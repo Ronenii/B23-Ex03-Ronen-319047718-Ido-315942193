@@ -32,7 +32,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="GarageHandleManager.cs" />
+    <Compile Include="GrageUserInterface.cs" />
     <Compile Include="Program.cs" />
+    <Compile Include="Action.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Ex03.GarageLogic\Ex03.GarageLogic.csproj">
