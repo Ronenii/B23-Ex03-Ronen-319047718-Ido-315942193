@@ -39,7 +39,7 @@
     <Compile Include="Car.cs" />
     <Compile Include="Truck.cs" />
     <Compile Include="Vehicle.cs" />
-    <Compile Include="Wheels.cs" />
+    <Compile Include="Wheel.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
