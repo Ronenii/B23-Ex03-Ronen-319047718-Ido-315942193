@@ -35,9 +35,14 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Bike.cs" />
-    <Compile Include="Car.cs" />
+    <Compile Include="DieselBike.cs" />
+    <Compile Include="DieselCar.cs" />
+    <Compile Include="DieselVehicle.cs" />
+    <Compile Include="ElectricBike.cs" />
+    <Compile Include="ElectricCar.cs" />
+    <Compile Include="ElectricVehicle.cs" />
     <Compile Include="Truck.cs" />
+    <Compile Include="ValueOutOfRangeException.cs" />
     <Compile Include="Vehicle.cs" />
     <Compile Include="Wheel.cs" />
   </ItemGroup>

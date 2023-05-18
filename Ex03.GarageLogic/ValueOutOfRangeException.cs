@@ -5,7 +5,9 @@ using System.Text;
 
 namespace Ex03.GarageLogic
 {
-    class Truck: DieselVehicle
+    class ValueOutOfRangeException: Exception
     {
+
+        // TODO: Write exception logic
     }
 }
