@@ -35,6 +35,8 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Bike.cs" />
+    <Compile Include="Car.cs" />
     <Compile Include="DieselBike.cs" />
     <Compile Include="DieselCar.cs" />
     <Compile Include="DieselVehicle.cs" />

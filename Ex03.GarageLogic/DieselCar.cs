@@ -5,22 +5,6 @@ using System.Text;
 
 namespace Ex03.GarageLogic
 {
-    public enum eCarColor
-    {
-        White,
-        Black,
-        Yellow,
-        Red
-    }
-
-    public enum eNumOfCarDoors
-    {
-        Two =2,
-        Three,
-        Four,
-        Five
-    }
-
     class DieselCar: DieselVehicle
     {
         private const int k_NumOfWheels = 5;
@@ -28,8 +12,7 @@ namespace Ex03.GarageLogic
         private const eFuelType k_FuelType = eFuelType.Octan95;
         private const float k_MaxFuelLiters = 46f;
 
-        private readonly eNumOfCarDoors r_NumOfCarDoors;
-        private readonly eCarColor r_CarColor;
+        private readonly Car r_Car;
 
         public DieselCar(
             string i_Model,
@@ -39,8 +22,8 @@ namespace Ex03.GarageLogic
             float i_CurrentPSI,
             int i_NumOfWheels,
             float i_FuelLitersLeft,
-            eCarColor i_CarColor,
-            eNumOfCarDoors i_NumOfCarDoors)
+            eCarColor i_Color,
+            eNumOfCarDoors i_NumOfDoors)
             : base(i_Model,
                 i_LicensePlate,
                 i_EnergyLeft,
@@ -52,23 +35,22 @@ namespace Ex03.GarageLogic
                 k_MaxFuelLiters,
                 k_FuelType)
         {
-            r_NumOfCarDoors = i_NumOfCarDoors;
-            r_CarColor = i_CarColor;
+            r_Car = new Car(i_Color, i_NumOfDoors);
         }
 
-        public eCarColor CarColor
+        public eCarColor Color
         {
             get
             {
-                return r_CarColor;
+                return r_Car.Color;
             }
         }
 
-        public eNumOfCarDoors NumOfCarDoors
+        public eNumOfCarDoors NumOfDoors
         {
             get
             {
-                return r_NumOfCarDoors;
+                return r_Car.NumOfDoors;
             }
         }
     }

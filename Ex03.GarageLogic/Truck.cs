@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Ex03.GarageLogic
 {
-    class Truck : DieselVehicle
+    public class Truck : DieselVehicle
     {
         private const int k_NumOfWheels = 14;
         private const float k_MaxPSI = 26f;

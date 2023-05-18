@@ -9,10 +9,9 @@ namespace Ex03.GarageLogic
     {
         private const int k_NumOfWheels = 5;
         private const float k_MaxPSI = 33f;
-        private const float k_MaxChargeHours = 2.6f;
+        private const float k_MaxChargeHours = 5.2f;
 
-        private readonly eCarColor r_CarColor;
-        private readonly eNumOfCarDoors r_NumOfCarDoors;
+        private readonly Car r_Car;
 
         public ElectricCar(
             string i_Model,
@@ -22,8 +21,8 @@ namespace Ex03.GarageLogic
             float i_CurrentPSI,
             int i_NumOfWheels,
             float i_ChargeHoursLeft,
-            eCarColor i_CarColor,
-            eNumOfCarDoors i_NumOfCarDoors)
+            eCarColor i_Color,
+            eNumOfCarDoors i_NumOfDoors)
             : base(
                 i_Model,
                 i_LicensePlate,
@@ -35,15 +34,14 @@ namespace Ex03.GarageLogic
                 i_ChargeHoursLeft,
                 k_MaxChargeHours)
         {
-            r_CarColor = i_CarColor;
-            r_NumOfCarDoors = i_NumOfCarDoors;
+            r_Car = new Car(i_Color, i_NumOfDoors);
         }
 
         public eCarColor CarColor
         {
             get
             {
-                return r_CarColor;
+                return r_Car.Color;
             }
         }
 
@@ -51,7 +49,7 @@ namespace Ex03.GarageLogic
         {
             get
             {
-                return r_NumOfCarDoors;
+                return r_Car.NumOfDoors;
             }
         }
     }

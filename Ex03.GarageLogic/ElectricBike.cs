@@ -11,8 +11,7 @@ namespace Ex03.GarageLogic
         private const float k_MaxPSI = 31f;
         private const float k_MaxChargeHours = 2.6f;
 
-        private readonly eBikeLicense r_License;
-        private readonly int r_EngineSize;
+        private readonly Bike r_Bike;
 
         public ElectricBike(
             string i_Model,
@@ -35,15 +34,14 @@ namespace Ex03.GarageLogic
                 i_ChargeHoursLeft,
                 k_MaxChargeHours)
         {
-            r_License = i_License;
-            r_EngineSize = i_EngineSize;
+            r_Bike = new Bike(i_License, i_EngineSize);
         }
 
         public eBikeLicense License
         {
             get
             {
-                return r_License;
+                return r_Bike.License;
             }
         }
 
@@ -51,7 +49,7 @@ namespace Ex03.GarageLogic
         {
             get
             {
-                return r_EngineSize;
+                return r_Bike.EngineSize;
             }
         }
     }

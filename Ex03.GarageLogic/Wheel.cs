@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Ex03.GarageLogic
 {
-    class Wheel
+    public class Wheel
     {
         private readonly float r_MaxPSI;
         private readonly string r_Manufacturer;
