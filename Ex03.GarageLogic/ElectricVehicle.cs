@@ -7,8 +7,8 @@ namespace Ex03.GarageLogic
 {
     public abstract class ElectricVehicle: Vehicle
     {
+        private readonly float r_MaxChargeHours;
         private float m_ChargeHoursLeft;
-        private float m_MaxChargeHours;
 
         public ElectricVehicle(
             string i_Model,
@@ -22,7 +22,28 @@ namespace Ex03.GarageLogic
             float i_MaxChargeHours): base(i_Model,i_LicensePlate,i_EnergyLeft,i_MaxPSI,i_WheelManufacturer,i_CurrentPSI,i_NumOfWheels)
         {
             m_ChargeHoursLeft = i_ChargeHoursLeft;
-            m_MaxChargeHours = i_MaxChargeHours;
+            r_MaxChargeHours = i_MaxChargeHours;
+        }
+
+        public float MaxChargeHours
+        {
+            get
+            {
+                return r_MaxChargeHours;
+            }
+        }
+
+        public float ChargeHoursLeft
+        {
+            get
+            {
+                return ChargeHoursLeft;
+            }
+
+            set
+            {
+                ChargeHoursLeft = value;
+            }
         }
 
         public void ChargeBattery(float i_HoursToCharge)
@@ -35,6 +56,7 @@ namespace Ex03.GarageLogic
             else
             {
                 m_ChargeHoursLeft += i_HoursToCharge;
+                EnergyLeft = m_ChargeHoursLeft / MaxChargeHours;
             }
         }
 

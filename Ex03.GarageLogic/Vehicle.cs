@@ -12,18 +12,46 @@ namespace Ex03.GarageLogic
     }
     public abstract class Vehicle
     {
-        private string m_Model;
-        private string m_LicensePlate;
+        private readonly string r_Model;
+        private readonly string r_LicensePlate;
         private float m_EnergyLeft;
 
         private List<Wheel> m_Wheels;
 
         public Vehicle(string i_Model, string i_LicensePlate, float i_EnergyLeft ,float i_MaxPSI, string i_WheelManufacturer,float i_CurrentPsi , int i_NumOfWheels)
         {
-            m_Model = i_Model;
-            m_LicensePlate = i_LicensePlate;
+            r_Model = i_Model;
+            r_LicensePlate = i_LicensePlate;
             m_EnergyLeft = i_EnergyLeft;
             createAllWheels(i_NumOfWheels, i_CurrentPsi, i_WheelManufacturer, i_MaxPSI);
+        }
+        public string Model
+        {
+            get
+            {
+                return r_Model;
+            }
+        }
+
+        public float EnergyLeft
+        {
+            get
+            {
+                return m_EnergyLeft;
+            }
+
+            set
+            {
+                m_EnergyLeft = value;
+            }
+        }
+
+        public string LicensePlate
+        {
+            get
+            {
+                return r_LicensePlate;
+            }
         }
 
         // Adds the given amount of wheels to this vehicle's wheels list
@@ -39,7 +67,7 @@ namespace Ex03.GarageLogic
         {
             foreach(Wheel wheel in m_Wheels)
             {
-                wheel.Inflate(wheel.MaxPSI - wheel.CurrentPsi);
+                wheel.Inflate(wheel.MaxPSI - wheel.CurrentPSI);
             }
         }
     }

@@ -9,14 +9,14 @@ namespace Ex03.GarageLogic
     class Wheel
     {
         private readonly float r_MaxPSI;
-        private string m_Manufacturer;
+        private readonly string r_Manufacturer;
         private float m_CurrentPSI;
 
 
         public Wheel(float i_MaxPSI, string i_Manufaturer, float i_CurrentPsi)
         {
             r_MaxPSI = i_MaxPSI;
-            m_Manufacturer = i_Manufaturer;
+            r_Manufacturer = i_Manufaturer;
             m_CurrentPSI = i_CurrentPsi;
         }
         public float CurrentPSI
@@ -44,12 +44,7 @@ namespace Ex03.GarageLogic
         {
             get
             {
-                return m_Manufacturer;
-            }
-
-            set
-            {
-                m_Manufacturer = value;
+                return r_Manufacturer;
             }
         }
 
