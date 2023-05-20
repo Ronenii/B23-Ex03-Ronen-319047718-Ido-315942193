@@ -7,9 +7,14 @@ namespace B23_Ex03_Ronen_319047718_Ido_315942193
 {
     public class GarageHandleManager
     {
+        private Ex03.GarageLogic.LogicInterface logicInterface = new Ex03.GarageLogic.LogicInterface();
+
         public void AddingNewCar()
         {
-            Console.WriteLine("AddingNewCar logic");
+            Console.WriteLine("Please insert the license plate");
+            String licensePLate = Console.ReadLine();
+            logicInterface.AddNewCar(licensePLate);
+
         }
         public void ShowGrageCar()
         {

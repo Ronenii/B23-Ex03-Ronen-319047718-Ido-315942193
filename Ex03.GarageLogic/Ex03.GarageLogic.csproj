@@ -44,6 +44,8 @@
     <Compile Include="ElectricCar.cs" />
     <Compile Include="ElectricVehicle.cs" />
     <Compile Include="Garage.cs" />
+    <Compile Include="LogicInterface.cs" />
+    <Compile Include="LogicManager.cs" />
     <Compile Include="Truck.cs" />
     <Compile Include="ValueOutOfRangeException.cs" />
     <Compile Include="Vehicle.cs" />
