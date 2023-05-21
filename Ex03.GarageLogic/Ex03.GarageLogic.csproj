@@ -37,6 +37,7 @@
   <ItemGroup>
     <Compile Include="Bike.cs" />
     <Compile Include="Car.cs" />
+    <Compile Include="Customer.cs" />
     <Compile Include="DieselBike.cs" />
     <Compile Include="DieselCar.cs" />
     <Compile Include="DieselVehicle.cs" />
