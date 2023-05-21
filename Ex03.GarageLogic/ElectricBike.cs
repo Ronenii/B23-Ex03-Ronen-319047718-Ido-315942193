@@ -5,10 +5,8 @@ using System.Text;
 
 namespace Ex03.GarageLogic
 {
-    class ElectricBike: ElectricVehicle
+    class ElectricBike : ElectricVehicle
     {
-        private const int k_NumOfWheels = 2;
-        private const float k_MaxPSI = 31f;
         private const float k_MaxChargeHours = 2.6f;
 
         private readonly Bike r_Bike;
@@ -17,20 +15,19 @@ namespace Ex03.GarageLogic
             string i_Model,
             string i_LicensePlate,
             float i_EnergyLeft,
-            string i_WheelManufacturer,
-            float i_CurrentPSI,
-            int i_NumOfWheels,
+            List<Wheel> i_Wheels,
+            Customer i_Owner,
+            eVehicleStatus i_VehicleStatus,
             float i_ChargeHoursLeft,
-            eBikeLicense i_License, 
+            eBikeLicense i_License,
             int i_EngineSize)
             : base(
                 i_Model,
                 i_LicensePlate,
                 i_EnergyLeft,
-                k_MaxPSI,
-                i_WheelManufacturer,
-                i_CurrentPSI,
-                k_NumOfWheels,
+                i_Wheels,
+                i_Owner,
+                i_VehicleStatus,
                 i_ChargeHoursLeft,
                 k_MaxChargeHours)
         {

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Ex03.GarageLogic
 {
-    public abstract class DieselVehicle: Vehicle
+    public abstract class DieselVehicle : Vehicle
     {
         private readonly float r_MaxFuelLiters;
         private readonly eFuelType r_FuelType;
@@ -45,13 +45,12 @@ namespace Ex03.GarageLogic
             string i_Model,
             string i_LicensePlate,
             float i_EnergyLeft,
-            float i_MaxPSI,
-            string i_WheelManufacturer,
-            float i_CurrentPSI,
-            int i_NumOfWheels,
+            List<Wheel> i_Wheels,
+            Customer i_Owner,
+            eVehicleStatus i_VehicleStatus,
             float i_FuelLitersLeft,
             float i_MaxFuelLiters,
-            eFuelType i_FuelType) : base(i_Model, i_LicensePlate, i_EnergyLeft, i_MaxPSI, i_WheelManufacturer, i_CurrentPSI, i_NumOfWheels)
+            eFuelType i_FuelType) : base(i_Model, i_LicensePlate, i_EnergyLeft, i_Wheels, i_Owner, i_VehicleStatus)
         {
             m_FuelLitersLeft = i_FuelLitersLeft;
             r_MaxFuelLiters = i_MaxFuelLiters;
@@ -60,7 +59,7 @@ namespace Ex03.GarageLogic
 
         public void Fuel(float i_FuelLitersToAdd, eFuelType i_FuelType)
         {
-            if(!isFuelTypeValid(i_FuelType))
+            if (!isFuelTypeValid(i_FuelType))
             {
                 // TODO: adjust exception output
                 throw new ArgumentException();

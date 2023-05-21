@@ -19,19 +19,18 @@ namespace Ex03.GarageLogic
             string i_Model,
             string i_LicensePlate,
             float i_EnergyLeft,
-            string i_WheelManufacturer,
-            float i_CurrentPSI,
-            int i_NumOfWheels,
+            List<Wheel> i_Wheels,
+            Customer i_Owner,
+            eVehicleStatus i_VehicleStatus,
             float i_FuelLitersLeft,
             bool i_IsTransportingHazardousMaterial,
             float i_CargoSize)
             : base(i_Model,
                 i_LicensePlate,
                 i_EnergyLeft,
-                k_MaxPSI,
-                i_WheelManufacturer,
-                i_CurrentPSI,
-                k_NumOfWheels,
+                i_Wheels,
+                i_Owner,
+                i_VehicleStatus,
                 i_FuelLitersLeft,
                 k_MaxFuelLiters, 
                 k_FuelType)
@@ -53,6 +52,22 @@ namespace Ex03.GarageLogic
             get
             {
                 return CargoSize;
+            }
+        }
+
+        public static int NumOfWheels
+        {
+            get
+            {
+                return k_NumOfWheels;
+            }
+        }
+
+        public static float MaxPSI
+        {
+            get
+            {
+                return k_MaxPSI;
             }
         }
     }
