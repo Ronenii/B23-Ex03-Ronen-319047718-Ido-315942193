@@ -51,12 +51,15 @@ namespace Ex03.GarageLogic
             int i_NumOfWheels,
             float i_FuelLitersLeft,
             float i_MaxFuelLiters,
-            eFuelType i_FuelType) : base(i_Model, i_LicensePlate, i_EnergyLeft, i_MaxPSI, i_WheelManufacturer, i_CurrentPSI, i_NumOfWheels)
+            eVehicaleStatus i_VehicleStatus,
+            eFuelType i_FuelType) : base(i_Model, i_LicensePlate, i_EnergyLeft, i_MaxPSI, i_WheelManufacturer, i_CurrentPSI, i_NumOfWheels, i_VehicleStatus)
         {
             m_FuelLitersLeft = i_FuelLitersLeft;
             r_MaxFuelLiters = i_MaxFuelLiters;
             r_FuelType = i_FuelType;
         }
+
+
 
         public void Fuel(float i_FuelLitersToAdd, eFuelType i_FuelType)
         {
@@ -82,5 +85,6 @@ namespace Ex03.GarageLogic
         {
             return i_FuelType == r_FuelType;
         }
+
     }
 }

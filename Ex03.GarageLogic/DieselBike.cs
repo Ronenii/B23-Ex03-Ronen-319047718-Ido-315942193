@@ -54,5 +54,12 @@ namespace Ex03.GarageLogic
                 return r_Bike.License;
             }
         }
+
+        public override void PrintVehicleDescription()
+        {
+            base.PrintVehicleDescription()
+            Console.WriteLine(); ;
+        }
+
     }
 }

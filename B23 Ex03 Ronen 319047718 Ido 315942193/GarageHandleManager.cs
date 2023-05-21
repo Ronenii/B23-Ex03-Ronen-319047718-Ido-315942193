@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Ex03.GarageLogic;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,26 +8,63 @@ namespace B23_Ex03_Ronen_319047718_Ido_315942193
 {
     public class GarageHandleManager
     {
-        private Ex03.GarageLogic.LogicInterface logicInterface = new Ex03.GarageLogic.LogicInterface();
+        private Garage garage = new Ex03.GarageLogic.Garage();
 
         public void AddingNewCar()
         {
+            int integerCarType;
             Console.WriteLine("Please insert the license plate");
-            String licensePLate = Console.ReadLine();
-            logicInterface.AddNewCar(licensePLate);
-
+            string licensePLate = Console.ReadLine();
+            Vehicle vehicle = garage.GetVehicleByLicense(licensePLate);
+            if (vehicle == null)
+            {
+                vehicle = CreateRelevantVehicle();
+                garage.AddNewVehicle(vehicle);
+            }
+            else
+            {
+                vehicle.Status = eVehicaleStatus.Reapir;
+            }
         }
+
+        private static void printCarTypeChoosenRequest()
+        {
+            Console.WriteLine("Please Insert the vehicle Type\n1. Diesel Bike\n2. Electric Bike\n3. Diesel Car\n 4. Electric Car\n5. Truck");
+        }
+
         public void ShowGrageCar()
         {
-            Console.WriteLine("ShowGrageCar logic");
+            List<Vehicle> vehicles = garage.GetAllVehicles();
+            foreach (Vehicle vehicle in vehicles)
+            {
+                Console.WriteLine(vehicle);
+            }
         }
         public void ChangeCarStatus()
         {
-            Console.WriteLine("ChangeCarStatus logic");
+            Console.Write("Please insert the Licence plate for the car: ");
+            string licencePlate = Console.ReadLine();
+            Console.WriteLine("Please choose on of the next status:\n 1. Ready\n2. Repair\n 3. Total loss");
+            string userStatusInput = Console.ReadLine();
+            isUserStatusVehicleIsValid(userStatusInput, out eVehicaleStatus o_status);
+            garage.UpdateVehicleStatus(licencePlate, o_status);
+
         }
+
         public void InflateWheel()
         {
-            Console.WriteLine("InflateWheel logic");
+            Console.Write("Please insert the Licence plate for the car: ");
+            string licencePlate = Console.ReadLine();
+            Vehicle vehicle = garage.GetVehicleByLicense(licencePlate);
+            if (vehicle != null)
+            {
+                vehicle.InflateAllWheelsToMax();
+            }
+            else
+            {
+                Console.WriteLine("Could not find the vehicle");
+            }
+
         }
         public void FillFuel()
         {
@@ -39,6 +77,17 @@ namespace B23_Ex03_Ronen_319047718_Ido_315942193
         public void PresentCar()
         {
             Console.WriteLine("PresentCar logic");
+        }
+
+        private void isUserStatusVehicleIsValid(string userStatusInput, out eVehicaleStatus o_status)
+        {
+            throw new NotImplementedException();
+        }
+
+        private Vehicle CreateRelevantVehicle()
+        {
+            printCarTypeChoosenRequest();
+            throw new NotImplementedException();
         }
     }
 }
