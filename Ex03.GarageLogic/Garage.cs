@@ -27,7 +27,7 @@ namespace Ex03.GarageLogic
             return returnVehicle;
         }
 
-        public void UpdateVehicleStatus(string i_LicencePlate, eVehicaleStatus i_Status)
+        public void UpdateVehicleStatus(string i_LicencePlate, eVehicleStatus i_Status)
         {
             Vehicle vehicle = GetVehicleByLicense(i_LicencePlate);
             if(vehicle != null)

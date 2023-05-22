@@ -50,7 +50,6 @@ namespace Ex03.GarageLogic
             eVehicleStatus i_VehicleStatus,
             float i_FuelLitersLeft,
             float i_MaxFuelLiters,
-            eVehicaleStatus i_VehicleStatus,
             eFuelType i_FuelType) : base(i_Model, i_LicensePlate, i_EnergyLeft, i_MaxPSI, i_WheelManufacturer, i_CurrentPSI, i_NumOfWheels, i_VehicleStatus)
         {
             m_FuelLitersLeft = i_FuelLitersLeft;

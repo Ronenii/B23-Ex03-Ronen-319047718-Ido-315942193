@@ -23,7 +23,7 @@ namespace B23_Ex03_Ronen_319047718_Ido_315942193
             }
             else
             {
-                vehicle.Status = eVehicaleStatus.Reapir;
+                vehicle.Status = eVehicleStatus.InRepair;
             }
         }
 
@@ -46,7 +46,7 @@ namespace B23_Ex03_Ronen_319047718_Ido_315942193
             string licencePlate = Console.ReadLine();
             Console.WriteLine("Please choose on of the next status:\n 1. Ready\n2. Repair\n 3. Total loss");
             string userStatusInput = Console.ReadLine();
-            isUserStatusVehicleIsValid(userStatusInput, out eVehicaleStatus o_status);
+            isUserStatusVehicleIsValid(userStatusInput, out eVehicleStatus o_status);
             garage.UpdateVehicleStatus(licencePlate, o_status);
 
         }
@@ -79,7 +79,7 @@ namespace B23_Ex03_Ronen_319047718_Ido_315942193
             Console.WriteLine("PresentCar logic");
         }
 
-        private void isUserStatusVehicleIsValid(string userStatusInput, out eVehicaleStatus o_status)
+        private void isUserStatusVehicleIsValid(string userStatusInput, out eVehicleStatus o_status)
         {
             throw new NotImplementedException();
         }

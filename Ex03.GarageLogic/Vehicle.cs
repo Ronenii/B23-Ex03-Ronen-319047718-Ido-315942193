@@ -136,16 +136,16 @@ namespace Ex03.GarageLogic
             }
         }
 
-        public eVehicaleStatus Status
+        public eVehicleStatus Status
         {
             get
             {
-                return m_vehicaleStatus;
+                return m_VehicleStatus;
             }
 
             set
             {
-                m_vehicaleStatus = value;
+                m_VehicleStatus = value;
             }
         }
 
