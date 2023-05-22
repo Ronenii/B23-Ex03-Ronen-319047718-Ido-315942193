@@ -9,12 +9,24 @@ namespace B23_Ex03_Ronen_319047718_Ido_315942193
     {
         public void Run()
         {
-            printWelcomeMessage();
-            printMenu();
-            int userInput = getUserChoice();
-            Action.eAction action = Action.ConvertIntgerToeAction(userInput);
-            handleRequestByAction(action);
-            Console.ReadKey();
+            int userInput;
+            string errorMessage = null;
+            Action.eAction action;
+            do
+            {
+                printWelcomeMessage();
+                printMenu();
+                printErrorMessage(errorMessage); // TODO: find a way to get exceptions into the errorMessage
+                userInput = getUserChoice();
+                action = Action.ConvertIntgerToeAction(userInput);
+                handleRequestByAction(action);
+                if(action != Action.eAction.Exit)
+                {
+                    Console.ReadKey();
+                }
+                Console.Clear();
+            }
+            while(action != Action.eAction.Exit);
         }
 
         private void handleRequestByAction(Action.eAction i_Action)
@@ -51,14 +63,14 @@ namespace B23_Ex03_Ronen_319047718_Ido_315942193
 
         private int getUserChoice()
         {
-            int o_userInputInteger;
+            int o_UserInputInteger;
             string userInput;
             do
             {
                 userInput = Console.ReadLine();
             }
-            while (!validateUserActionInput(userInput, out o_userInputInteger));
-            return o_userInputInteger;
+            while (!validateUserActionInput(userInput, out o_UserInputInteger));
+            return o_UserInputInteger;
         }
 
         private void printMenu()
@@ -71,18 +83,27 @@ namespace B23_Ex03_Ronen_319047718_Ido_315942193
             Console.WriteLine("5. Refuel a car");
             Console.WriteLine("6. Charge electronic car");
             Console.WriteLine("7. Present car by a license plate");
+            Console.WriteLine("8. Exit");
         }
 
-        private bool validateUserActionInput(string i_UserInput, out int o_userInputInteger)
+        private bool validateUserActionInput(string i_UserInput, out int o_UserInputInteger)
         {
             bool isValid = true;
-            int.TryParse(i_UserInput, out o_userInputInteger);
-            if (!(o_userInputInteger > 0 && o_userInputInteger <= 7))
+            int.TryParse(i_UserInput, out o_UserInputInteger);
+            if (!(o_UserInputInteger > 0 && o_UserInputInteger <= 7))
             {
                 Console.WriteLine("Invalid Input");
                 isValid = false;
             }
             return isValid;
+        }
+
+        private void printErrorMessage(string i_ErrorMessage)
+        {
+            if(i_ErrorMessage != null)
+            {
+                Console.WriteLine(i_ErrorMessage);
+            }
         }
 
         private void printWelcomeMessage()
