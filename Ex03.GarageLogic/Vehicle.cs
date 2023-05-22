@@ -136,13 +136,27 @@ namespace Ex03.GarageLogic
             }
         }
 
-        public void InflateAllWheelsToMax(float i_PSI)
+        public eVehicleStatus Status
+        {
+            get
+            {
+                return m_VehicleStatus;
+            }
+
+            set
+            {
+                m_VehicleStatus = value;
+            }
+        }
+
+        public void InflateAllWheelsToMax()
         {
             foreach (Wheel wheel in m_Wheels)
             {
                 wheel.Inflate(wheel.MaxPSI - wheel.CurrentPSI);
             }
         }
-    }
 
+        public abstract void PrintVehicleDescription();
+    }
 }

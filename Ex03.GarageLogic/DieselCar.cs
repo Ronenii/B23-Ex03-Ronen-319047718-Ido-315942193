@@ -50,5 +50,14 @@ namespace Ex03.GarageLogic
                 return r_Car.NumOfDoors;
             }
         }
+
+        public override void PrintVehicleDescription()
+        {
+            Console.WriteLine($"Licence Plate: {LicensePlate}");
+            Console.WriteLine($"Licence Plate: {Ma}");
+            Console.WriteLine($"Licence Plate: {LicensePlate}");
+            Console.WriteLine($"Licence Plate: {LicensePlate}");
+            Console.WriteLine($"Licence Plate: {LicensePlate}");
+        }
     }
 }
