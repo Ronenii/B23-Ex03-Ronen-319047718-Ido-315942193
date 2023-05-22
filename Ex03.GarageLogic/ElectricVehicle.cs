@@ -14,12 +14,11 @@ namespace Ex03.GarageLogic
             string i_Model,
             string i_LicensePlate,
             float i_EnergyLeft,
-            float i_MaxPSI,
-            string i_WheelManufacturer,
-            float i_CurrentPSI,
-            int i_NumOfWheels,
+            List<Wheel> i_Wheels,
+            Customer i_Owner,
+            eVehicleStatus i_VehicleStatus,
             float i_ChargeHoursLeft,
-            float i_MaxChargeHours): base(i_Model,i_LicensePlate,i_EnergyLeft,i_MaxPSI,i_WheelManufacturer,i_CurrentPSI,i_NumOfWheels)
+            float i_MaxChargeHours): base(i_Model, i_LicensePlate, i_EnergyLeft, i_Wheels, i_Owner, i_VehicleStatus)
         {
             m_ChargeHoursLeft = i_ChargeHoursLeft;
             r_MaxChargeHours = i_MaxChargeHours;

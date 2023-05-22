@@ -12,7 +12,6 @@ namespace Ex03.GarageLogic
         private readonly string r_Manufacturer;
         private float m_CurrentPSI;
 
-
         public Wheel(float i_MaxPSI, string i_Manufaturer, float i_CurrentPsi)
         {
             r_MaxPSI = i_MaxPSI;

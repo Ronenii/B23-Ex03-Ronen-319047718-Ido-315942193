@@ -36,32 +36,33 @@ namespace Ex03.GarageLogic
         Five
     }
 
-    public enum eVehicaleStatus
+    public enum eVehicleStatus
     {
-        Ready = 1,
-        Reapir = 2,
-        Total_Loss = 3
+        InRepair,
+        Repaired,
+        Paid
     }
 
     public abstract class Vehicle
     {
         private readonly string r_Model;
         private readonly string r_LicensePlate;
+        private readonly Customer r_Owner;
+
         private float m_EnergyLeft;
-        private eVehicaleStatus m_vehicaleStatus;
-
         private List<Wheel> m_Wheels;
+        private eVehicleStatus m_VehicleStatus;
 
-        public Vehicle(string i_Model, string i_LicensePlate, float i_EnergyLeft, float i_MaxPSI, string i_WheelManufacturer, float i_CurrentPSI, int i_NumOfWheels, List<Wheel> i_Wheels, eVehicaleStatus i_VehicaleStatus)
+        public Vehicle(string i_Model, string i_LicensePlate, float i_EnergyLeft, List<Wheel> i_Wheels, Customer i_Owner, eVehicleStatus i_VehicleStatus)
         {
             r_Model = i_Model;
             r_LicensePlate = i_LicensePlate;
+            r_Owner = i_Owner;
             m_EnergyLeft = i_EnergyLeft;
             m_Wheels = i_Wheels;
-            m_vehicaleStatus = i_VehicaleStatus;
-
-            // TODO: We are not using the given wheel properties, need to figure out what were gonna do with that...
+            m_VehicleStatus = i_VehicleStatus;
         }
+
         public string Model
         {
             get
@@ -88,6 +89,50 @@ namespace Ex03.GarageLogic
             get
             {
                 return r_LicensePlate;
+            }
+        }
+
+        public eVehicleStatus VehicleStatus
+        {
+            get
+            {
+                return m_VehicleStatus;
+            }
+
+            set
+            {
+                m_VehicleStatus = value;
+            }
+        }
+
+        protected List<Wheel> initializeWheels(
+            int i_NumOfWheels,
+            float i_MaxPSI,
+            float i_CurrentPSI,
+            string i_Manufacturer)
+        {
+            List<Wheel> wheels = new List<Wheel>();
+            for(int i = 0; i < i_NumOfWheels; i++)
+            {
+                wheels.Add(new Wheel(i_MaxPSI, i_Manufacturer, i_CurrentPSI));
+            }
+
+            return wheels;
+        }
+
+        public string OwnerPhoneNum
+        {
+            get
+            {
+                return r_Owner.OwnerPhoneNum;
+            }
+        }
+
+        public string OwnerName
+        {
+            get
+            {
+                return r_Owner.OwnerName;
             }
         }
 

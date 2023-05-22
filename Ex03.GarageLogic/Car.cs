@@ -7,6 +7,9 @@ namespace Ex03.GarageLogic
 {
     class Car
     {
+        private const int k_NumOfWheels = 5;
+        private const float k_MaxPSI = 33f;
+
         private readonly eNumOfCarDoors r_NumOfDoors;
         private readonly eCarColor r_Color;
 
@@ -28,6 +31,22 @@ namespace Ex03.GarageLogic
             get
             {
                 return r_NumOfDoors;
+            }
+        }
+
+        public static float MaxPSI
+        {
+            get
+            {
+                return k_MaxPSI;
+            }
+        }
+
+        public static int NumOfWheels
+        {
+            get
+            {
+                return k_NumOfWheels;
             }
         }
     }

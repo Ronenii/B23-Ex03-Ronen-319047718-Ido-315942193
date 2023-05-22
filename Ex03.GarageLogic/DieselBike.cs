@@ -7,8 +7,6 @@ namespace Ex03.GarageLogic
 {
     public class DieselBike : DieselVehicle
     {
-        private const int k_NumOfWheels = 2;
-        private const float k_MaxPSI = 31f;
         private const eFuelType k_FuelType = eFuelType.Octan98;
         private const float k_MaxFuelLiters = 6.4f;
 
@@ -18,23 +16,13 @@ namespace Ex03.GarageLogic
             string i_Model,
             string i_LicensePlate,
             float i_EnergyLeft,
-            string i_WheelManufacturer,
-            float i_CurrentPSI,
-            int i_NumOfWheels,
+            List<Wheel> i_Wheels,
+            Customer i_Owner,
+            eVehicleStatus i_VehicleStatus,
             float i_FuelLitersLeft,
             eBikeLicense i_License,
             int i_EngineSize)
-            : base(
-                i_Model,
-                i_LicensePlate,
-                i_EnergyLeft,
-                k_MaxPSI,
-                i_WheelManufacturer,
-                i_CurrentPSI,
-                k_NumOfWheels,
-                i_FuelLitersLeft,
-                k_MaxFuelLiters,
-                k_FuelType)
+            : base(i_Model, i_LicensePlate, i_EnergyLeft,i_Wheels,i_Owner,i_VehicleStatus,i_FuelLitersLeft, k_MaxFuelLiters,k_FuelType)
         {
             r_Bike = new Bike(i_License, i_EngineSize);
         }
@@ -55,11 +43,6 @@ namespace Ex03.GarageLogic
             }
         }
 
-        public override void PrintVehicleDescription()
-        {
-            base.PrintVehicleDescription()
-            Console.WriteLine(); ;
-        }
-
+        
     }
 }
