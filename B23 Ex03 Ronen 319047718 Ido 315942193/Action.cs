@@ -16,6 +16,7 @@ namespace B23_Ex03_Ronen_319047718_Ido_315942193
             FillFuel,
             ChargeElctonicCar,
             PresentCar,
+            Exit,
             Error
         }
 

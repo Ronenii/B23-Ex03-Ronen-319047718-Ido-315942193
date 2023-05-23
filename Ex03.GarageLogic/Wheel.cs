@@ -52,7 +52,7 @@ namespace Ex03.GarageLogic
             if(i_PSItoAdd + m_CurrentPSI > r_MaxPSI)
             {
                 // TODO: Adjust the exception after writing the exception class
-                throw new ValueOutOfRangeException();
+                throw new ValueOutOfRangeException(0, MaxPSI);
             }
             else
             {

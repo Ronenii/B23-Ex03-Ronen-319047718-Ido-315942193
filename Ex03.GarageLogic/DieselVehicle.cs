@@ -70,7 +70,7 @@ namespace Ex03.GarageLogic
             if (m_FuelLitersLeft + i_FuelLitersToAdd > r_MaxFuelLiters)
             {
                 // TODO: Adjust the exception after writing the exception class
-                throw new ValueOutOfRangeException();
+                throw new ValueOutOfRangeException(0, MaxFuelLiters);
             }
             else
             {
