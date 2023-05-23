@@ -61,25 +61,38 @@ namespace B23_Ex03_Ronen_319047718_Ido_315942193
         public void ChangeCarStatus()
         {
             Console.Write("Please insert the Licence plate for the car: ");
-            string licencePlate = Console.ReadLine();
+            string licensePlate = Console.ReadLine();
+            printSuportedStatus();
+            string userStatusInput = Console.ReadLine();
+            if (isUserStatusVehicleIsValid(userStatusInput, out eVehicleStatus o_status))
+            {
+                garage.UpdateVehicleStatus(licensePlate, o_status);
+                Console.WriteLine($"The vehicle with the license plate: {licensePlate} updated successfully");
+            }
+            else
+            {
+                throw new ArgumentOutOfRangeException("Invalid vehicle status");
+            }
+
+        }
+
+        private static void printSuportedStatus()
+        {
             Console.WriteLine("Please choose one of the next status");
             Console.WriteLine("1. In-Repair");
             Console.WriteLine("2. Repaired");
             Console.WriteLine("3. Paid");
-            string userStatusInput = Console.ReadLine();
-            isUserStatusVehicleIsValid(userStatusInput, out eVehicleStatus o_status);
-            garage.UpdateVehicleStatus(licensePlate, o_status);
-
         }
 
         public void InflateWheel()
         {
             Console.Write("Please insert the Licence plate for the car: ");
-            string licencePlate = Console.ReadLine();
-            Vehicle vehicle = garage.GetVehicleByLicense(licencePlate);
+            string licensePlate = Console.ReadLine();
+            Vehicle vehicle = garage.GetVehicleByLicense(licensePlate);
             if (vehicle != null)
             {
                 vehicle.InflateAllWheelsToMax();
+                Console.WriteLine("The wheels inflate to max");
             }
             else
             {
@@ -200,7 +213,7 @@ namespace B23_Ex03_Ronen_319047718_Ido_315942193
                     printTrunkDetails(truck);
                 }
             }
-            else if(vehicleToPresent is ElectricVehicle electricVehicle)
+            else if (vehicleToPresent is ElectricVehicle electricVehicle)
             {
                 printBatteryDetails(electricVehicle);
                 if (electricVehicle is ElectricCar electricCarCar)
@@ -271,9 +284,9 @@ namespace B23_Ex03_Ronen_319047718_Ido_315942193
             Console.WriteLine($"Cargo Size:          {i_Truck.CargoSize}m^3\n");
         }
 
-        private void isUserStatusVehicleIsValid(string userStatusInput, out eVehicleStatus o_status)
+        private bool isUserStatusVehicleIsValid(string userStatusInput, out eVehicleStatus o_status)
         {
-            throw new NotImplementedException();
+            return eVehicleType.TryParse(userStatusInput, out o_status);
         }
 
     }

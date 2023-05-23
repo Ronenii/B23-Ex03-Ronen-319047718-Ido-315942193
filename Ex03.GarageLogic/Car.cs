@@ -7,7 +7,7 @@ namespace Ex03.GarageLogic
 {
     public class Car
     {
-        public const int k_NumOfWheels = 5;
+        private const int k_NumOfWheels = 5;
         private const float k_MaxPSI = 33f;
 
         private readonly eNumOfCarDoors r_NumOfDoors;

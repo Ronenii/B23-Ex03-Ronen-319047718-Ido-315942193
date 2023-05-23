@@ -167,15 +167,15 @@ namespace Ex03.GarageLogic
             List<Wheel> userWheels;
             if (i_VehicleType == eVehicleType.DieselCar || i_VehicleType == eVehicleType.ElectricCar)
             {
-                userWheels = createNewWheel(Car.k_NumOfWheels);
+                userWheels = createNewWheel(Car.NumOfWheels);
             }
             else if (i_VehicleType == eVehicleType.DieselBike || i_VehicleType == eVehicleType.ElectricBike)
             {
-                userWheels = createNewWheel(Bike.k_NumOfWheels);
+                userWheels = createNewWheel(Bike.NumOfWheels);
             }
             else
             {
-                userWheels = createNewWheel(Truck.k_NumOfWheels);
+                userWheels = createNewWheel(Truck.NumOfWheels);
             }
             return userWheels;
         }

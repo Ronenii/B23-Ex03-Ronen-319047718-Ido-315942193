@@ -24,7 +24,7 @@ namespace B23_Ex03_Ronen_319047718_Ido_315942193
                 {
                     handleRequestByAction(action);
                 }
-                catch(Exception e)
+                catch (Exception e)
                 {
                     errorMessage = e.Message;
                     Console.WriteLine(e.Message);
@@ -33,7 +33,7 @@ namespace B23_Ex03_Ronen_319047718_Ido_315942193
                 Console.ReadKey();
                 Console.Clear();
             }
-            while(action != Action.eAction.Exit);
+            while (action != Action.eAction.Exit);
         }
 
         private void handleRequestByAction(Action.eAction i_Action)
@@ -111,7 +111,7 @@ namespace B23_Ex03_Ronen_319047718_Ido_315942193
 
         private void printErrorMessage(string i_ErrorMessage)
         {
-            if(i_ErrorMessage != null)
+            if (i_ErrorMessage != null)
             {
                 Console.WriteLine($"ERROR: **{i_ErrorMessage}**");
             }

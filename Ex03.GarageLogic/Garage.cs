@@ -32,7 +32,6 @@ namespace Ex03.GarageLogic
         public void DisplayVehicleDetails(string i_LicensePlate)
         {
             Vehicle vehicle = GetVehicleByLicense(i_LicensePlate);
-            vehicle.PrintVehicleDescription();
         }
         public List<Vehicle> GetAllVehicles()
         {
