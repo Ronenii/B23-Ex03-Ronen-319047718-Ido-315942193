@@ -16,11 +16,19 @@ namespace B23_Ex03_Ronen_319047718_Ido_315942193
             {
                 printWelcomeMessage();
                 printMenu();
-                printErrorMessage(errorMessage); // TODO: find a way to get exceptions into the errorMessage
+                printErrorMessage(errorMessage); 
                 userInput = getUserChoice();
                 action = Action.ConvertIntgerToeAction(userInput);
-                handleRequestByAction(action);
-                Console.ReadKey();
+                try
+                {
+                    errorMessage = null;
+                    handleRequestByAction(action);
+                    Console.ReadKey();
+                }
+                catch (Exception e)
+                {
+                    errorMessage = e.Message;
+                }
                 Console.Clear();
             }
             while(action != Action.eAction.Exit);
@@ -35,7 +43,7 @@ namespace B23_Ex03_Ronen_319047718_Ido_315942193
                     garageHandleManager.AddingNewCar();
                     Console.ReadKey();
                     break;
-                case Action.eAction.ShowGrageCar:
+                case Action.eAction.ShowGarageCar:
                     garageHandleManager.ShowGrageCar();
                     Console.ReadKey();
                     break;
@@ -48,11 +56,11 @@ namespace B23_Ex03_Ronen_319047718_Ido_315942193
                     Console.ReadKey();
                     break;
                 case Action.eAction.FillFuel:
-                    garageHandleManager.FillFuel();
+                    garageHandleManager.FuelVehicle();
                     Console.ReadKey();
                     break;
-                case Action.eAction.ChargeElctonicCar:
-                    garageHandleManager.ChargeElctonicCar();
+                case Action.eAction.ChargeElectronicCar:
+                    garageHandleManager.ChargeVehicle();
                     Console.ReadKey();
                     break;
                 case Action.eAction.PresentCar:
@@ -109,7 +117,7 @@ namespace B23_Ex03_Ronen_319047718_Ido_315942193
         {
             if(i_ErrorMessage != null)
             {
-                Console.WriteLine(i_ErrorMessage);
+                Console.WriteLine($"ERROR: **{i_ErrorMessage}**");
             }
         }
 
