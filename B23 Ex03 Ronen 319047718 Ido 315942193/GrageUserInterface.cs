@@ -17,7 +17,7 @@ namespace B23_Ex03_Ronen_319047718_Ido_315942193
             do
             {
                 printWelcomeMessage();
-                //printErrorMessage(errorMessage); // TODO: find a way to get exceptions into the errorMessage
+                printErrorMessage(errorMessage);
                 userInput = getUserChoice();
                 action = Action.ConvertIntgerToAction(userInput);
                 try
@@ -26,6 +26,7 @@ namespace B23_Ex03_Ronen_319047718_Ido_315942193
                 }
                 catch(Exception e)
                 {
+                    errorMessage = e.Message;
                     Console.WriteLine(e.Message);
                 }
                 Console.WriteLine("Press any key to continue....");
@@ -42,7 +43,7 @@ namespace B23_Ex03_Ronen_319047718_Ido_315942193
                 case Action.eAction.NewCar:
                     garageHandleManager.AddingNewCar();
                     break;
-                case Action.eAction.ShowGrageCar:
+                case Action.eAction.ShowGarageCar:
                     garageHandleManager.ShowGrageCar();
                     break;
                 case Action.eAction.ChangeCarStatus:
@@ -52,10 +53,10 @@ namespace B23_Ex03_Ronen_319047718_Ido_315942193
                     garageHandleManager.InflateWheel();
                     break;
                 case Action.eAction.FillFuel:
-                    garageHandleManager.FillFuel();
+                    garageHandleManager.FuelVehicle();
                     break;
-                case Action.eAction.ChargeElctonicCar:
-                    garageHandleManager.ChargeElctonicCar();
+                case Action.eAction.ChargeElectronicCar:
+                    garageHandleManager.ChargeVehicle();
                     break;
                 case Action.eAction.PresentCar:
                     garageHandleManager.PresentCar();
@@ -112,7 +113,7 @@ namespace B23_Ex03_Ronen_319047718_Ido_315942193
         {
             if(i_ErrorMessage != null)
             {
-                Console.WriteLine(i_ErrorMessage);
+                Console.WriteLine($"ERROR: **{i_ErrorMessage}**");
             }
         }
 

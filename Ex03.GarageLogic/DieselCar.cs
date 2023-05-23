@@ -41,17 +41,20 @@ namespace Ex03.GarageLogic
             }
         }
 
+        public Car CarProperties
+        {
+            get
+            {
+                return r_Car;
+            }
+        }
+
         public eNumOfCarDoors NumOfDoors
         {
             get
             {
                 return r_Car.NumOfDoors;
             }
-        }
-
-        public override void PrintVehicleDescription()
-        {
-            Console.WriteLine($"Licence Plate: {LicensePlate}");
         }
     }
 }

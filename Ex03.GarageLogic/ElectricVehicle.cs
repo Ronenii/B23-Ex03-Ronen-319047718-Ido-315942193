@@ -57,5 +57,13 @@ namespace Ex03.GarageLogic
             }
         }
 
+        public string ChargeTimeToString()
+        {
+            int hours = Convert.ToInt32(m_ChargeHoursLeft);
+            int minutes = Convert.ToInt32((m_ChargeHoursLeft - hours) * 60);
+
+            string time = string.Format("{0}:{1:D2}", hours, minutes);
+            return time;
+        }
     }
 }

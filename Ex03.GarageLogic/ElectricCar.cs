@@ -48,9 +48,12 @@ namespace Ex03.GarageLogic
             }
         }
 
-        public override void PrintVehicleDescription()
+        public Car CarProperties
         {
-            throw new NotImplementedException();
+            get
+            {
+                return r_Car;
+            }
         }
     }
 }

@@ -10,11 +10,11 @@ namespace B23_Ex03_Ronen_319047718_Ido_315942193
         public enum eAction
         {
             NewCar,
-            ShowGrageCar,
+            ShowGarageCar,
             ChangeCarStatus,
             InflateWheel,
             FillFuel,
-            ChargeElctonicCar,
+            ChargeElectronicCar,
             PresentCar,
             Exit,
             Error
@@ -26,7 +26,7 @@ namespace B23_Ex03_Ronen_319047718_Ido_315942193
             if (i_IntegerAction == 1)
                 action = eAction.NewCar;
             else if (i_IntegerAction == 2)
-                action = eAction.ShowGrageCar;
+                action = eAction.ShowGarageCar;
             else if (i_IntegerAction == 3)
                 action = eAction.ChangeCarStatus;
             else if (i_IntegerAction == 4)

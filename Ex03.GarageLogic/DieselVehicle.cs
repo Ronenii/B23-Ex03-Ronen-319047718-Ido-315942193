@@ -68,7 +68,6 @@ namespace Ex03.GarageLogic
 
             if (m_FuelLitersLeft + i_FuelLitersToAdd > r_MaxFuelLiters)
             {
-                // TODO: Adjust the exception after writing the exception class
                 throw new ValueOutOfRangeException(0, MaxFuelLiters);
             }
             else
@@ -83,5 +82,29 @@ namespace Ex03.GarageLogic
             return i_FuelType == r_FuelType;
         }
 
+        public string FuelTypeToString()
+        {
+            string fuelType;
+            switch (r_FuelType)
+            {
+                case eFuelType.Soler:
+                    fuelType = "Soler";
+                    break;
+                case eFuelType.Octan95:
+                    fuelType = "Octan 95";
+                    break;
+                case eFuelType.Octan96:
+                    fuelType = "Octan 96";
+                    break;
+                case eFuelType.Octan98:
+                    fuelType = "Octan 98";
+                    break;
+                default:
+                    fuelType = String.Empty;
+                    break;
+            }
+
+            return fuelType;
+        }
     }
 }

@@ -69,9 +69,19 @@ namespace Ex03.GarageLogic
             }
         }
 
-        public override void PrintVehicleDescription()
+        public string IsTransportingHazardousMaterialToString()
         {
-            throw new NotImplementedException();
+            string yesOrNo = string.Empty;
+            if (IsTransportingHazardousMaterial)
+            {
+                yesOrNo = "Yes";
+            }
+            else
+            {
+                yesOrNo = "No";
+            }
+
+            return yesOrNo;
         }
     }
 }
