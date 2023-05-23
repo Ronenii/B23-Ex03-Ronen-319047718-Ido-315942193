@@ -47,10 +47,9 @@ namespace Ex03.GarageLogic
 
         public void ChargeBattery(float i_HoursToCharge)
         {
-            if(i_HoursToCharge + m_ChargeHoursLeft > m_ChargeHoursLeft)
+            if(i_HoursToCharge + m_ChargeHoursLeft > MaxChargeHours)
             {
-                // TODO: Adjust the exception after writing the exception class
-                throw new ValueOutOfRangeException();
+                throw new ValueOutOfRangeException(0, MaxChargeHours);
             }
             else
             {

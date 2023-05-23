@@ -20,10 +20,7 @@ namespace B23_Ex03_Ronen_319047718_Ido_315942193
                 userInput = getUserChoice();
                 action = Action.ConvertIntgerToeAction(userInput);
                 handleRequestByAction(action);
-                if(action != Action.eAction.Exit)
-                {
-                    Console.ReadKey();
-                }
+                Console.ReadKey();
                 Console.Clear();
             }
             while(action != Action.eAction.Exit);
@@ -36,24 +33,34 @@ namespace B23_Ex03_Ronen_319047718_Ido_315942193
             {
                 case Action.eAction.NewCar:
                     garageHandleManager.AddingNewCar();
+                    Console.ReadKey();
                     break;
                 case Action.eAction.ShowGrageCar:
                     garageHandleManager.ShowGrageCar();
+                    Console.ReadKey();
                     break;
                 case Action.eAction.ChangeCarStatus:
                     garageHandleManager.ChangeCarStatus();
+                    Console.ReadKey();
                     break;
                 case Action.eAction.InflateWheel:
                     garageHandleManager.InflateWheel();
+                    Console.ReadKey();
                     break;
                 case Action.eAction.FillFuel:
                     garageHandleManager.FillFuel();
+                    Console.ReadKey();
                     break;
                 case Action.eAction.ChargeElctonicCar:
                     garageHandleManager.ChargeElctonicCar();
+                    Console.ReadKey();
                     break;
                 case Action.eAction.PresentCar:
                     garageHandleManager.PresentCar();
+                    break;
+                case Action.eAction.Exit:
+                    Console.Clear();
+                    Console.WriteLine("Goodbye!");
                     break;
                 default:
                     Console.WriteLine("Error");
