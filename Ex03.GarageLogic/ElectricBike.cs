@@ -49,5 +49,10 @@ namespace Ex03.GarageLogic
                 return r_Bike.EngineSize;
             }
         }
+
+        public override void PrintVehicleDescription()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

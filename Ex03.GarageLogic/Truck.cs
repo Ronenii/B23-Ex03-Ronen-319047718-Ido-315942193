@@ -70,5 +70,10 @@ namespace Ex03.GarageLogic
                 return k_MaxPSI;
             }
         }
+
+        public override void PrintVehicleDescription()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

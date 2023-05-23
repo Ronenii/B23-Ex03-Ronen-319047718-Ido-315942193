@@ -27,18 +27,19 @@ namespace Ex03.GarageLogic
             return returnVehicle;
         }
 
-        public void UpdateVehicleStatus(string i_LicencePlate, eVehicleStatus i_Status)
+        public void UpdateVehicleStatus(string i_LicensePlate, eVehicleStatus i_Status)
         {
-            Vehicle vehicle = GetVehicleByLicense(i_LicencePlate);
-            if(vehicle != null)
+            Vehicle vehicle = GetVehicleByLicense(i_LicensePlate);
+            if(vehicle == null)
             {
                 throw new Exception();
             }
             vehicle.Status = i_Status;
         }
-        public void DisplayVehicleDetails(string i_LicencePlate)
+
+        public void DisplayVehicleDetails(string i_LicensePlate)
         {
-           Vehicle vehicle = GetVehicleByLicense(i_LicencePlate);
+           Vehicle vehicle = GetVehicleByLicense(i_LicensePlate);
             vehicle.PrintVehicleDescription();
         }
         public List<Vehicle> GetAllVehicles()
