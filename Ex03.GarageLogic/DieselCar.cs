@@ -54,10 +54,6 @@ namespace Ex03.GarageLogic
         public override void PrintVehicleDescription()
         {
             Console.WriteLine($"Licence Plate: {LicensePlate}");
-            Console.WriteLine($"Licence Plate: {Ma}");
-            Console.WriteLine($"Licence Plate: {LicensePlate}");
-            Console.WriteLine($"Licence Plate: {LicensePlate}");
-            Console.WriteLine($"Licence Plate: {LicensePlate}");
         }
     }
 }

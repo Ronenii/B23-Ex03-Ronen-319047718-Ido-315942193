@@ -49,5 +49,10 @@ namespace Ex03.GarageLogic
                 return r_Car.NumOfDoors;
             }
         }
+
+        public override void PrintVehicleDescription()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
