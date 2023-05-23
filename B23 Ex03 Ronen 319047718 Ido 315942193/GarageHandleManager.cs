@@ -160,7 +160,95 @@ namespace B23_Ex03_Ronen_319047718_Ido_315942193
 
         public void PresentCar()
         {
-            Console.WriteLine("PresentCar logic");
+            Vehicle vehicleToPresent;
+            vehicleToPresent = FindVehicleInGarage();
+
+            printVehicleDetails(vehicleToPresent);
+            if (vehicleToPresent is DieselVehicle dieselVehicle)
+            {
+                printFuelDetails(dieselVehicle);
+                if (dieselVehicle is DieselCar dieselCar)
+                {
+                    printCarDetails(dieselCar.CarProperties);
+                }
+                else if (dieselVehicle is DieselBike dieselBike)
+                {
+                    printBikeDetails(dieselBike.BikeProperties);
+                }
+                else if (dieselVehicle is Truck truck)
+                {
+                    printTrunkDetails(truck);
+                }
+            }
+            else if(vehicleToPresent is ElectricVehicle electricVehicle)
+            {
+                printBatteryDetails(electricVehicle);
+                if (electricVehicle is ElectricCar electricCarCar)
+                {
+                    printCarDetails(electricCarCar.CarProperties);
+                }
+                else if (electricVehicle is ElectricBike electricBikeBike)
+                {
+                    printBikeDetails(electricBikeBike.BikeProperties);
+                }
+            }
+
+        }
+
+        private void printVehicleDetails(Vehicle i_Vehicle)
+        {
+            Console.Clear();
+            Console.WriteLine("         *** VEHICLE INFO ***\n");
+            Console.WriteLine("             GENERAL INFO");
+            Console.WriteLine($"License Plate:       {i_Vehicle.LicensePlate}");
+            Console.WriteLine($"Model:               {i_Vehicle.Model}");
+            Console.WriteLine($"Owner:               {i_Vehicle.OwnerName}");
+            Console.WriteLine($"Status:              {i_Vehicle.VehicleStatusToString()}\n");
+            Console.WriteLine("             WHEEL INFO");
+            Console.WriteLine($"Wheel Manufacturer:  {i_Vehicle.VehicleStatusToString()}");
+            Console.WriteLine($"Wheel PSI:           {i_Vehicle.VehicleStatusToString()}\n");
+        }
+
+        private void printFuelDetails(DieselVehicle i_DieselVehicle)
+        {
+            Console.WriteLine("             FUEL INFO ");
+            Console.WriteLine($"Octan:               {i_DieselVehicle.FuelTypeToString()}");
+            Console.WriteLine($"Liters Left:         {i_DieselVehicle.FuelLitersLeft}L");
+            printPowerPercentage(i_DieselVehicle);
+        }
+
+        private void printBatteryDetails(ElectricVehicle i_ElectricVehicle)
+        {
+            Console.WriteLine("             BATTERY INFO ");
+            Console.WriteLine($"Charge Left:         {i_ElectricVehicle.ChargeTimeToString()} h:mm");
+            printPowerPercentage(i_ElectricVehicle);
+        }
+
+        private void printPowerPercentage(Vehicle i_Vehicle)
+        {
+            float percentage = i_Vehicle.EnergyLeft * 100;
+            Console.WriteLine($"In Percents:         {percentage.ToString("0")}%\n");
+        }
+
+        private void printCarDetails(Car i_Car)
+        {
+            Console.WriteLine("             CAR INFO ");
+            Console.WriteLine($"Number Of Doors:     {i_Car.NumOfDoors.ToString()}");
+            Console.WriteLine($"Color:               {i_Car.CarColorToString()}\n");
+        }
+
+        private void printBikeDetails(Bike i_Bike)
+        {
+            Console.WriteLine("             BIKE INFO ");
+            Console.WriteLine($"License:              {i_Bike.LicenseToString()}");
+            Console.WriteLine($"Engine Size:          {i_Bike.EngineSize}cc\n");
+        }
+
+        private void printTrunkDetails(Truck i_Truck)
+        {
+            Console.WriteLine("             TRUCK INFO ");
+            Console.WriteLine($"Hazardous Material:   {i_Truck.IsTransportingHazardousMaterialToString()}");
+            Console.WriteLine($"Cargo Size:          {i_Truck.CargoSize}m^3\n");
         }
 
         private void isUserStatusVehicleIsValid(string userStatusInput, out eVehicleStatus o_status)

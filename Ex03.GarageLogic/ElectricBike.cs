@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Ex03.GarageLogic
 {
-    class ElectricBike : ElectricVehicle
+    public class ElectricBike : ElectricVehicle
     {
         private const float k_MaxChargeHours = 2.6f;
 
@@ -50,9 +50,12 @@ namespace Ex03.GarageLogic
             }
         }
 
-        public override void PrintVehicleDescription()
+        public Bike BikeProperties
         {
-            throw new NotImplementedException();
+            get
+            {
+                return r_Bike;
+            }
         }
     }
 }

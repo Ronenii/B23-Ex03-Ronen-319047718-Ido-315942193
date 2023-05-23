@@ -41,27 +41,21 @@ namespace B23_Ex03_Ronen_319047718_Ido_315942193
             {
                 case Action.eAction.NewCar:
                     garageHandleManager.AddingNewCar();
-                    Console.ReadKey();
                     break;
                 case Action.eAction.ShowGarageCar:
                     garageHandleManager.ShowGrageCar();
-                    Console.ReadKey();
                     break;
                 case Action.eAction.ChangeCarStatus:
                     garageHandleManager.ChangeCarStatus();
-                    Console.ReadKey();
                     break;
                 case Action.eAction.InflateWheel:
                     garageHandleManager.InflateWheel();
-                    Console.ReadKey();
                     break;
                 case Action.eAction.FillFuel:
                     garageHandleManager.FuelVehicle();
-                    Console.ReadKey();
                     break;
                 case Action.eAction.ChargeElectronicCar:
                     garageHandleManager.ChargeVehicle();
-                    Console.ReadKey();
                     break;
                 case Action.eAction.PresentCar:
                     garageHandleManager.PresentCar();

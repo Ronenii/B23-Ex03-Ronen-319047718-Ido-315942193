@@ -50,5 +50,32 @@ namespace Ex03.GarageLogic
                 return k_NumOfWheels;
             }
         }
+
+
+
+        public string LicenseToString()
+        {
+            string license;
+            switch (r_License)
+            {
+                case eBikeLicense.A1:
+                    license = "A1";
+                    break;
+                case eBikeLicense.A2:
+                    license = "A2";
+                    break;
+                case eBikeLicense.AA:
+                    license = "AA";
+                    break;
+                case eBikeLicense.B1:
+                    license = "B1";
+                    break;
+                default:
+                    license = string.Empty;
+                    break;
+            }
+
+            return license;
+        }
     }
 }
