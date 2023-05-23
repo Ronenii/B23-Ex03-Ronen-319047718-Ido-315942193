@@ -16,11 +16,19 @@ namespace B23_Ex03_Ronen_319047718_Ido_315942193
             {
                 printWelcomeMessage();
                 printMenu();
-                printErrorMessage(errorMessage); // TODO: find a way to get exceptions into the errorMessage
+                printErrorMessage(errorMessage); 
                 userInput = getUserChoice();
                 action = Action.ConvertIntgerToeAction(userInput);
-                handleRequestByAction(action);
-                Console.ReadKey();
+                try
+                {
+                    errorMessage = null;
+                    handleRequestByAction(action);
+                    Console.ReadKey();
+                }
+                catch (Exception e)
+                {
+                    errorMessage = e.Message;
+                }
                 Console.Clear();
             }
             while(action != Action.eAction.Exit);
@@ -33,27 +41,21 @@ namespace B23_Ex03_Ronen_319047718_Ido_315942193
             {
                 case Action.eAction.NewCar:
                     garageHandleManager.AddingNewCar();
-                    Console.ReadKey();
                     break;
-                case Action.eAction.ShowGrageCar:
+                case Action.eAction.ShowGarageCar:
                     garageHandleManager.ShowGrageCar();
-                    Console.ReadKey();
                     break;
                 case Action.eAction.ChangeCarStatus:
                     garageHandleManager.ChangeCarStatus();
-                    Console.ReadKey();
                     break;
                 case Action.eAction.InflateWheel:
                     garageHandleManager.InflateWheel();
-                    Console.ReadKey();
                     break;
                 case Action.eAction.FillFuel:
-                    garageHandleManager.FillFuel();
-                    Console.ReadKey();
+                    garageHandleManager.FuelVehicle();
                     break;
-                case Action.eAction.ChargeElctonicCar:
-                    garageHandleManager.ChargeElctonicCar();
-                    Console.ReadKey();
+                case Action.eAction.ChargeElectronicCar:
+                    garageHandleManager.ChargeVehicle();
                     break;
                 case Action.eAction.PresentCar:
                     garageHandleManager.PresentCar();
@@ -109,7 +111,7 @@ namespace B23_Ex03_Ronen_319047718_Ido_315942193
         {
             if(i_ErrorMessage != null)
             {
-                Console.WriteLine(i_ErrorMessage);
+                Console.WriteLine($"ERROR: **{i_ErrorMessage}**");
             }
         }
 

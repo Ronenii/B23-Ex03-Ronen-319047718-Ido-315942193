@@ -157,6 +157,26 @@ namespace Ex03.GarageLogic
             }
         }
 
-        public abstract void PrintVehicleDescription();
+        public string VehicleStatusToString()
+        {
+            string vehicleStatus;
+            switch (m_VehicleStatus)
+            {
+                case eVehicleStatus.InRepair:
+                    vehicleStatus = "In repair";
+                    break;
+                case eVehicleStatus.Paid:
+                    vehicleStatus = "Paid";
+                    break;
+                case eVehicleStatus.Repaired:
+                    vehicleStatus = "Repaired";
+                    break;
+                default:
+                    vehicleStatus =  String.Empty;
+                    break;
+            }
+
+            return vehicleStatus;
+        }
     }
 }

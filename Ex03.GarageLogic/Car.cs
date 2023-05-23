@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Ex03.GarageLogic
 {
-    class Car
+    public class Car
     {
         private const int k_NumOfWheels = 5;
         private const float k_MaxPSI = 33f;
@@ -48,6 +48,31 @@ namespace Ex03.GarageLogic
             {
                 return k_NumOfWheels;
             }
+        }
+
+        public string CarColorToString()
+        {
+            string carColor;
+            switch (r_Color)
+            {
+                case eCarColor.Black:
+                    carColor = "Black";
+                    break;
+                case eCarColor.Red:
+                    carColor = "Red";
+                    break;
+                case eCarColor.White:
+                    carColor = "White";
+                    break;
+                case eCarColor.Yellow:
+                    carColor = "Yellow";
+                    break;
+                default:
+                    carColor = string.Empty;
+                    break;
+            }
+
+            return carColor;
         }
     }
 }

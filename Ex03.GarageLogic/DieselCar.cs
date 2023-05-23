@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Ex03.GarageLogic
 {
-    class DieselCar: DieselVehicle
+    public class DieselCar: DieselVehicle
     {
         private const eFuelType k_FuelType = eFuelType.Octan95;
         private const float k_MaxFuelLiters = 46f;
@@ -43,17 +43,20 @@ namespace Ex03.GarageLogic
             }
         }
 
+        public Car CarProperties
+        {
+            get
+            {
+                return r_Car;
+            }
+        }
+
         public eNumOfCarDoors NumOfDoors
         {
             get
             {
                 return r_Car.NumOfDoors;
             }
-        }
-
-        public override void PrintVehicleDescription()
-        {
-            Console.WriteLine($"Licence Plate: {LicensePlate}");
         }
     }
 }

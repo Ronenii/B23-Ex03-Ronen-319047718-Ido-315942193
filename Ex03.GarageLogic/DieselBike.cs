@@ -43,10 +43,12 @@ namespace Ex03.GarageLogic
             }
         }
 
-
-        public override void PrintVehicleDescription()
+        public Bike BikeProperties
         {
-            throw new NotImplementedException();
+            get
+            {
+                return r_Bike;
+            }
         }
     }
 }
