@@ -7,7 +7,7 @@ namespace Ex03.GarageLogic
 {
     public class Bike
     {
-        private const int k_NumOfWheels = 2;
+        public const int k_NumOfWheels = 2;
         private const float k_MaxPSI = 31f;
 
         private readonly eBikeLicense r_License;

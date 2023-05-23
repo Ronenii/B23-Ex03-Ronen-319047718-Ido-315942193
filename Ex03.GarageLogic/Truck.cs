@@ -7,7 +7,7 @@ namespace Ex03.GarageLogic
 {
     public class Truck : DieselVehicle
     {
-        private const int k_NumOfWheels = 14;
+        public const int k_NumOfWheels = 14;
         private const float k_MaxPSI = 26f;
         private const eFuelType k_FuelType = eFuelType.Soler;
         private const float k_MaxFuelLiters = 135f;
@@ -18,7 +18,6 @@ namespace Ex03.GarageLogic
         public Truck(
             string i_Model,
             string i_LicensePlate,
-            float i_EnergyLeft,
             List<Wheel> i_Wheels,
             Customer i_Owner,
             eVehicleStatus i_VehicleStatus,
@@ -27,7 +26,6 @@ namespace Ex03.GarageLogic
             float i_CargoSize)
             : base(i_Model,
                 i_LicensePlate,
-                i_EnergyLeft,
                 i_Wheels,
                 i_Owner,
                 i_VehicleStatus,

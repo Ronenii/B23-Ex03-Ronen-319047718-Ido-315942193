@@ -7,44 +7,36 @@ namespace Ex03.GarageLogic
 {
     public class Garage
     {
-        private List<Vehicle> AllVehicles;
+        private List<Vehicle> m_AllVehicles = new List<Vehicle>();
 
         public void AddNewVehicle(Vehicle vehicle)
         {
-            AllVehicles.Add(vehicle);
+                m_AllVehicles.Add(vehicle);
         }
 
         public Vehicle GetVehicleByLicense(string i_LicencePlate)
         {
-            Vehicle returnVehicle = null;
-            foreach (Vehicle vehicle in AllVehicles)
-            {
-                if (vehicle.LicensePlate == i_LicencePlate)
-                {
-                    returnVehicle = vehicle;
-                }
-            }
-            return returnVehicle;
+            return m_AllVehicles.FirstOrDefault(vehicle => vehicle.LicensePlate == i_LicencePlate);
         }
 
         public void UpdateVehicleStatus(string i_LicensePlate, eVehicleStatus i_Status)
         {
             Vehicle vehicle = GetVehicleByLicense(i_LicensePlate);
-            if(vehicle == null)
+            if (vehicle == null)
             {
-                throw new Exception();
+                throw new ArgumentNullException("Could not find the given license plate in the system");
             }
             vehicle.Status = i_Status;
         }
 
         public void DisplayVehicleDetails(string i_LicensePlate)
         {
-           Vehicle vehicle = GetVehicleByLicense(i_LicensePlate);
+            Vehicle vehicle = GetVehicleByLicense(i_LicensePlate);
             vehicle.PrintVehicleDescription();
         }
         public List<Vehicle> GetAllVehicles()
         {
-            return AllVehicles;
+            return m_AllVehicles;
         }
 
         // TODO: add garage logic

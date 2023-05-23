@@ -5,9 +5,9 @@ using System.Text;
 
 namespace Ex03.GarageLogic
 {
-    class Car
+    public class Car
     {
-        private const int k_NumOfWheels = 5;
+        public const int k_NumOfWheels = 5;
         private const float k_MaxPSI = 33f;
 
         private readonly eNumOfCarDoors r_NumOfDoors;

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Ex03.GarageLogic
 {
-    public abstract class ElectricVehicle: Vehicle
+    public abstract class ElectricVehicle : Vehicle
     {
         private readonly float r_MaxChargeHours;
         private float m_ChargeHoursLeft;
@@ -13,12 +13,11 @@ namespace Ex03.GarageLogic
         public ElectricVehicle(
             string i_Model,
             string i_LicensePlate,
-            float i_EnergyLeft,
             List<Wheel> i_Wheels,
             Customer i_Owner,
             eVehicleStatus i_VehicleStatus,
             float i_ChargeHoursLeft,
-            float i_MaxChargeHours): base(i_Model, i_LicensePlate, i_EnergyLeft, i_Wheels, i_Owner, i_VehicleStatus)
+            float i_MaxChargeHours) : base(i_Model, i_LicensePlate, i_ChargeHoursLeft / i_MaxChargeHours, i_Wheels, i_Owner, i_VehicleStatus)
         {
             m_ChargeHoursLeft = i_ChargeHoursLeft;
             r_MaxChargeHours = i_MaxChargeHours;
@@ -47,7 +46,7 @@ namespace Ex03.GarageLogic
 
         public void ChargeBattery(float i_HoursToCharge)
         {
-            if(i_HoursToCharge + m_ChargeHoursLeft > MaxChargeHours)
+            if (i_HoursToCharge + m_ChargeHoursLeft > MaxChargeHours)
             {
                 throw new ValueOutOfRangeException(0, MaxChargeHours);
             }
