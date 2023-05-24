@@ -56,6 +56,8 @@ namespace Ex03.GarageLogic
             r_FuelType = i_FuelType;
         }
 
+        // Adds given fuel amount to the vehicle, throws exceptions if too much fuel,
+        // if given amount out of range or if fuel type is invalid.
         public void Fuel(float i_FuelLitersToAdd, eFuelType i_FuelType)
         {
             if (!isFuelTypeValid(i_FuelType))

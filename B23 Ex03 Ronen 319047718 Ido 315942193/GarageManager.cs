@@ -10,6 +10,10 @@ namespace B23_Ex03_Ronen_319047718_Ido_315942193
         private Garage garage = new Ex03.GarageLogic.Garage();
         private VehicleFactory vehicleFactory = new VehicleFactory();
 
+        // TODO: REMOVE THIS WHEN PROGRAM IS COMPLETE!!!!
+        // TODO: REMOVE THIS WHEN PROGRAM IS COMPLETE!!!!
+        // TODO: REMOVE THIS WHEN PROGRAM IS COMPLETE!!!!
+        // TODO: REMOVE THIS WHEN PROGRAM IS COMPLETE!!!!
         public GarageManager()
         {
             List<Wheel> bikeWheels = new List<Wheel>();
@@ -77,8 +81,13 @@ namespace B23_Ex03_Ronen_319047718_Ido_315942193
             garage.AddNewVehicle(ec);
             garage.AddNewVehicle(eb);
             garage.AddNewVehicle(dc);
-
         }
+        // TODO: REMOVE THIS WHEN PROGRAM IS COMPLETE!!!!
+        // TODO: REMOVE THIS WHEN PROGRAM IS COMPLETE!!!!
+        // TODO: REMOVE THIS WHEN PROGRAM IS COMPLETE!!!!
+        // TODO: REMOVE THIS WHEN PROGRAM IS COMPLETE!!!!
+
+
         public void AddingNewCar()
         {
             Console.WriteLine("Please insert the license plate");
@@ -106,8 +115,6 @@ namespace B23_Ex03_Ronen_319047718_Ido_315942193
             }
         }
 
-
-
         public void ShowGrageCar()
         {
             List<Vehicle> vehicles = garage.GetAllVehicles();
@@ -116,6 +123,7 @@ namespace B23_Ex03_Ronen_319047718_Ido_315942193
                 Console.WriteLine(vehicle.ToString());
             }
         }
+
         public void ChangeCarStatus()
         {
             Console.Write("Please insert the Licence plate for the car: ");
@@ -131,7 +139,6 @@ namespace B23_Ex03_Ronen_319047718_Ido_315942193
             {
                 throw new ArgumentOutOfRangeException("Invalid vehicle status");
             }
-
         }
 
         public void InflateWheel()
@@ -148,9 +155,9 @@ namespace B23_Ex03_Ronen_319047718_Ido_315942193
             {
                 Console.WriteLine("Could not find the vehicle");
             }
-
         }
 
+        // Responsible for handling user input and executing fueling logic and validations.
         public void FuelVehicle()
         {
             eFuelType fuelType;
@@ -174,6 +181,7 @@ namespace B23_Ex03_Ronen_319047718_Ido_315942193
             }
         }
 
+        // Prompts user to input liters to fuel and validates the input format wise
         private float getLitersToAddFromUser()
         {
             float litersToAdd;
@@ -188,19 +196,30 @@ namespace B23_Ex03_Ronen_319047718_Ido_315942193
             return litersToAdd;
         }
 
+        // Prompts the user to input fuel type and validates the input
         private eFuelType getFuelTypeFromUser()
         {
             eFuelType fuelType;
             Display.ChooseFuelPrompt();
             string fuelTypeStr = Console.ReadLine();
-            if (!(eFuelType.TryParse(fuelTypeStr, out fuelType) && Enum.IsDefined(typeof(eFuelType), fuelType)))
+            if (eFuelType.TryParse(fuelTypeStr, out fuelType))
             {
-                throw new ArgumentException("Invalid fuel type");
+                if(!Enum.IsDefined(typeof(eFuelType), fuelType))
+                {
+                    throw new ArgumentException("Fuel not listed on the menu");
+                }
+            }
+            else
+            {
+                throw new FormatException("Input must be in numbers");
             }
 
             return fuelType;
         }
-
+        
+        // Propts the user to enter a license plate number and returns a vehicle 
+        // with the corresponding license plate in the garage.
+        // If vehicle not found throws an exception.
         private Vehicle FindVehicleInGarage()
         {
             Console.Write("Vehicle license plate: ");
@@ -215,6 +234,7 @@ namespace B23_Ex03_Ronen_319047718_Ido_315942193
             return vehicleToFind;
         }
 
+        // Responsible for handling user input and executing charging logic and validations.
         public void ChargeVehicle()
         {
             int minutesToCharge;
@@ -236,6 +256,7 @@ namespace B23_Ex03_Ronen_319047718_Ido_315942193
             }
         }
 
+        // Prompts user to input number of minutes to charge and validates the input format wise
         private int getMinutesToChargeFromUser()
         {
             int minutesToCharge;
@@ -249,6 +270,7 @@ namespace B23_Ex03_Ronen_319047718_Ido_315942193
             return minutesToCharge;
         }
 
+        // Prints out the requested vehicle by license plate
         public void PresentCar()
         {
             Vehicle vehicleToPresent;
@@ -266,6 +288,7 @@ namespace B23_Ex03_Ronen_319047718_Ido_315942193
             }
         }
 
+        // Prints the relevant details for diesel vehicles
         private void printDieselVehicleDetails(DieselVehicle i_DieselVehicle)
         {
             Display.FuelDetails(i_DieselVehicle);
@@ -283,6 +306,7 @@ namespace B23_Ex03_Ronen_319047718_Ido_315942193
             }
         }
 
+        // Prints the relevant details for electric vehicles
         private void printElectricVehicleDetails(ElectricVehicle i_ElectricVehicle)
         {
             Display.BatteryDetails(i_ElectricVehicle);
