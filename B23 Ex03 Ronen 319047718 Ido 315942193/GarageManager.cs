@@ -1,9 +1,7 @@
 ﻿using Ex03.GarageLogic;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Management.Instrumentation;
-using System.Text;
 
 namespace B23_Ex03_Ronen_319047718_Ido_315942193
 {
@@ -136,8 +134,6 @@ namespace B23_Ex03_Ronen_319047718_Ido_315942193
 
         }
 
-
-
         public void InflateWheel()
         {
             Console.Write("Please insert the Licence plate for the car: ");
@@ -197,7 +193,7 @@ namespace B23_Ex03_Ronen_319047718_Ido_315942193
             eFuelType fuelType;
             Display.ChooseFuelPrompt();
             string fuelTypeStr = Console.ReadLine();
-            if (!eFuelType.TryParse(fuelTypeStr, out fuelType))
+            if (!(eFuelType.TryParse(fuelTypeStr, out fuelType) && Enum.IsDefined(typeof(eFuelType), fuelType)))
             {
                 throw new ArgumentException("Invalid fuel type");
             }
@@ -302,8 +298,7 @@ namespace B23_Ex03_Ronen_319047718_Ido_315942193
 
         private bool isUserStatusVehicleIsValid(string userStatusInput, out eVehicleStatus o_status)
         {
-            return eVehicleType.TryParse(userStatusInput, out o_status);
+            return (eVehicleType.TryParse(userStatusInput, out o_status)) && Enum.IsDefined(typeof(eVehicleType), o_status);
         }
-
     }
 }

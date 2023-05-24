@@ -30,13 +30,14 @@ namespace B23_Ex03_Ronen_319047718_Ido_315942193
             {
                 Display.PrintWelcomeMessage();
                 Display.PrintMenu();
-                userAction = getUserAction();
                 try
                 {
+                    userAction = getUserAction();
                     handleRequestByAction(userAction);
                 }
                 catch (Exception e)
                 {
+                    userAction = eUserAction.Error;
                     errorMessage = e.Message;
                     Display.PrintErrorMessage(errorMessage);
                 }
@@ -80,7 +81,7 @@ namespace B23_Ex03_Ronen_319047718_Ido_315942193
         {
             eUserAction userAction;
             string userActionStr = Console.ReadLine();
-            if (!eUserAction.TryParse(userActionStr, out userAction))
+            if (!(eUserAction.TryParse(userActionStr, out userAction) && Enum.IsDefined(typeof(eUserAction), userAction)))
             {
                 throw new ArgumentException("No such menu option");
             }
