@@ -7,94 +7,85 @@ namespace B23_Ex03_Ronen_319047718_Ido_315942193
 {
     public class GrageUserInterface
     {
-        private GarageHandleManager garageHandleManager = new GarageHandleManager();
+        public enum eUserAction
+        {
+            NewCar = 1,
+            ShowGarageCar,
+            ChangeCarStatus,
+            InflateWheel,
+            FillFuel,
+            ChargeElectronicCar,
+            PresentCar,
+            Exit,
+            Error
+        }
+
+        private GarageManager garageHandleManager = new GarageManager();
 
         public void Run()
         {
-            int userInput;
             string errorMessage = null;
-            Action.eAction action;
+            eUserAction userAction;
             do
             {
-                printWelcomeMessage();
-                printErrorMessage(errorMessage);
-                userInput = getUserChoice();
-                action = Action.ConvertIntgerToAction(userInput);
+                Display.PrintWelcomeMessage();
+                Display.PrintMenu();
                 try
                 {
-                    handleRequestByAction(action);
+                    userAction = getUserAction();
+                    handleRequestByAction(userAction);
                 }
                 catch (Exception e)
                 {
+                    userAction = eUserAction.Error;
                     errorMessage = e.Message;
-                    Console.WriteLine(e.Message);
+                    Display.PrintErrorMessage(errorMessage);
                 }
-                Console.WriteLine("Press any key to continue....");
-                Console.ReadKey();
-                Console.Clear();
+                Display.ActionEndingPrompt();
             }
-            while (action != Action.eAction.Exit);
+            while (userAction != eUserAction.Exit);
         }
 
-        private void handleRequestByAction(Action.eAction i_Action)
+        private void handleRequestByAction(eUserAction i_Action)
         {
             switch (i_Action)
             {
-                case Action.eAction.NewCar:
+                case eUserAction.NewCar:
                     garageHandleManager.AddingNewCar();
                     break;
-                case Action.eAction.ShowGarageCar:
+                case eUserAction.ShowGarageCar:
                     garageHandleManager.ShowGrageCar();
                     break;
-                case Action.eAction.ChangeCarStatus:
+                case eUserAction.ChangeCarStatus:
                     garageHandleManager.ChangeCarStatus();
                     break;
-                case Action.eAction.InflateWheel:
+                case eUserAction.InflateWheel:
                     garageHandleManager.InflateWheel();
                     break;
-                case Action.eAction.FillFuel:
+                case eUserAction.FillFuel:
                     garageHandleManager.FuelVehicle();
                     break;
-                case Action.eAction.ChargeElectronicCar:
+                case eUserAction.ChargeElectronicCar:
                     garageHandleManager.ChargeVehicle();
                     break;
-                case Action.eAction.PresentCar:
+                case eUserAction.PresentCar:
                     garageHandleManager.PresentCar();
                     break;
-                case Action.eAction.Exit:
-                    Console.Clear();
-                    Console.WriteLine("Goodbye!");
-                    break;
-                default:
-                    Console.WriteLine("Error");
+                case eUserAction.Exit:
+                    Display.PrintGoodbye();
                     break;
             }
         }
 
-        private int getUserChoice()
+        private eUserAction getUserAction()
         {
-            int o_UserInputInteger;
-            string userInput;
-            do
+            eUserAction userAction;
+            string userActionStr = Console.ReadLine();
+            if (!(eUserAction.TryParse(userActionStr, out userAction) && Enum.IsDefined(typeof(eUserAction), userAction)))
             {
-                printMenu();
-                userInput = Console.ReadLine();
+                throw new ArgumentException("No such menu option");
             }
-            while (!validateUserActionInput(userInput, out o_UserInputInteger));
-            return o_UserInputInteger;
-        }
-
-        private void printMenu()
-        {
-            Console.WriteLine("Please enter one of the folowing options");
-            Console.WriteLine("1. Insert new car");
-            Console.WriteLine("2. Show all cars in the grage");
-            Console.WriteLine("3. Change car status");
-            Console.WriteLine("4. Inflate car Wheel");
-            Console.WriteLine("5. Refuel a car");
-            Console.WriteLine("6. Charge electronic car");
-            Console.WriteLine("7. Present car by a license plate");
-            Console.WriteLine("8. Exit");
+            return userAction;
         }
 
         private bool validateUserActionInput(string i_UserInput, out int o_UserInputInteger)
@@ -107,26 +98,6 @@ namespace B23_Ex03_Ronen_319047718_Ido_315942193
                 isValid = false;
             }
             return isValid;
-        }
-
-        private void printErrorMessage(string i_ErrorMessage)
-        {
-            if (i_ErrorMessage != null)
-            {
-                Console.WriteLine($"ERROR: **{i_ErrorMessage}**");
-            }
-        }
-
-        private void printWelcomeMessage()
-        {
-            string welcomeText = @"                                                                                    
- _ _ _     _                      _          _   _                                  
-| | | |___| |___ ___ _____ ___   | |_ ___   | |_| |_ ___    ___ ___ ___ ___ ___ ___ 
-| | | | -_| |  _| . |     | -_|  |  _| . |  |  _|   | -_|  | . | .'|  _| .'| . | -_|
-|_____|___|_|___|___|_|_|_|___|  |_| |___|  |_| |_|_|___|  |_  |__,|_| |__,|_  |___|
-                                                           |___|           |___|     ";
-
-            Console.WriteLine(welcomeText);
         }
     }
 }
