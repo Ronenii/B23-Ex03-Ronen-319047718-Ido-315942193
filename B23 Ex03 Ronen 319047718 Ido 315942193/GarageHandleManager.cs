@@ -176,14 +176,20 @@ namespace B23_Ex03_Ronen_319047718_Ido_315942193
             Vehicle vehicleToFuel;
 
             vehicleToFuel = FindVehicleInGarage();
-            if (vehicleToFuel is ElectricVehicle)
+            if (vehicleToFuel is DieselVehicle dieselVehicle)
+            {
+                if(dieselVehicle.isTankFull())
+                {
+                    throw new InvalidOperationException("Tank full");
+                }
+                fuelType = getFuelTypeFromUser();
+                litersToAdd = getLitersToAddFromUser();
+                dieselVehicle.Fuel(litersToAdd, fuelType);
+            }
+            else
             {
                 throw new ArgumentException("Can't fuel an electric car");
             }
-
-            fuelType = getFuelTypeFromUser();
-            litersToAdd = getLitersToAddFromUser();
-            (vehicleToFuel as DieselVehicle).Fuel(litersToAdd, fuelType);
         }
 
         private float getLitersToAddFromUser()
@@ -233,30 +239,36 @@ namespace B23_Ex03_Ronen_319047718_Ido_315942193
 
         public void ChargeVehicle()
         {
-            float hoursToCharge;
+            int minutesToCharge;
             Vehicle vehicleToCharge;
 
             vehicleToCharge = FindVehicleInGarage();
-            if (vehicleToCharge is DieselVehicle)
+            if (vehicleToCharge is ElectricVehicle electricVehicle)
+            {
+                if (electricVehicle.isBatteryFull())
+                {
+                    throw new InvalidOperationException("Battery full");
+                }
+                minutesToCharge = getMinutesToChargeFromUser();
+                (vehicleToCharge as ElectricVehicle).ChargeBattery(minutesToCharge);
+            }
+            else
             {
                 throw new ArgumentException("Can't charge a fuel powered vehicle");
             }
-
-            hoursToCharge = getHoursToChargeFromUser();
-            (vehicleToCharge as ElectricVehicle).ChargeBattery(hoursToCharge);
         }
 
-        private float getHoursToChargeFromUser()
+        private int getMinutesToChargeFromUser()
         {
-            float hoursToCharge;
-            Console.Write("Liters to add: ");
-            string hoursToChargeStr = Console.ReadLine();
+            int minutesToCharge;
+            Console.Write("Minutes to charge: ");
+            string minutesToChargeStr = Console.ReadLine();
 
-            if (!float.TryParse(hoursToChargeStr, out hoursToCharge))
+            if (!int.TryParse(minutesToChargeStr, out minutesToCharge))
             {
                 throw new FormatException("Input must be in numbers");
             }
-            return hoursToCharge;
+            return minutesToCharge;
         }
 
         public void PresentCar()
@@ -340,7 +352,7 @@ namespace B23_Ex03_Ronen_319047718_Ido_315942193
         private void printBatteryDetails(ElectricVehicle i_ElectricVehicle)
         {
             Console.WriteLine("             BATTERY INFO ");
-            Console.WriteLine($"Charge Left:         {i_ElectricVehicle.ChargeTimeToString()} h:mm");
+            Console.WriteLine($"Charge Left:         {i_ElectricVehicle.ChargeTimeToString()} hours");
             printPowerPercentage(i_ElectricVehicle);
         }
 

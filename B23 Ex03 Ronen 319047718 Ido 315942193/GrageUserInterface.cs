@@ -7,93 +7,99 @@ namespace B23_Ex03_Ronen_319047718_Ido_315942193
 {
     public class GrageUserInterface
     {
+        public enum eUserAction
+        {
+            NewCar = 1,
+            ShowGarageCar,
+            ChangeCarStatus,
+            InflateWheel,
+            FillFuel,
+            ChargeElectronicCar,
+            PresentCar,
+            Exit,
+            Error
+        }
+
         private GarageHandleManager garageHandleManager = new GarageHandleManager();
 
         public void Run()
         {
-            int userInput;
             string errorMessage = null;
-            Action.eAction action;
+            eUserAction userAction;
             do
             {
                 printWelcomeMessage();
-                printErrorMessage(errorMessage);
-                userInput = getUserChoice();
-                action = Action.ConvertIntgerToAction(userInput);
+                printMenu();
+                userAction = getUserAction();
                 try
                 {
-                    handleRequestByAction(action);
+                    handleRequestByAction(userAction);
                 }
                 catch (Exception e)
                 {
                     errorMessage = e.Message;
-                    Console.WriteLine(e.Message);
+                    printErrorMessage(errorMessage);
                 }
                 Console.WriteLine("Press any key to continue....");
                 Console.ReadKey();
                 Console.Clear();
             }
-            while (action != Action.eAction.Exit);
+            while (userAction != eUserAction.Exit);
         }
 
-        private void handleRequestByAction(Action.eAction i_Action)
+        private void handleRequestByAction(eUserAction i_Action)
         {
             switch (i_Action)
             {
-                case Action.eAction.NewCar:
+                case eUserAction.NewCar:
                     garageHandleManager.AddingNewCar();
                     break;
-                case Action.eAction.ShowGarageCar:
+                case eUserAction.ShowGarageCar:
                     garageHandleManager.ShowGrageCar();
                     break;
-                case Action.eAction.ChangeCarStatus:
+                case eUserAction.ChangeCarStatus:
                     garageHandleManager.ChangeCarStatus();
                     break;
-                case Action.eAction.InflateWheel:
+                case eUserAction.InflateWheel:
                     garageHandleManager.InflateWheel();
                     break;
-                case Action.eAction.FillFuel:
+                case eUserAction.FillFuel:
                     garageHandleManager.FuelVehicle();
                     break;
-                case Action.eAction.ChargeElectronicCar:
+                case eUserAction.ChargeElectronicCar:
                     garageHandleManager.ChargeVehicle();
                     break;
-                case Action.eAction.PresentCar:
+                case eUserAction.PresentCar:
                     garageHandleManager.PresentCar();
                     break;
-                case Action.eAction.Exit:
+                case eUserAction.Exit:
                     Console.Clear();
                     Console.WriteLine("Goodbye!");
-                    break;
-                default:
-                    Console.WriteLine("Error");
                     break;
             }
         }
 
-        private int getUserChoice()
+        private eUserAction getUserAction()
         {
-            int o_UserInputInteger;
-            string userInput;
-            do
+            eUserAction userAction;
+            string userActionStr = Console.ReadLine();
+            if(!eUserAction.TryParse(userActionStr, out userAction))
             {
-                printMenu();
-                userInput = Console.ReadLine();
+                throw new ArgumentException("No such menu option");
             }
-            while (!validateUserActionInput(userInput, out o_UserInputInteger));
-            return o_UserInputInteger;
+            return userAction;
         }
 
         private void printMenu()
         {
             Console.WriteLine("Please enter one of the folowing options");
-            Console.WriteLine("1. Insert new car");
-            Console.WriteLine("2. Show all cars in the grage");
-            Console.WriteLine("3. Change car status");
-            Console.WriteLine("4. Inflate car Wheel");
-            Console.WriteLine("5. Refuel a car");
-            Console.WriteLine("6. Charge electronic car");
-            Console.WriteLine("7. Present car by a license plate");
+            Console.WriteLine("1. Insert a new vehicle");
+            Console.WriteLine("2. Show all vehicles in the garage");
+            Console.WriteLine("3. Change vehicle status");
+            Console.WriteLine("4. Inflate vehicle Wheel");
+            Console.WriteLine("5. Refuel a vehicle");
+            Console.WriteLine("6. Charge a vehicle");
+            Console.WriteLine("7. Present a vehicle");
             Console.WriteLine("8. Exit");
         }
 

@@ -29,7 +29,5 @@ namespace Ex03.GarageLogic
             m_MaxValue = i_MaxValue;
             m_MinValue = i_MaxValue;
         }
-
-
     }
 }

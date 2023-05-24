@@ -35,7 +35,6 @@
     <Compile Include="GarageHandleManager.cs" />
     <Compile Include="GrageUserInterface.cs" />
     <Compile Include="Program.cs" />
-    <Compile Include="Action.cs" />
     <Compile Include="VehicleFactory.cs" />
   </ItemGroup>
   <ItemGroup>

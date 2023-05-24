@@ -35,26 +35,50 @@ namespace Ex03.GarageLogic
         {
             get
             {
-                return ChargeHoursLeft;
+                return m_ChargeHoursLeft;
             }
 
             set
             {
-                ChargeHoursLeft = value;
+                m_ChargeHoursLeft = value;
             }
         }
 
-        public void ChargeBattery(float i_HoursToCharge)
+        public void ChargeBattery(int i_MinutesToCharge)
         {
-            if (i_HoursToCharge + m_ChargeHoursLeft > MaxChargeHours)
+            float hoursToCharge = i_MinutesToCharge / 60f;
+            if (!(isHoursToChargeNotTooMuch(hoursToCharge) && isHoursToChargeValid(hoursToCharge)))
             {
-                throw new ValueOutOfRangeException(0, MaxChargeHours);
+                throw new ValueOutOfRangeException(0, floatHoursToMinutes(MaxChargeHours - m_ChargeHoursLeft) - 1);
             }
             else
             {
-                m_ChargeHoursLeft += i_HoursToCharge;
+                m_ChargeHoursLeft += hoursToCharge;
                 EnergyLeft = m_ChargeHoursLeft / MaxChargeHours;
             }
+        }
+
+        public bool isBatteryFull()
+        {
+            return m_ChargeHoursLeft >= r_MaxChargeHours;
+        }
+
+        private int floatHoursToMinutes(float i_FloatHours)
+        {
+            int hours = Convert.ToInt32(i_FloatHours);
+            int minutes = Convert.ToInt32((i_FloatHours - hours) * 60);
+
+            return hours * 60 + minutes;
+        }
+
+        private bool isHoursToChargeValid(float i_HoursToCharge)
+        {
+            return i_HoursToCharge >= 0 && i_HoursToCharge <= r_MaxChargeHours;
+        }
+
+        private bool isHoursToChargeNotTooMuch(float i_HoursToCharge)
+        {
+            return m_ChargeHoursLeft + i_HoursToCharge <= r_MaxChargeHours;
         }
 
         public string ChargeTimeToString()
