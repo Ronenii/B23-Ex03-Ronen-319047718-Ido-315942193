@@ -5,7 +5,7 @@ namespace B23_Ex03_Ronen_319047718_Ido_315942193
 {
     class Display
     {
-        public static void PrintErrorMessage(string i_ErrorMessage)
+        public static void ErrorMessage(string i_ErrorMessage)
         {
             if (i_ErrorMessage != null)
             {
@@ -13,7 +13,7 @@ namespace B23_Ex03_Ronen_319047718_Ido_315942193
             }
         }
 
-        public static void PrintWelcomeMessage()
+        public static void WelcomeMessage()
         {
             string welcomeText = @"                                                                                    
  _ _ _     _                      _          _   _                                  
@@ -25,7 +25,7 @@ namespace B23_Ex03_Ronen_319047718_Ido_315942193
             Console.WriteLine(welcomeText);
         }
 
-        public static void PrintMenu()
+        public static void Menu()
         {
             Console.WriteLine("Please enter one of the folowing options");
             Console.WriteLine("1. Insert a new vehicle");
@@ -38,7 +38,7 @@ namespace B23_Ex03_Ronen_319047718_Ido_315942193
             Console.WriteLine("8. Exit");
         }
 
-        public static void PrintGoodbye()
+        public static void Goodbye()
         {
             Console.Clear();
             Console.WriteLine("Goodbye!");
@@ -96,17 +96,17 @@ namespace B23_Ex03_Ronen_319047718_Ido_315942193
             Console.WriteLine("             FUEL INFO ");
             Console.WriteLine($"Octan:               {i_DieselVehicle.FuelTypeToString()}");
             Console.WriteLine($"Liters Left:         {i_DieselVehicle.FuelLitersLeft}L");
-            PowerPercentage(i_DieselVehicle);
+            printPowerPercentage(i_DieselVehicle);
         }
 
         public static void BatteryDetails(ElectricVehicle i_ElectricVehicle)
         {
             Console.WriteLine("             BATTERY INFO ");
             Console.WriteLine($"Charge Left:         {i_ElectricVehicle.ChargeTimeToString()} hours");
-            PowerPercentage(i_ElectricVehicle);
+            printPowerPercentage(i_ElectricVehicle);
         }
 
-        public static void PowerPercentage(Vehicle i_Vehicle)
+        private static void printPowerPercentage(Vehicle i_Vehicle)
         {
             float percentage = i_Vehicle.EnergyLeft * 100;
             Console.WriteLine($"In Percents:         {percentage.ToString("0")}%\n");
