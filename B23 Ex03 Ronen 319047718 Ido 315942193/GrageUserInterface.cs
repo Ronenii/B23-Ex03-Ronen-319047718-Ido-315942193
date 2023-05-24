@@ -20,7 +20,7 @@ namespace B23_Ex03_Ronen_319047718_Ido_315942193
             Error
         }
 
-        private GarageHandleManager garageHandleManager = new GarageHandleManager();
+        private GarageManager garageHandleManager = new GarageManager();
 
         public void Run()
         {
@@ -28,8 +28,8 @@ namespace B23_Ex03_Ronen_319047718_Ido_315942193
             eUserAction userAction;
             do
             {
-                printWelcomeMessage();
-                printMenu();
+                Display.PrintWelcomeMessage();
+                Display.PrintMenu();
                 userAction = getUserAction();
                 try
                 {
@@ -38,11 +38,9 @@ namespace B23_Ex03_Ronen_319047718_Ido_315942193
                 catch (Exception e)
                 {
                     errorMessage = e.Message;
-                    printErrorMessage(errorMessage);
+                    Display.PrintErrorMessage(errorMessage);
                 }
-                Console.WriteLine("Press any key to continue....");
-                Console.ReadKey();
-                Console.Clear();
+                Display.ActionEndingPrompt();
             }
             while (userAction != eUserAction.Exit);
         }
@@ -73,8 +71,7 @@ namespace B23_Ex03_Ronen_319047718_Ido_315942193
                     garageHandleManager.PresentCar();
                     break;
                 case eUserAction.Exit:
-                    Console.Clear();
-                    Console.WriteLine("Goodbye!");
+                    Display.PrintGoodbye();
                     break;
             }
         }
@@ -83,24 +80,11 @@ namespace B23_Ex03_Ronen_319047718_Ido_315942193
         {
             eUserAction userAction;
             string userActionStr = Console.ReadLine();
-            if(!eUserAction.TryParse(userActionStr, out userAction))
+            if (!eUserAction.TryParse(userActionStr, out userAction))
             {
                 throw new ArgumentException("No such menu option");
             }
             return userAction;
-        }
-
-        private void printMenu()
-        {
-            Console.WriteLine("Please enter one of the folowing options");
-            Console.WriteLine("1. Insert a new vehicle");
-            Console.WriteLine("2. Show all vehicles in the garage");
-            Console.WriteLine("3. Change vehicle status");
-            Console.WriteLine("4. Inflate vehicle Wheel");
-            Console.WriteLine("5. Refuel a vehicle");
-            Console.WriteLine("6. Charge a vehicle");
-            Console.WriteLine("7. Present a vehicle");
-            Console.WriteLine("8. Exit");
         }
 
         private bool validateUserActionInput(string i_UserInput, out int o_UserInputInteger)
@@ -113,26 +97,6 @@ namespace B23_Ex03_Ronen_319047718_Ido_315942193
                 isValid = false;
             }
             return isValid;
-        }
-
-        private void printErrorMessage(string i_ErrorMessage)
-        {
-            if (i_ErrorMessage != null)
-            {
-                Console.WriteLine($"ERROR: **{i_ErrorMessage}**");
-            }
-        }
-
-        private void printWelcomeMessage()
-        {
-            string welcomeText = @"                                                                                    
- _ _ _     _                      _          _   _                                  
-| | | |___| |___ ___ _____ ___   | |_ ___   | |_| |_ ___    ___ ___ ___ ___ ___ ___ 
-| | | | -_| |  _| . |     | -_|  |  _| . |  |  _|   | -_|  | . | .'|  _| .'| . | -_|
-|_____|___|_|___|___|_|_|_|___|  |_| |___|  |_| |_|_|___|  |_  |__,|_| |__,|_  |___|
-                                                           |___|           |___|     ";
-
-            Console.WriteLine(welcomeText);
         }
     }
 }
