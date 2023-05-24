@@ -83,9 +83,16 @@ namespace B23_Ex03_Ronen_319047718_Ido_315942193
         {
             eUserAction userAction;
             string userActionStr = Console.ReadLine();
-            if (!(eUserAction.TryParse(userActionStr, out userAction) && Enum.IsDefined(typeof(eUserAction), userAction)))
+            if (eUserAction.TryParse(userActionStr, out userAction))
             {
-                throw new ArgumentException("No such menu option");
+                if(!Enum.IsDefined(typeof(eUserAction), userAction))
+                {
+                    throw new ArgumentException("No such menu option");
+                }
+            }
+            else
+            {
+                throw new FormatException("Input must be in numbers");
             }
             return userAction;
         }
