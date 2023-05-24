@@ -15,14 +15,13 @@ namespace Ex03.GarageLogic
         public DieselBike(
             string i_Model,
             string i_LicensePlate,
-            float i_EnergyLeft,
             List<Wheel> i_Wheels,
             Customer i_Owner,
             eVehicleStatus i_VehicleStatus,
             float i_FuelLitersLeft,
             eBikeLicense i_License,
             int i_EngineSize)
-            : base(i_Model, i_LicensePlate, i_EnergyLeft,i_Wheels,i_Owner,i_VehicleStatus,i_FuelLitersLeft, k_MaxFuelLiters,k_FuelType)
+            : base(i_Model, i_LicensePlate, i_Wheels, i_Owner, i_VehicleStatus, i_FuelLitersLeft, k_MaxFuelLiters, k_FuelType)
         {
             r_Bike = new Bike(i_License, i_EngineSize);
         }

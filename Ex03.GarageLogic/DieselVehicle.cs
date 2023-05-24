@@ -44,13 +44,12 @@ namespace Ex03.GarageLogic
         public DieselVehicle(
             string i_Model,
             string i_LicensePlate,
-            float i_EnergyLeft,
             List<Wheel> i_Wheels,
             Customer i_Owner,
             eVehicleStatus i_VehicleStatus,
             float i_FuelLitersLeft,
             float i_MaxFuelLiters,
-            eFuelType i_FuelType) : base(i_Model, i_LicensePlate, i_EnergyLeft,i_Wheels, i_Owner, i_VehicleStatus)
+            eFuelType i_FuelType) : base(i_Model, i_LicensePlate, i_FuelLitersLeft / i_MaxFuelLiters, i_Wheels, i_Owner, i_VehicleStatus)
         {
             m_FuelLitersLeft = i_FuelLitersLeft;
             r_MaxFuelLiters = i_MaxFuelLiters;

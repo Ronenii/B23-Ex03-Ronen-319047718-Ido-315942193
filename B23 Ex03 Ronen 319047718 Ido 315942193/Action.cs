@@ -20,7 +20,7 @@ namespace B23_Ex03_Ronen_319047718_Ido_315942193
             Error
         }
 
-        public static eAction ConvertIntgerToeAction(int i_IntegerAction)
+        public static eAction ConvertIntgerToAction(int i_IntegerAction)
         {
             eAction action;
             if (i_IntegerAction == 1)
@@ -37,6 +37,8 @@ namespace B23_Ex03_Ronen_319047718_Ido_315942193
                 action = eAction.ChangeCarStatus;
             else if (i_IntegerAction == 7)
                 action = eAction.PresentCar;
+            else if (i_IntegerAction == 8)
+                action = eAction.Exit;
             else
                 action = eAction.Error;
             return action;

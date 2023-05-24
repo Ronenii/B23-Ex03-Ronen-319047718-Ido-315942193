@@ -7,6 +7,8 @@ namespace B23_Ex03_Ronen_319047718_Ido_315942193
 {
     public class GrageUserInterface
     {
+        private GarageHandleManager garageHandleManager = new GarageHandleManager();
+
         public void Run()
         {
             int userInput;
@@ -15,28 +17,27 @@ namespace B23_Ex03_Ronen_319047718_Ido_315942193
             do
             {
                 printWelcomeMessage();
-                printMenu();
-                printErrorMessage(errorMessage); 
+                printErrorMessage(errorMessage);
                 userInput = getUserChoice();
-                action = Action.ConvertIntgerToeAction(userInput);
+                action = Action.ConvertIntgerToAction(userInput);
                 try
                 {
-                    errorMessage = null;
                     handleRequestByAction(action);
-                    Console.ReadKey();
                 }
                 catch (Exception e)
                 {
                     errorMessage = e.Message;
+                    Console.WriteLine(e.Message);
                 }
+                Console.WriteLine("Press any key to continue....");
+                Console.ReadKey();
                 Console.Clear();
             }
-            while(action != Action.eAction.Exit);
+            while (action != Action.eAction.Exit);
         }
 
         private void handleRequestByAction(Action.eAction i_Action)
         {
-            GarageHandleManager garageHandleManager = new GarageHandleManager();
             switch (i_Action)
             {
                 case Action.eAction.NewCar:
@@ -76,6 +77,7 @@ namespace B23_Ex03_Ronen_319047718_Ido_315942193
             string userInput;
             do
             {
+                printMenu();
                 userInput = Console.ReadLine();
             }
             while (!validateUserActionInput(userInput, out o_UserInputInteger));
@@ -99,7 +101,7 @@ namespace B23_Ex03_Ronen_319047718_Ido_315942193
         {
             bool isValid = true;
             int.TryParse(i_UserInput, out o_UserInputInteger);
-            if (!(o_UserInputInteger > 0 && o_UserInputInteger <= 7))
+            if (!(o_UserInputInteger > 0 && o_UserInputInteger <= 8))
             {
                 Console.WriteLine("Invalid Input");
                 isValid = false;
@@ -109,7 +111,7 @@ namespace B23_Ex03_Ronen_319047718_Ido_315942193
 
         private void printErrorMessage(string i_ErrorMessage)
         {
-            if(i_ErrorMessage != null)
+            if (i_ErrorMessage != null)
             {
                 Console.WriteLine($"ERROR: **{i_ErrorMessage}**");
             }

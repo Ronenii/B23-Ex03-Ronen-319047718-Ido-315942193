@@ -15,18 +15,18 @@ namespace Ex03.GarageLogic
 
     public enum eCarColor
     {
-        White,
-        Black,
-        Yellow,
-        Red
+        White = 1,
+        Black = 2,
+        Yellow = 3,
+        Red = 4
     }
 
     public enum eBikeLicense
     {
-        A1,
-        A2,
-        AA,
-        B1
+        A1 = 1,
+        A2 = 2,
+        AA = 3,
+        B1 = 4
     }
     public enum eNumOfCarDoors
     {
@@ -38,9 +38,18 @@ namespace Ex03.GarageLogic
 
     public enum eVehicleStatus
     {
-        InRepair,
-        Repaired,
-        Paid
+        InRepair=1,
+        Repaired=2,
+        Paid=3
+    }
+
+    public enum eVehicleType
+    {
+        DieselCar,
+        ElectricCar,
+        DieselBike,
+        ElectricBike,
+        Truck
     }
 
     public abstract class Vehicle
@@ -112,7 +121,7 @@ namespace Ex03.GarageLogic
             string i_Manufacturer)
         {
             List<Wheel> wheels = new List<Wheel>();
-            for(int i = 0; i < i_NumOfWheels; i++)
+            for (int i = 0; i < i_NumOfWheels; i++)
             {
                 wheels.Add(new Wheel(i_MaxPSI, i_Manufacturer, i_CurrentPSI));
             }
