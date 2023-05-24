@@ -9,7 +9,7 @@ namespace Ex03.GarageLogic
     {
         private const float k_MaxChargeHours = 5.2f;
 
-        private readonly Car r_Car;
+        private readonly CarProperties r_CarProperties;
 
         public ElectricCar(
             string i_Model,
@@ -29,14 +29,14 @@ namespace Ex03.GarageLogic
                 i_ChargeHoursLeft,
                 k_MaxChargeHours)
         {
-            r_Car = new Car(i_Color, i_NumOfDoors);
+            r_CarProperties = new CarProperties(i_Color, i_NumOfDoors);
         }
 
         public eCarColor CarColor
         {
             get
             {
-                return r_Car.Color;
+                return r_CarProperties.Color;
             }
         }
 
@@ -44,15 +44,15 @@ namespace Ex03.GarageLogic
         {
             get
             {
-                return r_Car.NumOfDoors;
+                return r_CarProperties.NumOfDoors;
             }
         }
 
-        public Car CarProperties
+        public CarProperties CarProperties
         {
             get
             {
-                return r_Car;
+                return r_CarProperties;
             }
         }
     }

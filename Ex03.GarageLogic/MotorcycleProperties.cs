@@ -5,21 +5,21 @@ using System.Text;
 
 namespace Ex03.GarageLogic
 {
-    public class Bike
+    public class MotorcycleProperties
     {
         private const int k_NumOfWheels = 2;
         private const float k_MaxPSI = 31f;
 
-        private readonly eBikeLicense r_License;
+        private readonly eMotorcycleLicense r_License;
         private readonly int r_EngineSize;
 
-        public Bike(eBikeLicense i_License, int i_EngineSize)
+        public MotorcycleProperties(eMotorcycleLicense i_License, int i_EngineSize)
         {
             r_License = i_License;
             r_EngineSize = i_EngineSize;
         }
 
-        public eBikeLicense License
+        public eMotorcycleLicense License
         {
             get
             {
@@ -58,16 +58,16 @@ namespace Ex03.GarageLogic
             string license;
             switch (r_License)
             {
-                case eBikeLicense.A1:
+                case eMotorcycleLicense.A1:
                     license = "A1";
                     break;
-                case eBikeLicense.A2:
+                case eMotorcycleLicense.A2:
                     license = "A2";
                     break;
-                case eBikeLicense.AA:
+                case eMotorcycleLicense.AA:
                     license = "AA";
                     break;
-                case eBikeLicense.B1:
+                case eMotorcycleLicense.B1:
                     license = "B1";
                     break;
                 default:

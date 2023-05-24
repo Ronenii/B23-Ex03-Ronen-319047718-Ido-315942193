@@ -21,7 +21,7 @@ namespace Ex03.GarageLogic
         Red = 4
     }
 
-    public enum eBikeLicense
+    public enum eMotorcycleLicense
     {
         A1 = 1,
         A2 = 2,
@@ -111,6 +111,14 @@ namespace Ex03.GarageLogic
             set
             {
                 m_VehicleStatus = value;
+            }
+        }
+
+        public List<Wheel> Wheels
+        {
+            get
+            {
+                return m_Wheels;
             }
         }
 

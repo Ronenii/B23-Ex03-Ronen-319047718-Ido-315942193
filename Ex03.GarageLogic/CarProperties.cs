@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Ex03.GarageLogic
 {
-    public class Car
+    public class CarProperties
     {
         private const int k_NumOfWheels = 5;
         private const float k_MaxPSI = 33f;
@@ -13,7 +13,7 @@ namespace Ex03.GarageLogic
         private readonly eNumOfCarDoors r_NumOfDoors;
         private readonly eCarColor r_Color;
 
-        public Car(eCarColor i_Color, eNumOfCarDoors i_NumOfDoors)
+        public CarProperties(eCarColor i_Color, eNumOfCarDoors i_NumOfDoors)
         {
             r_NumOfDoors = i_NumOfDoors;
             r_Color = i_Color;

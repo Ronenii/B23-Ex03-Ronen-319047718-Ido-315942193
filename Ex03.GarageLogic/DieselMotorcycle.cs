@@ -5,48 +5,48 @@ using System.Text;
 
 namespace Ex03.GarageLogic
 {
-    public class DieselBike : DieselVehicle
+    public class DieselMotorcycle : DieselVehicle
     {
         private const eFuelType k_FuelType = eFuelType.Octan98;
         private const float k_MaxFuelLiters = 6.4f;
 
-        private readonly Bike r_Bike;
+        private readonly MotorcycleProperties r_MotorcycleProperties;
 
-        public DieselBike(
+        public DieselMotorcycle(
             string i_Model,
             string i_LicensePlate,
             List<Wheel> i_Wheels,
             Customer i_Owner,
             eVehicleStatus i_VehicleStatus,
             float i_FuelLitersLeft,
-            eBikeLicense i_License,
+            eMotorcycleLicense i_License,
             int i_EngineSize)
             : base(i_Model, i_LicensePlate, i_Wheels, i_Owner, i_VehicleStatus, i_FuelLitersLeft, k_MaxFuelLiters, k_FuelType)
         {
-            r_Bike = new Bike(i_License, i_EngineSize);
+            r_MotorcycleProperties = new MotorcycleProperties(i_License, i_EngineSize);
         }
 
         public int EngineSize
         {
             get
             {
-                return r_Bike.EngineSize;
+                return r_MotorcycleProperties.EngineSize;
             }
         }
 
-        public eBikeLicense License
+        public eMotorcycleLicense License
         {
             get
             {
-                return r_Bike.License;
+                return r_MotorcycleProperties.License;
             }
         }
 
-        public Bike BikeProperties
+        public MotorcycleProperties MotorcycleProperties
         {
             get
             {
-                return r_Bike;
+                return r_MotorcycleProperties;
             }
         }
     }

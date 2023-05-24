@@ -87,10 +87,10 @@ namespace Ex03.GarageLogic
                 }
                 else
                 {
-                    eBikeLicense bikeLicense = getBikeLicense();      //////// Let me know if u have a soluation for it :(
+                    eMotorcycleLicense motorcycleLicense = getBikeLicense();      //////// Let me know if u have a soluation for it :(
                     Console.Write("Please insert the Engine size: ");
                     int engineSize = int.Parse(Console.ReadLine());   //////// it's duplicate rows from lines line 105 (only here)
-                    vehicle = new DieselBike(model, m_LicensePlate, wheels, owner, eVehicleStatus.InRepair, powerLeft, bikeLicense, engineSize);
+                    vehicle = new DieselMotorcycle(model, m_LicensePlate, wheels, owner, eVehicleStatus.InRepair, powerLeft, motorcycleLicense, engineSize);
                 }
             }
             else if (i_Type == eVehicleType.ElectricBike || i_Type == eVehicleType.ElectricCar)
@@ -105,9 +105,9 @@ namespace Ex03.GarageLogic
                 }
                 else
                 {
-                    eBikeLicense bikeLicense = getBikeLicense();
+                    eMotorcycleLicense motorcycleLicense = getBikeLicense();
                     int engineSize = int.Parse(Console.ReadLine());
-                    vehicle = new ElectricBike(model, m_LicensePlate, wheels, owner, eVehicleStatus.InRepair, powerLeft, bikeLicense, engineSize);
+                    vehicle = new ElectricMotorcycle(model, m_LicensePlate, wheels, owner, eVehicleStatus.InRepair, powerLeft, motorcycleLicense, engineSize);
                 }
             }
             else
@@ -117,10 +117,10 @@ namespace Ex03.GarageLogic
             return vehicle;
         }
 
-        private eBikeLicense getBikeLicense()
+        private eMotorcycleLicense getBikeLicense()
         {
             Console.WriteLine("Please insert the bike license type\n1. A1\n2. A2\n3. AA\n4. B1");
-            Enum.TryParse(Console.ReadLine(), out eBikeLicense o_bikeLicense);
+            Enum.TryParse(Console.ReadLine(), out eMotorcycleLicense o_bikeLicense);
             return o_bikeLicense;
         }
 
@@ -167,11 +167,11 @@ namespace Ex03.GarageLogic
             List<Wheel> userWheels;
             if (i_VehicleType == eVehicleType.DieselCar || i_VehicleType == eVehicleType.ElectricCar)
             {
-                userWheels = createNewWheel(Car.NumOfWheels);
+                userWheels = createNewWheel(CarProperties.NumOfWheels);
             }
             else if (i_VehicleType == eVehicleType.DieselBike || i_VehicleType == eVehicleType.ElectricBike)
             {
-                userWheels = createNewWheel(Bike.NumOfWheels);
+                userWheels = createNewWheel(MotorcycleProperties.NumOfWheels);
             }
             else
             {

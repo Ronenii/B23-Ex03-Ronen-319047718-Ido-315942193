@@ -12,7 +12,75 @@ namespace B23_Ex03_Ronen_319047718_Ido_315942193
         private Garage garage = new Ex03.GarageLogic.Garage();
         private VehicleFactory vehicleFactory = new VehicleFactory();
 
+        public GarageHandleManager()
+        {
+            List<Wheel> bikeWheels = new List<Wheel>();
+            for (int i = 0; i < 2; i++)
+            {
+                bikeWheels.Add(new Wheel(MotorcycleProperties.MaxPSI, "Michelin", 28));
+            }
 
+            List<Wheel> carWheels = new List<Wheel>();
+            for (int i = 0; i < 5; i++)
+            {
+                carWheels.Add(new Wheel(CarProperties.MaxPSI, "Bordeux", 15));
+            }
+
+            List<Wheel> truckWheels = new List<Wheel>();
+            for (int i = 0; i < 14; i++)
+            {
+                truckWheels.Add(new Wheel(Truck.MaxPSI, "Calgary", 28));
+            }
+
+            Customer idoBi = new Customer("Ido Biton", "0500001234");
+            Customer RonenGe = new Customer("Ronen Gelmanovich", "0540001234");
+            DieselMotorcycle db = new DieselMotorcycle(
+                "Kawasaki",
+                "1231",
+                bikeWheels,
+                idoBi,
+                eVehicleStatus.InRepair,
+                4.2f,
+                eMotorcycleLicense.A1,
+                250);
+            ElectricMotorcycle eb = new ElectricMotorcycle(
+                "Tesla",
+                "1232",
+                bikeWheels,
+                RonenGe,
+                eVehicleStatus.Paid,
+                1.1f,
+                eMotorcycleLicense.B1,
+                500);
+            DieselCar dc = new DieselCar(
+                "Mazeratti",
+                "1233",
+                carWheels,
+                idoBi,
+                eVehicleStatus.Repaired,
+                13.2f,
+                eCarColor.Yellow,
+                eNumOfCarDoors.Three);
+
+            ElectricCar ec = new ElectricCar(
+                "Ioniq 5",
+                "1234",
+                carWheels,
+                RonenGe,
+                eVehicleStatus.InRepair,
+                4.3f,
+                eCarColor.Black,
+                eNumOfCarDoors.Five);
+
+            Truck t = new Truck("DAF", "1235", truckWheels, idoBi, eVehicleStatus.Paid, 28.3f, true, 5000);
+
+            garage.AddNewVehicle(db);
+            garage.AddNewVehicle(t);
+            garage.AddNewVehicle(ec);
+            garage.AddNewVehicle(eb);
+            garage.AddNewVehicle(dc);
+
+        }
         public void AddingNewCar()
         {
             Console.WriteLine("Please insert the license plate");
@@ -197,35 +265,45 @@ namespace B23_Ex03_Ronen_319047718_Ido_315942193
             vehicleToPresent = FindVehicleInGarage();
 
             printVehicleDetails(vehicleToPresent);
+            printWheelDetails(vehicleToPresent);
             if (vehicleToPresent is DieselVehicle dieselVehicle)
             {
-                printFuelDetails(dieselVehicle);
-                if (dieselVehicle is DieselCar dieselCar)
-                {
-                    printCarDetails(dieselCar.CarProperties);
-                }
-                else if (dieselVehicle is DieselBike dieselBike)
-                {
-                    printBikeDetails(dieselBike.BikeProperties);
-                }
-                else if (dieselVehicle is Truck truck)
-                {
-                    printTrunkDetails(truck);
-                }
+                printDieselVehicleDetails(dieselVehicle);
             }
             else if (vehicleToPresent is ElectricVehicle electricVehicle)
             {
-                printBatteryDetails(electricVehicle);
-                if (electricVehicle is ElectricCar electricCarCar)
-                {
-                    printCarDetails(electricCarCar.CarProperties);
-                }
-                else if (electricVehicle is ElectricBike electricBikeBike)
-                {
-                    printBikeDetails(electricBikeBike.BikeProperties);
-                }
+                printElectricVehicleDetails(electricVehicle);
             }
+        }
 
+        private void printDieselVehicleDetails(DieselVehicle i_DieselVehicle)
+        {
+            printFuelDetails(i_DieselVehicle);
+            if (i_DieselVehicle is DieselCar dieselCar)
+            {
+                printCarDetails(dieselCar.CarProperties);
+            }
+            else if (i_DieselVehicle is DieselMotorcycle dieselMotorcycle)
+            {
+                printBikeDetails(dieselMotorcycle.MotorcycleProperties);
+            }
+            else if (i_DieselVehicle is Truck truck)
+            {
+                printTrunkDetails(truck);
+            }
+        }
+
+        private void printElectricVehicleDetails(ElectricVehicle i_ElectricVehicle)
+        {
+            printBatteryDetails(i_ElectricVehicle);
+            if (i_ElectricVehicle is ElectricCar electricCar)
+            {
+                printCarDetails(electricCar.CarProperties);
+            }
+            else if (i_ElectricVehicle is ElectricMotorcycle electricMotorcycle)
+            {
+                printBikeDetails(electricMotorcycle.MotorcycleProperties);
+            }
         }
 
         private void printVehicleDetails(Vehicle i_Vehicle)
@@ -237,9 +315,18 @@ namespace B23_Ex03_Ronen_319047718_Ido_315942193
             Console.WriteLine($"Model:               {i_Vehicle.Model}");
             Console.WriteLine($"Owner:               {i_Vehicle.OwnerName}");
             Console.WriteLine($"Status:              {i_Vehicle.VehicleStatusToString()}\n");
+        }
+
+        private void printWheelDetails(Vehicle i_Vehicle)
+        {
+            int wheelNo = 1;
             Console.WriteLine("             WHEEL INFO");
-            Console.WriteLine($"Wheel Manufacturer:  {i_Vehicle.VehicleStatusToString()}");
-            Console.WriteLine($"Wheel PSI:           {i_Vehicle.VehicleStatusToString()}\n");
+            foreach (Wheel w in i_Vehicle.Wheels)
+            {
+                Console.WriteLine($"#{wheelNo++}");
+                Console.WriteLine($"Wheel Manufacturer:  {w.Manufacturer}");
+                Console.WriteLine($"Wheel PSI:           {w.CurrentPSI}\n");
+            }
         }
 
         private void printFuelDetails(DieselVehicle i_DieselVehicle)
@@ -263,14 +350,14 @@ namespace B23_Ex03_Ronen_319047718_Ido_315942193
             Console.WriteLine($"In Percents:         {percentage.ToString("0")}%\n");
         }
 
-        private void printCarDetails(Car i_Car)
+        private void printCarDetails(CarProperties i_Car)
         {
             Console.WriteLine("             CAR INFO ");
             Console.WriteLine($"Number Of Doors:     {i_Car.NumOfDoors.ToString()}");
             Console.WriteLine($"Color:               {i_Car.CarColorToString()}\n");
         }
 
-        private void printBikeDetails(Bike i_Bike)
+        private void printBikeDetails(MotorcycleProperties i_Bike)
         {
             Console.WriteLine("             BIKE INFO ");
             Console.WriteLine($"License:              {i_Bike.LicenseToString()}");

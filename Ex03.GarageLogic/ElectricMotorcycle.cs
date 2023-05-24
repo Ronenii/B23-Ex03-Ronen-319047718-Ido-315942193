@@ -5,20 +5,20 @@ using System.Text;
 
 namespace Ex03.GarageLogic
 {
-    public class ElectricBike : ElectricVehicle
+    public class ElectricMotorcycle : ElectricVehicle
     {
         private const float k_MaxChargeHours = 2.6f;
 
-        private readonly Bike r_Bike;
+        private readonly MotorcycleProperties r_MotorcycleProperties;
 
-        public ElectricBike(
+        public ElectricMotorcycle(
             string i_Model,
             string i_LicensePlate,
             List<Wheel> i_Wheels,
             Customer i_Owner,
             eVehicleStatus i_VehicleStatus,
             float i_ChargeHoursLeft,
-            eBikeLicense i_License,
+            eMotorcycleLicense i_License,
             int i_EngineSize)
             : base(
                 i_Model,
@@ -29,14 +29,14 @@ namespace Ex03.GarageLogic
                 i_ChargeHoursLeft,
                 k_MaxChargeHours)
         {
-            r_Bike = new Bike(i_License, i_EngineSize);
+            r_MotorcycleProperties = new MotorcycleProperties(i_License, i_EngineSize);
         }
 
-        public eBikeLicense License
+        public eMotorcycleLicense License
         {
             get
             {
-                return r_Bike.License;
+                return r_MotorcycleProperties.License;
             }
         }
 
@@ -44,15 +44,15 @@ namespace Ex03.GarageLogic
         {
             get
             {
-                return r_Bike.EngineSize;
+                return r_MotorcycleProperties.EngineSize;
             }
         }
 
-        public Bike BikeProperties
+        public MotorcycleProperties MotorcycleProperties
         {
             get
             {
-                return r_Bike;
+                return r_MotorcycleProperties;
             }
         }
     }

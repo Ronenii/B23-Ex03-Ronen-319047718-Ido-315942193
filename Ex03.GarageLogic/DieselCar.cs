@@ -10,7 +10,7 @@ namespace Ex03.GarageLogic
         private const eFuelType k_FuelType = eFuelType.Octan95;
         private const float k_MaxFuelLiters = 46f;
 
-        private readonly Car r_Car;
+        private readonly CarProperties r_CarProperties;
 
         public DieselCar(
             string i_Model,
@@ -30,22 +30,22 @@ namespace Ex03.GarageLogic
                 k_MaxFuelLiters,
                 k_FuelType)
         {
-            r_Car = new Car(i_Color, i_NumOfDoors);
+            r_CarProperties = new CarProperties(i_Color, i_NumOfDoors);
         }
 
         public eCarColor Color
         {
             get
             {
-                return r_Car.Color;
+                return r_CarProperties.Color;
             }
         }
 
-        public Car CarProperties
+        public CarProperties CarProperties
         {
             get
             {
-                return r_Car;
+                return r_CarProperties;
             }
         }
 
@@ -53,7 +53,7 @@ namespace Ex03.GarageLogic
         {
             get
             {
-                return r_Car.NumOfDoors;
+                return r_CarProperties.NumOfDoors;
             }
         }
     }
