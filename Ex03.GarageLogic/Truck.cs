@@ -49,7 +49,7 @@ namespace Ex03.GarageLogic
         {
             get
             {
-                return CargoSize;
+                return r_CargoSize;
             }
         }
 
