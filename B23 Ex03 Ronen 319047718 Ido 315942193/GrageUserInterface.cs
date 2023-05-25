@@ -52,7 +52,7 @@ namespace B23_Ex03_Ronen_319047718_Ido_315942193
             switch (i_Action)
             {
                 case eUserAction.NewCar:
-                    garageHandleManager.AddingNewCar();
+                    garageHandleManager.AddingNewVehicle();
                     break;
                 case eUserAction.ShowGarageCar:
                     garageHandleManager.ShowGrageCar();

@@ -1,6 +1,7 @@
 ﻿using Ex03.GarageLogic;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Management.Instrumentation;
 
 namespace B23_Ex03_Ronen_319047718_Ido_315942193
@@ -87,8 +88,8 @@ namespace B23_Ex03_Ronen_319047718_Ido_315942193
         // TODO: REMOVE THIS WHEN PROGRAM IS COMPLETE!!!!
         // TODO: REMOVE THIS WHEN PROGRAM IS COMPLETE!!!!
 
-
-        public void AddingNewCar()
+        // Adding new vehicle by user input
+        public void AddingNewVehicle()
         {
             Console.WriteLine("Please insert the license plate");
             string licensePLate = Console.ReadLine();
@@ -115,15 +116,53 @@ namespace B23_Ex03_Ronen_319047718_Ido_315942193
             }
         }
 
+        //Show all licence plate in the garage
         public void ShowGrageCar()
         {
-            List<Vehicle> vehicles = garage.GetAllVehicles();
-            foreach (Vehicle vehicle in vehicles)
+            List<Vehicle> vehicles;
+            Display.FilteringStatus();
+            string filteringUser = Console.ReadLine();
+            vehicles = getFilterGragageVehicle(filteringUser);
+            for (int i = 1; i <= vehicles.Count; i++)
             {
-                Console.WriteLine(vehicle.ToString());
+                Console.WriteLine($"{i}. {vehicles[i - 1].LicensePlate}");
             }
         }
 
+        private List<Vehicle> getFilterGragageVehicle(string i_FilteringUser)
+        {
+            List<Vehicle> vehicles;
+            if (i_FilteringUser == "1")
+            {
+                vehicles = getFilterVehiclesByStatus(eVehicleStatus.InRepair);
+            }
+            else if (i_FilteringUser == "2")
+            {
+                vehicles = getFilterVehiclesByStatus(eVehicleStatus.InRepair);
+
+            }
+            else if (i_FilteringUser == "3")
+            {
+                vehicles = getFilterVehiclesByStatus(eVehicleStatus.Paid);
+            }
+            else if (i_FilteringUser == "4")
+            {
+                vehicles = garage.GetAllVehicles();
+            }
+            else
+            {
+                throw new ArgumentException("Invalid filtering status option");
+            }
+
+            return vehicles;
+        }
+
+        private List<Vehicle> getFilterVehiclesByStatus(eVehicleStatus i_VehicleStatus)
+        {
+            return garage.GetAllVehicles().Where(vehicle => vehicle.Status == i_VehicleStatus).ToList();
+        }
+
+        //Update the status of the vehicle by user input
         public void ChangeCarStatus()
         {
             Console.Write("Please insert the Licence plate for the car: ");
@@ -140,7 +179,7 @@ namespace B23_Ex03_Ronen_319047718_Ido_315942193
                 throw new ArgumentOutOfRangeException("Invalid vehicle status");
             }
         }
-
+        //Inflate Wheel to max by vehicle type
         public void InflateWheel()
         {
             Console.Write("Please insert the Licence plate for the car: ");
@@ -204,7 +243,7 @@ namespace B23_Ex03_Ronen_319047718_Ido_315942193
             string fuelTypeStr = Console.ReadLine();
             if (eFuelType.TryParse(fuelTypeStr, out fuelType))
             {
-                if(!Enum.IsDefined(typeof(eFuelType), fuelType))
+                if (!Enum.IsDefined(typeof(eFuelType), fuelType))
                 {
                     throw new ArgumentException("Fuel not listed on the menu");
                 }
@@ -216,7 +255,7 @@ namespace B23_Ex03_Ronen_319047718_Ido_315942193
 
             return fuelType;
         }
-        
+
         // Propts the user to enter a license plate number and returns a vehicle 
         // with the corresponding license plate in the garage.
         // If vehicle not found throws an exception.

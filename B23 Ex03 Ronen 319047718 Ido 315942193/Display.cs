@@ -54,6 +54,11 @@ namespace B23_Ex03_Ronen_319047718_Ido_315942193
         public static void StatusChoosePrompt()
         {
             Console.WriteLine("Please choose one of the next status");
+            vehicleStatuses();
+        }
+
+        private static void vehicleStatuses()
+        {
             Console.WriteLine("1. In-Repair");
             Console.WriteLine("2. Repaired");
             Console.WriteLine("3. Paid");
@@ -68,9 +73,15 @@ namespace B23_Ex03_Ronen_319047718_Ido_315942193
             Console.Write("Choose fuel type: ");
         }
 
+        public static void FilteringStatus()
+        {
+            Console.WriteLine("Please insert filtering by status");
+            Display.vehicleStatuses();
+            Console.WriteLine("4. All");
+        }
+
         public static void VehicleDetails(Vehicle i_Vehicle)
         {
-            Console.Clear();
             Console.WriteLine("         *** VEHICLE INFO ***\n");
             Console.WriteLine("             GENERAL INFO");
             Console.WriteLine($"License Plate:       {i_Vehicle.LicensePlate}");
