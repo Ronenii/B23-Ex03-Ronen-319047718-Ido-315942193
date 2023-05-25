@@ -26,6 +26,10 @@ namespace Ex03.GarageLogic
             {
                 throw new ArgumentNullException("Could not find the given license plate in the system");
             }
+            else if (vehicle.Status == i_Status)
+            {
+                throw new InvalidOperationException("Vehicle already in this status");
+            }
             vehicle.Status = i_Status;
         }
 
