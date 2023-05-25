@@ -185,7 +185,7 @@ namespace Ex03.GarageLogic
         private static float getFuelLitersLeft(eVehicleType i_VehicleType)
         {
             Console.Write("Fuel liters left: ");
-            if (float.TryParse(Console.ReadLine(), out float powerLeft))
+            if (float.TryParse(Console.ReadLine(), out float fuelLitersLeft))
             {
                 float maxPowerUnit;
                 if (isCarType(i_VehicleType))
@@ -201,7 +201,7 @@ namespace Ex03.GarageLogic
                     maxPowerUnit = DieselMotorcycle.k_MaxFuelLiters;
                 }
 
-                if (powerLeft < 0 || powerLeft > maxPowerUnit)
+                if (fuelLitersLeft < 0 || fuelLitersLeft > maxPowerUnit)
                 {
                     throw new ArgumentException("Got invalid fuel left");
                 }
@@ -211,13 +211,14 @@ namespace Ex03.GarageLogic
                 throw new FormatException("Input must be in numbers");
             }
 
-            return powerLeft;
+            return fuelLitersLeft;
         }
 
+        // Prompts user to input charge hours left, parses it and returns the float
         private static float getChargeHoursLeft(eVehicleType i_VehicleType)
         {
             Console.Write("Charge hours left: ");
-            if (float.TryParse(Console.ReadLine(), out float powerLeft))
+            if (float.TryParse(Console.ReadLine(), out float chargeHoursLeft))
             {
                 float maxPowerUnit;
                 if (isCarType(i_VehicleType))
@@ -228,7 +229,7 @@ namespace Ex03.GarageLogic
                 {
                     maxPowerUnit = ElectricMotorcycle.k_MaxChargeHours;
                 }
-                if (powerLeft < 0 || powerLeft > maxPowerUnit)
+                if (chargeHoursLeft < 0 || chargeHoursLeft > maxPowerUnit)
                 {
                     throw new ArgumentException("Charge can't be more than max battery capacity or negative");
                 }
@@ -238,9 +239,8 @@ namespace Ex03.GarageLogic
                 throw new FormatException("Input must be in numbers");
             }
 
-            return powerLeft;
+            return chargeHoursLeft;
         }
-
 
         private static bool isDieselVehicle(eVehicleType i_Type)
         {
