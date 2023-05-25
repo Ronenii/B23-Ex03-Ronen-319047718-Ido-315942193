@@ -32,7 +32,7 @@ namespace B23_Ex03_Ronen_319047718_Ido_315942193
             List<Wheel> truckWheels = new List<Wheel>();
             for (int i = 0; i < 14; i++)
             {
-                truckWheels.Add(new Wheel(Truck.MaxPSI, "Calgary", 28));
+                truckWheels.Add(new Wheel(TruckProperties.MaxPSI, "Calgary", 28));
             }
 
             Customer idoBi = new Customer("Ido Biton", "0500001234");

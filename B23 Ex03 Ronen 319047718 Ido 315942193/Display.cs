@@ -127,7 +127,7 @@ namespace B23_Ex03_Ronen_319047718_Ido_315942193
         {
             Console.WriteLine("             CAR INFO ");
             Console.WriteLine($"Number Of Doors:     {i_Car.NumOfDoors.ToString()}");
-            Console.WriteLine($"Color:               {i_Car.CarColorToString()}\n");
+            Console.WriteLine($"Color:               {i_Car.Color.ToString()}\n");
         }
 
         public static void BikeDetails(MotorcycleProperties i_Bike)
