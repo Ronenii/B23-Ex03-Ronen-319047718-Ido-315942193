@@ -27,7 +27,7 @@ namespace B23_Ex03_Ronen_319047718_Ido_315942193
 
         public static void Menu()
         {
-            Console.WriteLine("Please enter one of the folowing options");
+            Console.WriteLine("**       ACTIONS       **");
             Console.WriteLine("1. Insert a new vehicle");
             Console.WriteLine("2. Show vehicles in the garage");
             Console.WriteLine("3. Change vehicle status");
@@ -53,7 +53,7 @@ namespace B23_Ex03_Ronen_319047718_Ido_315942193
 
         public static void StatusChoosePrompt()
         {
-            Console.WriteLine("Please choose one of the next status");
+            Console.WriteLine("Vehicle status");
             vehicleStatuses();
         }
 
@@ -75,7 +75,7 @@ namespace B23_Ex03_Ronen_319047718_Ido_315942193
 
         public static void FilteringStatus()
         {
-            Console.WriteLine("Please insert filtering by status");
+            Console.WriteLine("Vehicle status: ");
             Display.vehicleStatuses();
             Console.WriteLine("4. All");
         }
@@ -139,7 +139,7 @@ namespace B23_Ex03_Ronen_319047718_Ido_315942193
 
         public static void MotorcycleLicense()
         {
-            Console.WriteLine("Please insert the motorcycle license type:");
+            Console.WriteLine("License type:");
             Console.WriteLine("1. A1");
             Console.WriteLine("2. A2");
             Console.WriteLine("3. AA");
@@ -149,7 +149,7 @@ namespace B23_Ex03_Ronen_319047718_Ido_315942193
 
         public static void TransportingHazardousMaterial()
         {
-            Console.WriteLine("Is transporting hazardous material?");
+            Console.WriteLine("Are you transporting hazardous material?");
             Console.WriteLine("1. Yes");
             Console.WriteLine("2. No ");
         }
@@ -162,7 +162,7 @@ namespace B23_Ex03_Ronen_319047718_Ido_315942193
 
         public static void ChooseCarTypePrompt()
         {
-            Console.WriteLine("Please Insert the vehicle Type:");
+            Console.WriteLine("Vehicle type:");
             Console.WriteLine("1. Diesel Motorcycle");
             Console.WriteLine("2. Electric Motorcycle");
             Console.WriteLine("3. Diesel Car");
@@ -172,7 +172,7 @@ namespace B23_Ex03_Ronen_319047718_Ido_315942193
 
         public static void ColorMenu()
         {
-            Console.WriteLine("Please insert the motorcycle license type:");
+            Console.WriteLine("Car color:");
             Console.WriteLine("1. White");
             Console.WriteLine("2. Black");
             Console.WriteLine("3. Yellow");
@@ -181,7 +181,7 @@ namespace B23_Ex03_Ronen_319047718_Ido_315942193
 
         public static void AutoWheelsRequest()
         {
-            Console.WriteLine("Do you want auto wheel enterence?");
+            Console.WriteLine("Do you want auto wheel entrance?");
             Console.WriteLine("1. Yes");
             Console.WriteLine("2. No");
         }

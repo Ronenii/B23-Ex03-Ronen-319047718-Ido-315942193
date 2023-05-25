@@ -33,7 +33,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="GarageManager.cs" />
-    <Compile Include="GrageUserInterface.cs" />
+    <Compile Include="GarageUserInterface.cs" />
     <Compile Include="Display.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="VehicleFactory.cs" />

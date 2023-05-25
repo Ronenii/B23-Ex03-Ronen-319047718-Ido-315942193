@@ -8,7 +8,7 @@ namespace Ex03.GarageLogic
     public class DieselMotorcycle : DieselVehicle
     {
         private const eFuelType k_FuelType = eFuelType.Octan98;
-        private const float k_MaxFuelLiters = 6.4f;
+        public static readonly float k_MaxFuelLiters = 6.4f;
 
         private readonly MotorcycleProperties r_MotorcycleProperties;
 

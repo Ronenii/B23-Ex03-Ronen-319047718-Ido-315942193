@@ -5,7 +5,7 @@ using System.Text;
 
 namespace B23_Ex03_Ronen_319047718_Ido_315942193
 {
-    public class GrageUserInterface
+    public class GarageUserInterface
     {
         public enum eUserAction
         {
@@ -23,6 +23,10 @@ namespace B23_Ex03_Ronen_319047718_Ido_315942193
         private readonly GarageManager r_garageHandleManager = new GarageManager();
 
         // Main Program loop
+        // 1) Display menu
+        // 2) prompt user for action and validate it
+        // 3) If action invalid print the error
+        // 4) Clear screen at the end of the action
         public void Run()
         {
             eUserAction userAction;
@@ -46,6 +50,7 @@ namespace B23_Ex03_Ronen_319047718_Ido_315942193
             while (userAction != eUserAction.Exit);
         }
 
+        // Receives user action enum and directs to corresponding method
         private void handleRequestByAction(eUserAction i_Action)
         {
             switch (i_Action)
@@ -54,7 +59,7 @@ namespace B23_Ex03_Ronen_319047718_Ido_315942193
                     r_garageHandleManager.AddingNewVehicle();
                     break;
                 case eUserAction.ShowGarageCar:
-                    r_garageHandleManager.ShowGrageCar();
+                    r_garageHandleManager.ShowGarageCar();
                     break;
                 case eUserAction.ChangeCarStatus:
                     r_garageHandleManager.ChangeCarStatus();
@@ -92,6 +97,7 @@ namespace B23_Ex03_Ronen_319047718_Ido_315942193
             {
                 throw new FormatException("Input must be in numbers");
             }
+
             return userAction;
         }
     }

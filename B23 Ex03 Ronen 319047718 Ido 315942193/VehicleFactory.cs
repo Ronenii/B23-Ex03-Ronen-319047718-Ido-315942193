@@ -9,62 +9,66 @@ namespace Ex03.GarageLogic
     public class VehicleFactory
     {
         private string m_LicensePlate;
-        public Vehicle CreateVehicleByType(int i_VehicleType, string i_LicensePLate)
+
+        // Creates a vehicle from given type with given license plate
+        public Vehicle CreateVehicleByType(eVehicleType i_VehicleType, string i_LicensePLate)
         {
             Vehicle vehicle;
             m_LicensePlate = i_LicensePLate;
             switch (i_VehicleType)
             {
-                case 1:
-                    vehicle = CreateDieselMotorcycle();
+                case eVehicleType.DieselMotorcycle:
+                    vehicle = createDieselMotorcycle();
                     break;
-                case 2:
-                    vehicle = CreateElectricMotorcycle();
+                case eVehicleType.ElectricMotorcycle:
+                    vehicle = createElectricMotorcycle();
                     break;
-                case 3:
-                    vehicle = CreateDieselCar();
+                case eVehicleType.DieselCar:
+                    vehicle = createDieselCar();
                     break;
-                case 4:
-                    vehicle = CreateElectricCar();
+                case eVehicleType.ElectricCar:
+                    vehicle = createElectricCar();
                     break;
-                case 5:
-                    vehicle = CreateTruck();
+                case eVehicleType.Truck:
+                    vehicle = createTruck();
                     break;
                 default:
                     throw new ArgumentException("Invalid choice. Please try again.");
             }
+
             return vehicle;
         }
 
-        private Vehicle CreateTruck()
+        private Vehicle createTruck()
         {
             return getVehicleFromUserByType(eVehicleType.Truck);
         }
 
-        private Vehicle CreateElectricMotorcycle()
+        private Vehicle createElectricMotorcycle()
         {
             return getVehicleFromUserByType(eVehicleType.ElectricMotorcycle);
         }
 
-        private Vehicle CreateDieselMotorcycle()
+        private Vehicle createDieselMotorcycle()
         {
             return getVehicleFromUserByType(eVehicleType.DieselMotorcycle);
         }
 
-        private Vehicle CreateElectricCar()
+        private Vehicle createElectricCar()
         {
             return getVehicleFromUserByType(eVehicleType.ElectricCar);
         }
 
-        private Vehicle CreateDieselCar()
+        private Vehicle createDieselCar()
         {
             return getVehicleFromUserByType(eVehicleType.DieselCar);
         }
 
+        // Receives vehicle type from user and builds a vehicle based on said type and user input
         private Vehicle getVehicleFromUserByType(eVehicleType i_Type)
         {
             Vehicle vehicle;
-            string model = getModelFromUser();
+            string model = getVehicleModelFromUser();
             List<Wheel> wheels = getWheelsFromUserByType(i_Type);
             Customer owner = getOwnerFromUser();
             eVehicleStatus vehicleStatus = eVehicleStatus.InRepair;
@@ -74,7 +78,7 @@ namespace Ex03.GarageLogic
                 if (isTruckType(i_Type))
                 {
                     bool transportingHazardousMaterial = getTransportingHazardousMaterial();
-                    float cargoSize = getCargoFromUser();
+                    float cargoSize = getCargoSizeFromUser();
                     vehicle = new Truck(model, m_LicensePlate, wheels, owner, eVehicleStatus.InRepair, powerLeft, transportingHazardousMaterial, cargoSize);
                 }
                 else if (isCarType(i_Type))
@@ -110,16 +114,18 @@ namespace Ex03.GarageLogic
             {
                 throw new ArgumentException("Invalid car type");
             }
+
             return vehicle;
         }
 
         private static eNumOfCarDoors getNumOfDoorsFromUser()
         {
+            Console.Write("Number of doors: ");
             if (Enum.TryParse(Console.ReadLine(), out eNumOfCarDoors numOfDoors))
             {
                 if (!Enum.IsDefined(typeof(eNumOfCarDoors), numOfDoors))
                 {
-                    throw new ArgumentException("number of doors not listed on the menu");
+                    throw new ArgumentException("Invalid number of doors");
                 }
             }
             else
@@ -134,10 +140,12 @@ namespace Ex03.GarageLogic
         {
             return i_Type == eVehicleType.ElectricCar || i_Type == eVehicleType.DieselCar;
         }
+
         private static bool isMotorcycleType(eVehicleType i_Type)
         {
             return i_Type == eVehicleType.ElectricMotorcycle || i_Type == eVehicleType.DieselMotorcycle;
         }
+
         private static bool isTruckType(eVehicleType i_Type)
         {
             return i_Type == eVehicleType.Truck;
@@ -150,52 +158,91 @@ namespace Ex03.GarageLogic
 
         private static int getEngineSizeFromUser()
         {
-            Console.Write("Please insert the Engine size: ");
+            Console.Write("Engine size: ");
             int engineSize = int.Parse(Console.ReadLine());
             return engineSize;
         }
 
-        private static float getCargoFromUser()
+        private static float getCargoSizeFromUser()
         {
-            Console.Write("Please insert cargo size: ");
+            Console.Write("Cargo size: ");
             float cargoSize = float.Parse(Console.ReadLine());
             return cargoSize;
         }
 
-        private static float getPowerLeftFromUser(eVehicleType i_Type)
+        private static float getPowerLeftFromUser(eVehicleType i_VehicleType)
         {
-            float maxLittersToFill;
-            if (isDieselVehicle(i_Type))
+            float powerLeft;
+            if (isDieselVehicle(i_VehicleType))
             {
-                Console.Write("Please insert the fuel left: ");
+                powerLeft = getFuelLitersLeft(i_VehicleType);
             }
             else
             {
-                Console.Write("Please insert the electric left");
+                powerLeft = getChargeHoursLeft(i_VehicleType);
             }
-            bool isValid = float.TryParse(Console.ReadLine(), out float powerLeft);
-            if (isValid)
+
+            return powerLeft;
+        }
+
+        private static float getFuelLitersLeft(eVehicleType i_VehicleType)
+        {
+            Console.Write("Fuel liters left: ");
+            if (float.TryParse(Console.ReadLine(), out float fuelLitersLeft))
             {
-                if (isCarType(i_Type))
+                float maxPowerUnit;
+                if (isCarType(i_VehicleType))
                 {
-                    maxLittersToFill = CarProperties.MaxPSI;
+                    maxPowerUnit = DieselCar.k_MaxFuelLiters;
                 }
-                else if (isTruckType(i_Type))
+                else if (isTruckType(i_VehicleType))
                 {
-                    maxLittersToFill = TruckProperties.MaxPSI;
+                    maxPowerUnit = Truck.k_MaxFuelLiters;
                 }
                 else
                 {
-                    maxLittersToFill = MotorcycleProperties.MaxPSI;
+                    maxPowerUnit = DieselMotorcycle.k_MaxFuelLiters;
                 }
 
-                if (powerLeft < 0 || powerLeft > maxLittersToFill)
+                if (fuelLitersLeft < 0 || fuelLitersLeft > maxPowerUnit)
                 {
                     throw new ArgumentException("Got invalid fuel left");
                 }
-
             }
-            return powerLeft;
+            else
+            {
+                throw new FormatException("Input must be in numbers");
+            }
+
+            return fuelLitersLeft;
+        }
+
+        // Prompts user to input charge hours left, parses it and returns the float
+        private static float getChargeHoursLeft(eVehicleType i_VehicleType)
+        {
+            Console.Write("Charge hours left: ");
+            if (float.TryParse(Console.ReadLine(), out float chargeHoursLeft))
+            {
+                float maxPowerUnit;
+                if (isCarType(i_VehicleType))
+                {
+                    maxPowerUnit = ElectricCar.k_MaxChargeHours;
+                }
+                else
+                {
+                    maxPowerUnit = ElectricMotorcycle.k_MaxChargeHours;
+                }
+                if (chargeHoursLeft < 0 || chargeHoursLeft > maxPowerUnit)
+                {
+                    throw new ArgumentException("Charge can't be more than max battery capacity or negative");
+                }
+            }
+            else
+            {
+                throw new FormatException("Input must be in numbers");
+            }
+
+            return chargeHoursLeft;
         }
 
         private static bool isDieselVehicle(eVehicleType i_Type)
@@ -203,9 +250,9 @@ namespace Ex03.GarageLogic
             return i_Type == eVehicleType.DieselCar || i_Type == eVehicleType.DieselMotorcycle || i_Type == eVehicleType.Truck;
         }
 
-        private static string getModelFromUser()
+        private static string getVehicleModelFromUser()
         {
-            Console.Write("Please insert the model: ");
+            Console.Write("Vehicle Model: ");
             string model = Console.ReadLine();
             return model;
         }
@@ -256,6 +303,7 @@ namespace Ex03.GarageLogic
             {
                 throw new ArgumentOutOfRangeException("Invliad transporting hazardous material option");
             }
+
             return hazardousMaterial;
         }
 
@@ -280,9 +328,9 @@ namespace Ex03.GarageLogic
 
         private Customer getOwnerFromUser()
         {
-            Console.Write("Please insert the owner name: ");
+            Console.Write("Owner name: ");
             string ownerName = Console.ReadLine();
-            Console.Write("Please insert the owner phone: ");
+            Console.Write("Owner phone number: ");
             string ownerPhone = Console.ReadLine();
             return new Customer(ownerName, ownerPhone);
         }
@@ -302,6 +350,7 @@ namespace Ex03.GarageLogic
             {
                 userWheels = createNewWheel(TruckProperties.NumOfWheels, TruckProperties.MaxPSI);
             }
+
             return userWheels;
         }
 
@@ -330,19 +379,21 @@ namespace Ex03.GarageLogic
             {
                 throw new ArgumentOutOfRangeException("Invalid wheels mode selection");
             }
+
             return wheels;
         }
 
         private Wheel createWheelFromUser(float i_MaxPsi)
         {
-            Console.Write("Please insert the manufaturer: ");
+            Console.Write("Wheel manufacturer: ");
             string userManufaturer = Console.ReadLine();
-            Console.Write("Please insert the current PSI: ");
+            Console.Write("Current wheel PSI: ");
             float userCurrentPSI = float.Parse(Console.ReadLine());
             if (!isValidCurrentPSI(userCurrentPSI, i_MaxPsi))
             {
                 throw new ArgumentException("Current PSI cannot be more than MaxPSI");
             }
+
             return new Wheel(i_MaxPsi, userManufaturer, userCurrentPSI);
         }
 

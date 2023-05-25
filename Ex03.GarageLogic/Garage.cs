@@ -7,11 +7,11 @@ namespace Ex03.GarageLogic
 {
     public class Garage
     {
-        private readonly List<Vehicle> m_AllVehicles = new List<Vehicle>();
+        private List<Vehicle> m_AllVehicles = new List<Vehicle>();
 
         public void AddNewVehicle(Vehicle vehicle)
         {
-                m_AllVehicles.Add(vehicle);
+            m_AllVehicles.Add(vehicle);
         }
 
         public Vehicle GetVehicleByLicense(string i_LicencePlate)
@@ -26,10 +26,7 @@ namespace Ex03.GarageLogic
             {
                 throw new ArgumentNullException("Could not find the given license plate in the system");
             }
-            else if (vehicle.Status == i_Status)
-            {
-                throw new InvalidOperationException("Vehicle already in this status");
-            }
+
             vehicle.Status = i_Status;
         }
 

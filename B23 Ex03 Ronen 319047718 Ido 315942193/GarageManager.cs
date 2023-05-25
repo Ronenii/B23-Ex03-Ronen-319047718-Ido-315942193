@@ -12,62 +12,84 @@ namespace B23_Ex03_Ronen_319047718_Ido_315942193
         private readonly Garage r_garage = new Garage();
         private readonly VehicleFactory r_vehicleFactory = new VehicleFactory();
 
-        // Adding new vehicle by user input
+        // Add a new vehicle to the garage or change it to in repait if in the system
         public void AddingNewVehicle()
         {
             Console.WriteLine("Please insert the license plate");
             string licensePLate = Console.ReadLine();
             Vehicle vehicle = r_garage.GetVehicleByLicense(licensePLate);
+            eVehicleType vehicleType;
             if (vehicle == null)
             {
                 Console.WriteLine("Create new vehicle in the system");
-                Display.ChooseCarTypePrompt();
-                try
+                vehicleType = getVehicleTypeFromUser();
+                vehicle = r_vehicleFactory.CreateVehicleByType(vehicleType, licensePLate);
+                r_garage.AddNewVehicle(vehicle);
+                Console.WriteLine("The vehicle added successfully");
+            }
+            else
+            {
+                if (vehicle.Status != eVehicleStatus.InRepair)
                 {
-                    vehicle = r_vehicleFactory.CreateVehicleByType(int.Parse(Console.ReadLine()), licensePLate);
-                    r_garage.AddNewVehicle(vehicle);
-                    Console.WriteLine("The vehicle added successfully");
+                    Console.WriteLine("Change vehicle status to In-Repair status");
+                    r_garage.UpdateVehicleStatus(licensePLate, eVehicleStatus.InRepair);
                 }
-                catch (Exception e)
+                else
                 {
-                    Console.WriteLine($"Insert invlalid parameters {e.Message}");
+                    Console.WriteLine("Vehicle already in repair");
+                }
+            }
+        }
+
+        // Prompts the user to input vehicle type, parses it and returns enum
+        private eVehicleType getVehicleTypeFromUser()
+        {
+            eVehicleType vehicleType;
+            Display.ChooseCarTypePrompt();
+
+            if (eVehicleType.TryParse(Console.ReadLine(), out vehicleType))
+            {
+                if (!Enum.IsDefined(typeof(eVehicleType), vehicleType))
+                {
+                    throw new ArgumentException("Vehicle type not listed on the menu");
                 }
             }
             else
             {
-                Console.WriteLine("Change vehicle status to In-Repair status");
-                vehicle.Status = eVehicleStatus.InRepair;
+                throw new FormatException(formatErrorMessage);
             }
+            return vehicleType;
         }
 
-        //Show all licence plate in the garage
-        public void ShowGrageCar()
+        //Show all license plate in the garage
+        public void ShowGarageCar()
         {
             List<Vehicle> vehicles;
             Display.FilteringStatus();
             string filteringUser = Console.ReadLine();
-            vehicles = getFilterGarageVehicle(filteringUser);
+            vehicles = getVehiclesByFilter(filteringUser);
             for (int i = 1; i <= vehicles.Count; i++)
             {
                 Console.WriteLine($"{i}. {vehicles[i - 1].LicensePlate}");
             }
         }
 
-        private List<Vehicle> getFilterGarageVehicle(string i_FilteringUser)
+        // Returns List of vehicles with the corresponding status
+        private List<Vehicle> getVehiclesByFilter(string i_FilteringUser)
         {
             List<Vehicle> vehicles;
             if (i_FilteringUser == "1")
             {
-                vehicles = getFilterVehiclesByStatus(eVehicleStatus.InRepair);
+                vehicles = getAllVehiclesWithFilterFromGarage(eVehicleStatus.InRepair);
             }
             else if (i_FilteringUser == "2")
             {
-                vehicles = getFilterVehiclesByStatus(eVehicleStatus.Repaired);
+                vehicles = getAllVehiclesWithFilterFromGarage(eVehicleStatus.Repaired);
 
             }
             else if (i_FilteringUser == "3")
             {
-                vehicles = getFilterVehiclesByStatus(eVehicleStatus.Paid);
+                vehicles = getAllVehiclesWithFilterFromGarage(eVehicleStatus.Paid);
             }
             else if (i_FilteringUser == "4")
             {
@@ -81,7 +103,8 @@ namespace B23_Ex03_Ronen_319047718_Ido_315942193
             return vehicles;
         }
 
-        private List<Vehicle> getFilterVehiclesByStatus(eVehicleStatus i_VehicleStatus)
+        // Creates and returns list from status
+        private List<Vehicle> getAllVehiclesWithFilterFromGarage(eVehicleStatus i_VehicleStatus)
         {
             return r_garage.GetAllVehicles().Where(vehicle => vehicle.Status == i_VehicleStatus).ToList();
         }
@@ -97,6 +120,7 @@ namespace B23_Ex03_Ronen_319047718_Ido_315942193
             Console.WriteLine($"The vehicle with the license plate: {licensePlate} updated successfully to \"{vehicleStatus}\" ");
         }
 
+        // Prompts user to input vehicle status, parses input and returns as eVehicleStatus.
         private eVehicleStatus getVehicleStatusFromUser()
         {
             Display.StatusChoosePrompt();
@@ -118,7 +142,7 @@ namespace B23_Ex03_Ronen_319047718_Ido_315942193
         //Inflate Wheel to max by vehicle type
         public void InflateWheel()
         {
-            Console.Write("Please insert the Licence plate for the car: ");
+            Console.Write("Please insert the License plate for the car: ");
             string licensePlate = Console.ReadLine();
             Vehicle vehicle = r_garage.GetVehicleByLicense(licensePlate);
             if (vehicle != null)
@@ -142,7 +166,7 @@ namespace B23_Ex03_Ronen_319047718_Ido_315942193
             vehicleToFuel = FindVehicleInGarage();
             if (vehicleToFuel is DieselVehicle dieselVehicle)
             {
-                if (dieselVehicle.isTankFull())
+                if (dieselVehicle.IsTankFull())
                 {
                     throw new InvalidOperationException("Tank full");
                 }
@@ -216,7 +240,7 @@ namespace B23_Ex03_Ronen_319047718_Ido_315942193
             vehicleToCharge = FindVehicleInGarage();
             if (vehicleToCharge is ElectricVehicle electricVehicle)
             {
-                if (electricVehicle.isBatteryFull())
+                if (electricVehicle.IsBatteryFull())
                 {
                     throw new InvalidOperationException("Battery full");
                 }
