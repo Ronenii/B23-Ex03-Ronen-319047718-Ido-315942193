@@ -12,7 +12,7 @@ namespace B23_Ex03_Ronen_319047718_Ido_315942193
         private readonly Garage r_garage = new Garage();
         private readonly VehicleFactory r_vehicleFactory = new VehicleFactory();
 
-        // Adding new vehicle by user input
+        // Add a new vehicle to the garage or change it to in repait if in the system
         public void AddingNewVehicle()
         {
             Console.WriteLine("Please insert the license plate");
@@ -41,6 +41,7 @@ namespace B23_Ex03_Ronen_319047718_Ido_315942193
             }
         }
 
+        // Prompts the user to input vehicle type, parses it and returns enum
         private eVehicleType getVehicleTypeFromUser()
         {
             eVehicleType vehicleType;
@@ -60,7 +61,7 @@ namespace B23_Ex03_Ronen_319047718_Ido_315942193
             return vehicleType;
         }
 
-        //Show all licence plate in the garage
+        //Show all license plate in the garage
         public void ShowGarageCar()
         {
             List<Vehicle> vehicles;
@@ -73,6 +74,7 @@ namespace B23_Ex03_Ronen_319047718_Ido_315942193
             }
         }
 
+        // Returns List of vehicles with the corresponding status
         private List<Vehicle> getVehiclesByFilter(string i_FilteringUser)
         {
             List<Vehicle> vehicles;
@@ -101,6 +103,7 @@ namespace B23_Ex03_Ronen_319047718_Ido_315942193
             return vehicles;
         }
 
+        // Creates and returns list from status
         private List<Vehicle> getAllVehiclesWithFilterFromGarage(eVehicleStatus i_VehicleStatus)
         {
             return r_garage.GetAllVehicles().Where(vehicle => vehicle.Status == i_VehicleStatus).ToList();
