@@ -70,7 +70,7 @@ namespace Ex03.GarageLogic
             eVehicleStatus vehicleStatus = eVehicleStatus.InRepair;
             if (isDieselVehicle(i_Type))
             {
-                float powerLeft = getFuelLeftFromUser();
+                float powerLeft = getPowerLeftFromUser(i_Type);
                 if (isTruckType(i_Type))
                 {
                     bool transportingHazardousMaterial = getTransportingHazardousMaterial();
@@ -92,7 +92,7 @@ namespace Ex03.GarageLogic
             }
             else if (isElectricVehicle(i_Type))
             {
-                float powerLeft = getElectricCarPowerLeftFromUser();
+                float powerLeft = getPowerLeftFromUser(i_Type);
                 if (isCarType(i_Type))
                 {
                     eCarColor color = getColorFromUser();
@@ -111,13 +111,6 @@ namespace Ex03.GarageLogic
                 throw new ArgumentException("Invalid car type");
             }
             return vehicle;
-        }
-
-        private static float getElectricCarPowerLeftFromUser()
-        {
-            Console.Write("Please insert the electric left");
-            float powerLeft = float.Parse(Console.ReadLine());
-            return powerLeft;
         }
 
         private static eNumOfCarDoors getNumOfDoorsFromUser()
@@ -169,13 +162,38 @@ namespace Ex03.GarageLogic
             return cargoSize;
         }
 
-        private static float getFuelLeftFromUser()
+        private static float getPowerLeftFromUser(eVehicleType i_Type)
         {
-            Console.Write("Please insert the fuel left: ");
-            float powerLeft = float.Parse(Console.ReadLine());
-            if (powerLeft < 0 || powerLeft > 100)
+            float maxLittersToFill;
+            if (isDieselVehicle(i_Type))
             {
-                throw new ArgumentException("Got invalid fuel left");
+                Console.Write("Please insert the fuel left: ");
+            }
+            else
+            {
+                Console.Write("Please insert the electric left");
+            }
+            bool isValid = float.TryParse(Console.ReadLine(), out float powerLeft);
+            if (isValid)
+            {
+                if (isCarType(i_Type))
+                {
+                    maxLittersToFill = CarProperties.MaxPSI;
+                }
+                else if (isTruckType(i_Type))
+                {
+                    maxLittersToFill = TruckProperties.MaxPSI;
+                }
+                else
+                {
+                    maxLittersToFill = MotorcycleProperties.MaxPSI;
+                }
+
+                if (powerLeft < 0 || powerLeft > maxLittersToFill)
+                {
+                    throw new ArgumentException("Got invalid fuel left");
+                }
+
             }
             return powerLeft;
         }
@@ -330,7 +348,7 @@ namespace Ex03.GarageLogic
 
         private bool isValidCurrentPSI(float userCurrentPSI, float i_MaxPsi)
         {
-            return userCurrentPSI <= i_MaxPsi;
+            return userCurrentPSI <= i_MaxPsi && userCurrentPSI >= 0;
         }
     }
 }
