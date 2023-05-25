@@ -1,4 +1,5 @@
-﻿using System;
+﻿using B23_Ex03_Ronen_319047718_Ido_315942193;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -37,76 +38,71 @@ namespace Ex03.GarageLogic
 
         private Vehicle CreateTruck()
         {
-            return getCarFromUserByType(eVehicleType.Truck);
+            return getVehicleFromUserByType(eVehicleType.Truck);
         }
 
         private Vehicle CreateElectricBike()
         {
-            return getCarFromUserByType(eVehicleType.ElectricBike);
+            return getVehicleFromUserByType(eVehicleType.ElectricBike);
         }
 
         private Vehicle CreateDieselBike()
         {
-            return getCarFromUserByType(eVehicleType.DieselBike);
+            return getVehicleFromUserByType(eVehicleType.DieselBike);
         }
 
         private Vehicle CreateElectricCar()
         {
-            return getCarFromUserByType(eVehicleType.ElectricCar);
+            return getVehicleFromUserByType(eVehicleType.ElectricCar);
         }
 
         private Vehicle CreateDieselCar()
         {
-            return getCarFromUserByType(eVehicleType.DieselCar);
+            return getVehicleFromUserByType(eVehicleType.DieselCar);
         }
 
-        private Vehicle getCarFromUserByType(eVehicleType i_Type)
+        private Vehicle getVehicleFromUserByType(eVehicleType i_Type)
         {
             Vehicle vehicle;
-            Console.Write("Please insert the model: ");
-            string model = Console.ReadLine();
+            string model = getModelFromUser();
             List<Wheel> wheels = getWheelsFromUserByType(i_Type);
             Customer owner = getOwnerFromUser();
             eVehicleStatus vehicleStatus = eVehicleStatus.InRepair;
-            if (i_Type == eVehicleType.DieselCar || i_Type == eVehicleType.DieselBike || i_Type == eVehicleType.Truck)
+            if (isDieselVehicle(i_Type))
             {
-                Console.Write("Please insert the fuel left: ");
-                float powerLeft = float.Parse(Console.ReadLine());
-                if (i_Type == eVehicleType.Truck)
+                float powerLeft = getFuelLeftFromUser();
+                if (isTruckType(i_Type))
                 {
                     bool transportingHazardousMaterial = getTransportingHazardousMaterial();
-                    Console.Write("Please insert cargo size: ");
-                    float cargoSize = float.Parse(Console.ReadLine());
+                    float cargoSize = getCargoFromUser();
                     vehicle = new Truck(model, m_LicensePlate, wheels, owner, eVehicleStatus.InRepair, powerLeft, transportingHazardousMaterial, cargoSize);
                 }
-                else if (i_Type == eVehicleType.DieselCar)
+                else if (isCarType(i_Type))
                 {
                     eCarColor color = getColorFromUser();
-                    Enum.TryParse(Console.ReadLine(), out eNumOfCarDoors numOfDoors);
+                    eNumOfCarDoors numOfDoors = getNumOfDoorsFromUser();
                     vehicle = new DieselCar(model, m_LicensePlate, wheels, owner, vehicleStatus, powerLeft, color, numOfDoors);
                 }
                 else
                 {
-                    eMotorcycleLicense motorcycleLicense = getBikeLicense();      //////// Let me know if u have a soluation for it :(
-                    Console.Write("Please insert the Engine size: ");
-                    int engineSize = int.Parse(Console.ReadLine());   //////// it's duplicate rows from lines line 105 (only here)
+                    eMotorcycleLicense motorcycleLicense = getBikeLicense();
+                    int engineSize = getEngineSizeFromUser();
                     vehicle = new DieselMotorcycle(model, m_LicensePlate, wheels, owner, eVehicleStatus.InRepair, powerLeft, motorcycleLicense, engineSize);
                 }
             }
-            else if (i_Type == eVehicleType.ElectricBike || i_Type == eVehicleType.ElectricCar)
+            else if (isElectricVehicle(i_Type))
             {
-                Console.Write("Please insert the electric left");
-                float powerLeft = float.Parse(Console.ReadLine());
-                if (i_Type == eVehicleType.ElectricCar)
+                float powerLeft = getElectricCarPowerLeftFromUser();
+                if (isCarType(i_Type))
                 {
                     eCarColor color = getColorFromUser();
-                    Enum.TryParse(Console.ReadLine(), out eNumOfCarDoors numOfDoors);
+                    eNumOfCarDoors numOfDoors = getNumOfDoorsFromUser();
                     vehicle = new ElectricCar(model, m_LicensePlate, wheels, owner, vehicleStatus, powerLeft, color, numOfDoors);
                 }
                 else
                 {
                     eMotorcycleLicense motorcycleLicense = getBikeLicense();
-                    int engineSize = int.Parse(Console.ReadLine());
+                    int engineSize = getEngineSizeFromUser();
                     vehicle = new ElectricMotorcycle(model, m_LicensePlate, wheels, owner, eVehicleStatus.InRepair, powerLeft, motorcycleLicense, engineSize);
                 }
             }
@@ -117,19 +113,104 @@ namespace Ex03.GarageLogic
             return vehicle;
         }
 
+        private static float getElectricCarPowerLeftFromUser()
+        {
+            Console.Write("Please insert the electric left");
+            float powerLeft = float.Parse(Console.ReadLine());
+            return powerLeft;
+        }
+
+        private static eNumOfCarDoors getNumOfDoorsFromUser()
+        {
+            if (Enum.TryParse(Console.ReadLine(), out eNumOfCarDoors numOfDoors))
+            {
+                if (!Enum.IsDefined(typeof(eNumOfCarDoors), numOfDoors))
+                {
+                    throw new ArgumentException("number of doors not listed on the menu");
+                }
+            }
+            else
+            {
+                throw new FormatException(Display.InvalidEnumParameter());
+            }
+
+            return numOfDoors;
+        }
+
+        private static bool isCarType(eVehicleType i_Type)
+        {
+            return i_Type == eVehicleType.ElectricCar || i_Type == eVehicleType.DieselCar;
+        }
+        private static bool isBikeType(eVehicleType i_Type)
+        {
+            return i_Type == eVehicleType.ElectricBike || i_Type == eVehicleType.DieselBike;
+        }
+        private static bool isTruckType(eVehicleType i_Type)
+        {
+            return i_Type == eVehicleType.Truck;
+        }
+
+        private static bool isElectricVehicle(eVehicleType i_Type)
+        {
+            return i_Type == eVehicleType.ElectricBike || i_Type == eVehicleType.ElectricCar;
+        }
+
+        private static int getEngineSizeFromUser()
+        {
+            Console.Write("Please insert the Engine size: ");
+            int engineSize = int.Parse(Console.ReadLine());
+            return engineSize;
+        }
+
+        private static float getCargoFromUser()
+        {
+            Console.Write("Please insert cargo size: ");
+            float cargoSize = float.Parse(Console.ReadLine());
+            return cargoSize;
+        }
+
+        private static float getFuelLeftFromUser()
+        {
+            Console.Write("Please insert the fuel left: ");
+            float powerLeft = float.Parse(Console.ReadLine());
+            return powerLeft;
+        }
+
+        private static bool isDieselVehicle(eVehicleType i_Type)
+        {
+            return i_Type == eVehicleType.DieselCar || i_Type == eVehicleType.DieselBike || i_Type == eVehicleType.Truck;
+        }
+
+        private static string getModelFromUser()
+        {
+            Console.Write("Please insert the model: ");
+            string model = Console.ReadLine();
+            return model;
+        }
+
         private eMotorcycleLicense getBikeLicense()
         {
-            Console.WriteLine("Please insert the bike license type\n1. A1\n2. A2\n3. AA\n4. B1");
-            Enum.TryParse(Console.ReadLine(), out eMotorcycleLicense o_bikeLicense);
+            Display.BikeLicense();
+
+            if (Enum.TryParse(Console.ReadLine(), out eMotorcycleLicense o_bikeLicense))
+            {
+                if (!Enum.IsDefined(typeof(eNumOfCarDoors), o_bikeLicense))
+                {
+                    throw new ArgumentException("Bike license not listed on the menu");
+                }
+            }
+            else
+            {
+                throw new FormatException(Display.InvalidEnumParameter());
+            }
+
             return o_bikeLicense;
         }
 
         private bool getTransportingHazardousMaterial()
         {
             bool hazardousMaterial;
-            Console.WriteLine("Is transporting hazardous material? ");
-            Console.WriteLine("1. Yes");
-            Console.WriteLine("2 No ");
+            Display.TransportingHazardousMaterial();
             string transportingHazardousMaterialStr = Console.ReadLine();
             if (transportingHazardousMaterialStr == "1")
             {
@@ -148,8 +229,20 @@ namespace Ex03.GarageLogic
 
         private eCarColor getColorFromUser()
         {
-            Console.WriteLine("Please insert the bike license type\n1. White\n2. Black\n3. Yellow\n4. Red");
-            Enum.TryParse(Console.ReadLine(), out eCarColor o_carColor);
+            Display.ColorMenu();
+
+            if (Enum.TryParse(Console.ReadLine(), out eCarColor o_carColor))
+            {
+                if (!Enum.IsDefined(typeof(eCarColor), o_carColor))
+                {
+                    throw new ArgumentException("Car color not listed on the menu");
+                }
+            }
+            else
+            {
+                throw new FormatException(Display.InvalidEnumParameter());
+            }
+
             return o_carColor;
         }
 
@@ -165,31 +258,29 @@ namespace Ex03.GarageLogic
         private List<Wheel> getWheelsFromUserByType(eVehicleType i_VehicleType)
         {
             List<Wheel> userWheels;
-            if (i_VehicleType == eVehicleType.DieselCar || i_VehicleType == eVehicleType.ElectricCar)
+            if (isCarType(i_VehicleType))
             {
-                userWheels = createNewWheel(CarProperties.NumOfWheels);
+                userWheels = createNewWheel(CarProperties.NumOfWheels, CarProperties.MaxPSI);
             }
-            else if (i_VehicleType == eVehicleType.DieselBike || i_VehicleType == eVehicleType.ElectricBike)
+            else if (isBikeType(i_VehicleType))
             {
-                userWheels = createNewWheel(MotorcycleProperties.NumOfWheels);
+                userWheels = createNewWheel(MotorcycleProperties.NumOfWheels, MotorcycleProperties.MaxPSI);
             }
             else
             {
-                userWheels = createNewWheel(Truck.NumOfWheels);
+                userWheels = createNewWheel(TruckProperties.NumOfWheels, TruckProperties.MaxPSI);
             }
             return userWheels;
         }
 
-        private List<Wheel> createNewWheel(int i_NumOfWheels)
+        private List<Wheel> createNewWheel(int i_NumOfWheels, float i_MaxPsi)
         {
             List<Wheel> wheels = new List<Wheel>();
-            Console.WriteLine("Do you want auto wheel enterence?");
-            Console.WriteLine("1. Yes");
-            Console.WriteLine("2. No");
+            Display.AutoWheelsRequest();
             int.TryParse(Console.ReadLine(), out int o_UserChoosenInsertMethod);
             if (o_UserChoosenInsertMethod == 1)
             {
-                Wheel userWheel = createWheelFromUser();
+                Wheel userWheel = createWheelFromUser(i_MaxPsi);
                 for (int i = 1; i <= i_NumOfWheels; i++)
                 {
                     wheels.Add(userWheel);
@@ -200,7 +291,7 @@ namespace Ex03.GarageLogic
                 for (int i = 1; i <= i_NumOfWheels; i++)
                 {
                     Console.WriteLine($"Please insert the next parameter for the #{i} wheel");
-                    wheels.Add(createWheelFromUser());
+                    wheels.Add(createWheelFromUser(i_MaxPsi));
                 }
             }
             else
@@ -210,15 +301,22 @@ namespace Ex03.GarageLogic
             return wheels;
         }
 
-        private Wheel createWheelFromUser()
+        private Wheel createWheelFromUser(float i_MaxPsi)
         {
-            Console.Write("Please insert the max PSI: ");
-            float userMaxPSI = float.Parse(Console.ReadLine());
             Console.Write("Please insert the manufaturer: ");
             string userManufaturer = Console.ReadLine();
             Console.Write("Please insert the current PSI: ");
             float userCurrentPSI = float.Parse(Console.ReadLine());
-            return new Wheel(userMaxPSI, userManufaturer, userCurrentPSI);
+            if (!isValidCurrentPSI(userCurrentPSI, i_MaxPsi))
+            {
+                throw new ArgumentException("The enterence current PSI bigger then the Max allowed PSI");
+            }
+            return new Wheel(i_MaxPsi, userManufaturer, userCurrentPSI);
+        }
+
+        private bool isValidCurrentPSI(float userCurrentPSI, float i_MaxPsi)
+        {
+            return userCurrentPSI <= i_MaxPsi;
         }
     }
 }

@@ -7,13 +7,10 @@ namespace Ex03.GarageLogic
 {
     public class Truck : DieselVehicle
     {
-        private const int k_NumOfWheels = 14;
-        private const float k_MaxPSI = 26f;
         private const eFuelType k_FuelType = eFuelType.Soler;
         private const float k_MaxFuelLiters = 135f;
 
-        private readonly bool r_IsTransportingHazardousMaterial;
-        private readonly float r_CargoSize;
+        private TruckProperties r_TruckProperties;
 
         public Truck(
             string i_Model,
@@ -30,18 +27,17 @@ namespace Ex03.GarageLogic
                 i_Owner,
                 i_VehicleStatus,
                 i_FuelLitersLeft,
-                k_MaxFuelLiters, 
+                k_MaxFuelLiters,
                 k_FuelType)
         {
-            r_IsTransportingHazardousMaterial = i_IsTransportingHazardousMaterial;
-            r_CargoSize = i_CargoSize;
+            r_TruckProperties = new TruckProperties(i_IsTransportingHazardousMaterial, i_CargoSize);
         }
 
         public bool IsTransportingHazardousMaterial
         {
             get
             {
-                return r_IsTransportingHazardousMaterial;
+                return r_TruckProperties.IsTransportingHazardousMaterial;
             }
         }
 
@@ -49,39 +45,33 @@ namespace Ex03.GarageLogic
         {
             get
             {
-                return r_CargoSize;
+                return r_TruckProperties.CargoSize;
             }
         }
 
-        public static int NumOfWheels
+        public int NumOfWheels
         {
             get
             {
-                return k_NumOfWheels;
+                return TruckProperties.NumOfWheels;
             }
         }
 
-        public static float MaxPSI
+        public float MaxPSI
         {
             get
             {
-                return k_MaxPSI;
+                return TruckProperties.MaxPSI;
             }
         }
 
-        public string IsTransportingHazardousMaterialToString()
+        public TruckProperties TruckProperties
         {
-            string yesOrNo = string.Empty;
-            if (IsTransportingHazardousMaterial)
+            get
             {
-                yesOrNo = "Yes";
+                return r_TruckProperties;
             }
-            else
-            {
-                yesOrNo = "No";
-            }
-
-            return yesOrNo;
         }
+
     }
 }

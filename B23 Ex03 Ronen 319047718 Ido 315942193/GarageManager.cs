@@ -9,7 +9,7 @@ namespace B23_Ex03_Ronen_319047718_Ido_315942193
     public class GarageManager
     {
         private const string formatErrorMessage = "Input must be in numbers";
-        private Garage garage = new Ex03.GarageLogic.Garage();
+        private Garage garage = new Garage();
         private VehicleFactory vehicleFactory = new VehicleFactory();
 
         // TODO: REMOVE THIS WHEN PROGRAM IS COMPLETE!!!!
@@ -33,7 +33,7 @@ namespace B23_Ex03_Ronen_319047718_Ido_315942193
             List<Wheel> truckWheels = new List<Wheel>();
             for (int i = 0; i < 14; i++)
             {
-                truckWheels.Add(new Wheel(Truck.MaxPSI, "Calgary", 28));
+                truckWheels.Add(new Wheel(TruckProperties.MaxPSI, "Calgary", 28));
             }
 
             Customer idoBi = new Customer("Ido Biton", "0500001234");
