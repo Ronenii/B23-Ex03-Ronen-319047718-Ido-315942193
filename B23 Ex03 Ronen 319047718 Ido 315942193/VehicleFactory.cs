@@ -39,26 +39,32 @@ namespace Ex03.GarageLogic
             return vehicle;
         }
 
+        // Creates a truck by user input
         private Vehicle createTruck()
         {
             return getVehicleFromUserByType(eVehicleType.Truck);
         }
 
+        // Creates an electric motorcycle by user input
         private Vehicle createElectricMotorcycle()
         {
             return getVehicleFromUserByType(eVehicleType.ElectricMotorcycle);
         }
 
+        // Creates a Diesel car by user input
         private Vehicle createDieselMotorcycle()
         {
             return getVehicleFromUserByType(eVehicleType.DieselMotorcycle);
         }
+
+        // Creates an electric car by user input
 
         private Vehicle createElectricCar()
         {
             return getVehicleFromUserByType(eVehicleType.ElectricCar);
         }
 
+        //Create a Diesel car by uswer input
         private Vehicle createDieselCar()
         {
             return getVehicleFromUserByType(eVehicleType.DieselCar);
@@ -118,6 +124,7 @@ namespace Ex03.GarageLogic
             return vehicle;
         }
 
+        //Get number of doors from user input
         private static eNumOfCarDoors getNumOfDoorsFromUser()
         {
             Console.Write("Number of doors: ");
@@ -136,26 +143,31 @@ namespace Ex03.GarageLogic
             return numOfDoors;
         }
 
+        //Validate the type is car
         private static bool isCarType(eVehicleType i_Type)
         {
             return i_Type == eVehicleType.ElectricCar || i_Type == eVehicleType.DieselCar;
         }
 
+        //Validate the type is motorcycle
         private static bool isMotorcycleType(eVehicleType i_Type)
         {
             return i_Type == eVehicleType.ElectricMotorcycle || i_Type == eVehicleType.DieselMotorcycle;
         }
 
+        //Validate the type is Truck
         private static bool isTruckType(eVehicleType i_Type)
         {
             return i_Type == eVehicleType.Truck;
         }
 
+        //Validate is the type is electric vehicle
         private static bool isElectricVehicle(eVehicleType i_Type)
         {
             return i_Type == eVehicleType.ElectricMotorcycle || i_Type == eVehicleType.ElectricCar;
         }
 
+        //Get engine size from user
         private static int getEngineSizeFromUser()
         {
             Console.Write("Engine size: ");
@@ -163,6 +175,7 @@ namespace Ex03.GarageLogic
             return engineSize;
         }
 
+        //Get cargo size from user
         private static float getCargoSizeFromUser()
         {
             Console.Write("Cargo size: ");
@@ -170,6 +183,7 @@ namespace Ex03.GarageLogic
             return cargoSize;
         }
 
+        //Get Power left for electric and diesel vehicles
         private static float getPowerLeftFromUser(eVehicleType i_VehicleType)
         {
             float powerLeft;
@@ -185,6 +199,7 @@ namespace Ex03.GarageLogic
             return powerLeft;
         }
 
+        //Get full litters left by type
         private static float getFuelLitersLeft(eVehicleType i_VehicleType)
         {
             Console.Write("Fuel liters left: ");
@@ -245,11 +260,13 @@ namespace Ex03.GarageLogic
             return chargeHoursLeft;
         }
 
+        //Validate the vehicle with diesel engine
         private static bool isDieselVehicle(eVehicleType i_Type)
         {
             return i_Type == eVehicleType.DieselCar || i_Type == eVehicleType.DieselMotorcycle || i_Type == eVehicleType.Truck;
         }
 
+        //Get vhicle model from user
         private static string getVehicleModelFromUser()
         {
             Console.Write("Vehicle Model: ");
@@ -257,6 +274,7 @@ namespace Ex03.GarageLogic
             return model;
         }
 
+        //Get motorcycle liccense from user
         private eMotorcycleLicense getMotorcycleLicense()
         {
             Display.MotorcycleLicense();
@@ -276,6 +294,7 @@ namespace Ex03.GarageLogic
             return motorcycleLicense;
         }
 
+        //Validate if the truck transporting hazardous material
         private bool getTransportingHazardousMaterial()
         {
             bool hazardousMaterial;
@@ -307,6 +326,7 @@ namespace Ex03.GarageLogic
             return hazardousMaterial;
         }
 
+        //Get Color car from user
         private eCarColor getColorFromUser()
         {
             Display.ColorMenu();
@@ -326,6 +346,7 @@ namespace Ex03.GarageLogic
             return carColor;
         }
 
+        //Create an owner from user
         private Customer getOwnerFromUser()
         {
             Console.Write("Owner name: ");
@@ -335,6 +356,7 @@ namespace Ex03.GarageLogic
             return new Customer(ownerName, ownerPhone);
         }
 
+        //Get wheels from user
         private List<Wheel> getWheelsFromUserByType(eVehicleType i_VehicleType)
         {
             List<Wheel> userWheels;
@@ -354,6 +376,7 @@ namespace Ex03.GarageLogic
             return userWheels;
         }
 
+        //Create new wheels from user
         private List<Wheel> createNewWheel(int i_NumOfWheels, float i_MaxPsi)
         {
             List<Wheel> wheels = new List<Wheel>();
@@ -383,6 +406,7 @@ namespace Ex03.GarageLogic
             return wheels;
         }
 
+        //Create new wheels from user
         private Wheel createWheelFromUser(float i_MaxPsi)
         {
             Console.Write("Wheel manufacturer: ");
@@ -397,6 +421,7 @@ namespace Ex03.GarageLogic
             return new Wheel(i_MaxPsi, userManufaturer, userCurrentPSI);
         }
 
+        //Validate the given PSI wheel is valid
         private bool isValidCurrentPSI(float userCurrentPSI, float i_MaxPsi)
         {
             return userCurrentPSI <= i_MaxPsi && userCurrentPSI >= 0;
