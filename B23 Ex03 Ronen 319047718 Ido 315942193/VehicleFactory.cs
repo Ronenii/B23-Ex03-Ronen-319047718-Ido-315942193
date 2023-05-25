@@ -214,9 +214,9 @@ namespace Ex03.GarageLogic
         {
             Display.MotorcycleLicense();
 
-            if (Enum.TryParse(Console.ReadLine(), out eMotorcycleLicense o_MotorcycleLicense))
+            if (Enum.TryParse(Console.ReadLine(), out eMotorcycleLicense motorcycleLicense))
             {
-                if (!Enum.IsDefined(typeof(eNumOfCarDoors), o_MotorcycleLicense))
+                if (!Enum.IsDefined(typeof(eNumOfCarDoors), motorcycleLicense))
                 {
                     throw new ArgumentException("Motorcycle license not listed on the menu");
                 }
@@ -226,16 +226,16 @@ namespace Ex03.GarageLogic
                 throw new FormatException(Display.InvalidEnumParameter());
             }
 
-            return o_MotorcycleLicense;
+            return motorcycleLicense;
         }
 
         private bool getTransportingHazardousMaterial()
         {
             bool hazardousMaterial;
             Display.TransportingHazardousMaterial();
-            if (Enum.TryParse(Console.ReadLine(), out eTransportingHazardousMaterial o_TransportingHazardousMaterial))
+            if (Enum.TryParse(Console.ReadLine(), out eTransportingHazardousMaterial transportingHazardousMaterial))
             {
-                if (!Enum.IsDefined(typeof(eTransportingHazardousMaterial), o_TransportingHazardousMaterial))
+                if (!Enum.IsDefined(typeof(eTransportingHazardousMaterial), transportingHazardousMaterial))
                 {
                     throw new ArgumentException("Transporting Hazardous Material not listed on the menu");
                 }
@@ -244,11 +244,11 @@ namespace Ex03.GarageLogic
             {
                 throw new FormatException(Display.InvalidEnumParameter());
             }
-            if (o_TransportingHazardousMaterial == eTransportingHazardousMaterial.Yes)
+            if (transportingHazardousMaterial == eTransportingHazardousMaterial.Yes)
             {
                 hazardousMaterial = true;
             }
-            else if (o_TransportingHazardousMaterial == eTransportingHazardousMaterial.No)
+            else if (transportingHazardousMaterial == eTransportingHazardousMaterial.No)
             {
                 hazardousMaterial = false;
             }
@@ -263,9 +263,9 @@ namespace Ex03.GarageLogic
         {
             Display.ColorMenu();
 
-            if (Enum.TryParse(Console.ReadLine(), out eCarColor o_carColor))
+            if (Enum.TryParse(Console.ReadLine(), out eCarColor carColor))
             {
-                if (!Enum.IsDefined(typeof(eCarColor), o_carColor))
+                if (!Enum.IsDefined(typeof(eCarColor), carColor))
                 {
                     throw new ArgumentException("Car color not listed on the menu");
                 }
@@ -275,7 +275,7 @@ namespace Ex03.GarageLogic
                 throw new FormatException(Display.InvalidEnumParameter());
             }
 
-            return o_carColor;
+            return carColor;
         }
 
         private Customer getOwnerFromUser()
@@ -309,8 +309,8 @@ namespace Ex03.GarageLogic
         {
             List<Wheel> wheels = new List<Wheel>();
             Display.AutoWheelsRequest();
-            int.TryParse(Console.ReadLine(), out int o_UserChoosenInsertMethod);
-            if (o_UserChoosenInsertMethod == 1)
+            int.TryParse(Console.ReadLine(), out int userChoosenInsertMethod);
+            if (userChoosenInsertMethod == 1)
             {
                 Wheel userWheel = createWheelFromUser(i_MaxPsi);
                 for (int i = 1; i <= i_NumOfWheels; i++)
@@ -318,7 +318,7 @@ namespace Ex03.GarageLogic
                     wheels.Add(userWheel);
                 }
             }
-            else if (o_UserChoosenInsertMethod == 2)
+            else if (userChoosenInsertMethod == 2)
             {
                 for (int i = 1; i <= i_NumOfWheels; i++)
                 {
