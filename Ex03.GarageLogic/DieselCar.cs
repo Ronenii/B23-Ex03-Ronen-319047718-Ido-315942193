@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Dynamic;
 using System.Linq;
 using System.Text;
 
 namespace Ex03.GarageLogic
 {
-    public class DieselCar : DieselVehicle
+    public class DieselCar: DieselVehicle
     {
         private const eFuelType k_FuelType = eFuelType.Octan95;
         public static readonly float k_MaxFuelLiters = 46f;
