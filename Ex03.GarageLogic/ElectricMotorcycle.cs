@@ -7,7 +7,7 @@ namespace Ex03.GarageLogic
 {
     public class ElectricMotorcycle : ElectricVehicle
     {
-        private const float k_MaxChargeHours = 2.6f;
+        public static readonly float k_MaxChargeHours = 2.6f;
 
         private readonly MotorcycleProperties r_MotorcycleProperties;
 

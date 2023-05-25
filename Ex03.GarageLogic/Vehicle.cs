@@ -45,10 +45,10 @@ namespace Ex03.GarageLogic
 
     public enum eVehicleType
     {
-        DieselCar = 1,
-        ElectricCar,
-        DieselMotorcycle,
+        DieselMotorcycle = 1,
         ElectricMotorcycle,
+        DieselCar,
+        ElectricCar,
         Truck
     }
 

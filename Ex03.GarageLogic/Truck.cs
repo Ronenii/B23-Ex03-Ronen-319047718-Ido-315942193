@@ -13,9 +13,9 @@ namespace Ex03.GarageLogic
     public class Truck : DieselVehicle
     {
         private const eFuelType k_FuelType = eFuelType.Soler;
-        private const float k_MaxFuelLiters = 135f;
+        public static readonly float k_MaxFuelLiters = 135f;
 
-        private readonly TruckProperties r_TruckProperties;
+        private readonly TruckProperties r_truckProperties;
 
         public Truck(
             string i_Model,
@@ -32,17 +32,17 @@ namespace Ex03.GarageLogic
                 i_Owner,
                 i_VehicleStatus,
                 i_FuelLitersLeft,
-                k_MaxFuelLiters,
+                k_MaxFuelLiters, 
                 k_FuelType)
         {
-            r_TruckProperties = new TruckProperties(i_IsTransportingHazardousMaterial, i_CargoSize);
+            r_truckProperties = new TruckProperties(i_IsTransportingHazardousMaterial, i_CargoSize);
         }
 
         public bool IsTransportingHazardousMaterial
         {
             get
             {
-                return r_TruckProperties.IsTransportingHazardousMaterial;
+                return r_truckProperties.IsTransportingHazardousMaterial;
             }
         }
 
@@ -50,7 +50,7 @@ namespace Ex03.GarageLogic
         {
             get
             {
-                return r_TruckProperties.CargoSize;
+                return r_truckProperties.CargoSize;
             }
         }
 
@@ -74,9 +74,8 @@ namespace Ex03.GarageLogic
         {
             get
             {
-                return r_TruckProperties;
+                return r_truckProperties;
             }
         }
-
     }
 }

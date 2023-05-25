@@ -5,7 +5,7 @@ using System.Text;
 
 namespace B23_Ex03_Ronen_319047718_Ido_315942193
 {
-    public class GrageUserInterface
+    public class GarageUserInterface
     {
         public enum eUserAction
         {
@@ -92,6 +92,7 @@ namespace B23_Ex03_Ronen_319047718_Ido_315942193
             {
                 throw new FormatException("Input must be in numbers");
             }
+
             return userAction;
         }
     }

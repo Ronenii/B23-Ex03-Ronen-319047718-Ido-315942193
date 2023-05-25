@@ -107,7 +107,7 @@ namespace Ex03.GarageLogic
             return fuelType;
         }
 
-        public bool isTankFull()
+        public bool IsTankFull()
         {
             return m_FuelLitersLeft >= MaxFuelLiters;
         }

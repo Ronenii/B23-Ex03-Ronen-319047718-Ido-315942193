@@ -66,7 +66,7 @@ namespace Ex03.GarageLogic
             return time;
         }
 
-        public bool isBatteryFull()
+        public bool IsBatteryFull()
         {
             return m_ChargeHoursLeft >= MaxChargeHours;
         }
