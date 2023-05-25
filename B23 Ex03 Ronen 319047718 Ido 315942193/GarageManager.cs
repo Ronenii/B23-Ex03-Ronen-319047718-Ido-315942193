@@ -139,7 +139,7 @@ namespace B23_Ex03_Ronen_319047718_Ido_315942193
             }
             else if (i_FilteringUser == "2")
             {
-                vehicles = getFilterVehiclesByStatus(eVehicleStatus.InRepair);
+                vehicles = getFilterVehiclesByStatus(eVehicleStatus.Repaired);
 
             }
             else if (i_FilteringUser == "3")
