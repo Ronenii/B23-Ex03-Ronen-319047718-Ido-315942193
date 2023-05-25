@@ -4,8 +4,8 @@ namespace Ex03.GarageLogic
 {
     public class ValueOutOfRangeException : Exception
     {
-        private float m_MaxValue;
-        private float m_MinValue;
+        private readonly float m_MaxValue;
+        private readonly float m_MinValue;
 
         public float MaxValue
         {
@@ -23,8 +23,8 @@ namespace Ex03.GarageLogic
             }
         }
 
-        public ValueOutOfRangeException(float i_MinValue, float i_MaxValue) : 
-            base(string.Format("Value must be between {0} and {1}",i_MinValue,i_MaxValue))
+        public ValueOutOfRangeException(float i_MinValue, float i_MaxValue) :
+            base(string.Format("Value must be between {0} and {1}", i_MinValue, i_MaxValue))
         {
             m_MaxValue = i_MaxValue;
             m_MinValue = i_MaxValue;

@@ -126,32 +126,69 @@ namespace B23_Ex03_Ronen_319047718_Ido_315942193
         public static void CarDetails(CarProperties i_Car)
         {
             Console.WriteLine("             CAR INFO ");
-            Console.WriteLine($"Number Of Doors:     {i_Car.NumOfDoors.ToString()}");
-            Console.WriteLine($"Color:               {i_Car.CarColorToString()}\n");
+            Console.WriteLine($"Number Of Doors:     {i_Car.NumOfDoors}");
+            Console.WriteLine($"Color:               {i_Car.Color}\n");
         }
 
-        public static void BikeDetails(MotorcycleProperties i_Bike)
+        public static void MotorcycleDetails(MotorcycleProperties i_Motorcycle)
         {
-            Console.WriteLine("             BIKE INFO ");
-            Console.WriteLine($"License:              {i_Bike.LicenseToString()}");
-            Console.WriteLine($"Engine Size:          {i_Bike.EngineSize}cc\n");
+            Console.WriteLine("             MOTORCYCLE INFO ");
+            Console.WriteLine($"License:              {i_Motorcycle.LicenseToString()}");
+            Console.WriteLine($"Engine Size:          {i_Motorcycle.EngineSize}cc\n");
         }
 
+        public static void MotorcycleLicense()
+        {
+            Console.WriteLine("Please insert the motorcycle license type:");
+            Console.WriteLine("1. A1");
+            Console.WriteLine("2. A2");
+            Console.WriteLine("3. AA");
+            Console.WriteLine("4. B1");
+
+        }
+
+        public static void TransportingHazardousMaterial()
+        {
+            Console.WriteLine("Is transporting hazardous material?");
+            Console.WriteLine("1. Yes");
+            Console.WriteLine("2. No ");
+        }
         public static void TruckDetails(Truck i_Truck)
         {
             Console.WriteLine("             TRUCK INFO ");
-            Console.WriteLine($"Hazardous Material:   {i_Truck.IsTransportingHazardousMaterialToString()}");
+            Console.WriteLine($"Hazardous Material:   {i_Truck.TruckProperties.IsTransportingHazardousMaterialToString()}");
             Console.WriteLine($"Cargo Size:          {i_Truck.CargoSize}m^3\n");
         }
 
         public static void ChooseCarTypePrompt()
         {
             Console.WriteLine("Please Insert the vehicle Type:");
-            Console.WriteLine("1. Diesel Bike");
-            Console.WriteLine("2. Electric Bike");
+            Console.WriteLine("1. Diesel Motorcycle");
+            Console.WriteLine("2. Electric Motorcycle");
             Console.WriteLine("3. Diesel Car");
             Console.WriteLine("4. Electric Car");
             Console.WriteLine("5. Truck");
+        }
+
+        public static void ColorMenu()
+        {
+            Console.WriteLine("Please insert the motorcycle license type:");
+            Console.WriteLine("1. White");
+            Console.WriteLine("2. Black");
+            Console.WriteLine("3. Yellow");
+            Console.WriteLine("4. Red");
+        }
+
+        public static void AutoWheelsRequest()
+        {
+            Console.WriteLine("Do you want auto wheel enterence?");
+            Console.WriteLine("1. Yes");
+            Console.WriteLine("2. No");
+        }
+
+        public static string InvalidEnumParameter()
+        {
+            return "Input must be a numbers";
         }
     }
 }

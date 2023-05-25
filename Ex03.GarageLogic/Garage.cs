@@ -7,7 +7,7 @@ namespace Ex03.GarageLogic
 {
     public class Garage
     {
-        private List<Vehicle> m_AllVehicles = new List<Vehicle>();
+        private readonly List<Vehicle> m_AllVehicles = new List<Vehicle>();
 
         public void AddNewVehicle(Vehicle vehicle)
         {
@@ -33,10 +33,6 @@ namespace Ex03.GarageLogic
             vehicle.Status = i_Status;
         }
 
-        public void DisplayVehicleDetails(string i_LicensePlate)
-        {
-            Vehicle vehicle = GetVehicleByLicense(i_LicensePlate);
-        }
         public List<Vehicle> GetAllVehicles()
         {
             return m_AllVehicles;

@@ -47,8 +47,8 @@ namespace Ex03.GarageLogic
     {
         DieselCar,
         ElectricCar,
-        DieselBike,
-        ElectricBike,
+        DieselMotorcycle,
+        ElectricMotorcycle,
         Truck
     }
 
@@ -59,7 +59,7 @@ namespace Ex03.GarageLogic
         private readonly Customer r_Owner;
 
         private float m_EnergyLeft;
-        private List<Wheel> m_Wheels;
+        private readonly List<Wheel> r_Wheels;
         private eVehicleStatus m_VehicleStatus;
 
         public Vehicle(string i_Model, string i_LicensePlate, float i_EnergyLeft, List<Wheel> i_Wheels, Customer i_Owner, eVehicleStatus i_VehicleStatus)
@@ -68,7 +68,7 @@ namespace Ex03.GarageLogic
             r_LicensePlate = i_LicensePlate;
             r_Owner = i_Owner;
             m_EnergyLeft = i_EnergyLeft;
-            m_Wheels = i_Wheels;
+            r_Wheels = i_Wheels;
             m_VehicleStatus = i_VehicleStatus;
         }
 
@@ -118,7 +118,7 @@ namespace Ex03.GarageLogic
         {
             get
             {
-                return m_Wheels;
+                return r_Wheels;
             }
         }
 
@@ -168,7 +168,7 @@ namespace Ex03.GarageLogic
 
         public void InflateAllWheelsToMax()
         {
-            foreach (Wheel wheel in m_Wheels)
+            foreach (Wheel wheel in r_Wheels)
             {
                 wheel.Inflate(wheel.MaxPSI - wheel.CurrentPSI);
             }
