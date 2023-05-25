@@ -56,14 +56,11 @@ namespace Ex03.GarageLogic
             r_FuelType = i_FuelType;
         }
 
-
-
         public void Fuel(float i_FuelLitersToAdd, eFuelType i_FuelType)
         {
             if (!isFuelTypeValid(i_FuelType))
             {
-                // TODO: adjust exception output
-                throw new ArgumentException();
+                throw new ArgumentException($"Fuel Type invalid, needs to be {r_FuelType}");
             }
 
             if (m_FuelLitersLeft + i_FuelLitersToAdd > r_MaxFuelLiters)
