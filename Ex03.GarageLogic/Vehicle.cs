@@ -16,17 +16,17 @@ namespace Ex03.GarageLogic
     public enum eCarColor
     {
         White = 1,
-        Black = 2,
-        Yellow = 3,
-        Red = 4
+        Black,
+        Yellow,
+        Red
     }
 
     public enum eMotorcycleLicense
     {
         A1 = 1,
-        A2 = 2,
-        AA = 3,
-        B1 = 4
+        A2,
+        AA,
+        B1
     }
     public enum eNumOfCarDoors
     {
@@ -39,13 +39,13 @@ namespace Ex03.GarageLogic
     public enum eVehicleStatus
     {
         InRepair=1,
-        Repaired=2,
-        Paid=3
+        Repaired,
+        Paid
     }
 
     public enum eVehicleType
     {
-        DieselCar,
+        DieselCar = 1,
         ElectricCar,
         DieselMotorcycle,
         ElectricMotorcycle,
@@ -59,7 +59,7 @@ namespace Ex03.GarageLogic
         private readonly Customer r_Owner;
 
         private float m_EnergyLeft;
-        private readonly List<Wheel> r_Wheels;
+        private List<Wheel> m_Wheels;
         private eVehicleStatus m_VehicleStatus;
 
         public Vehicle(string i_Model, string i_LicensePlate, float i_EnergyLeft, List<Wheel> i_Wheels, Customer i_Owner, eVehicleStatus i_VehicleStatus)
@@ -68,7 +68,7 @@ namespace Ex03.GarageLogic
             r_LicensePlate = i_LicensePlate;
             r_Owner = i_Owner;
             m_EnergyLeft = i_EnergyLeft;
-            r_Wheels = i_Wheels;
+            m_Wheels = i_Wheels;
             m_VehicleStatus = i_VehicleStatus;
         }
 
@@ -118,7 +118,7 @@ namespace Ex03.GarageLogic
         {
             get
             {
-                return r_Wheels;
+                return m_Wheels;
             }
         }
 
@@ -168,7 +168,7 @@ namespace Ex03.GarageLogic
 
         public void InflateAllWheelsToMax()
         {
-            foreach (Wheel wheel in r_Wheels)
+            foreach (Wheel wheel in m_Wheels)
             {
                 wheel.Inflate(wheel.MaxPSI - wheel.CurrentPSI);
             }

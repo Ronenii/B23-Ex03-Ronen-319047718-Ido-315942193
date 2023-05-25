@@ -18,19 +18,20 @@ namespace B23_Ex03_Ronen_319047718_Ido_315942193
             Console.WriteLine("Please insert the license plate");
             string licensePLate = Console.ReadLine();
             Vehicle vehicle = r_garage.GetVehicleByLicense(licensePLate);
+            eVehicleType vehicleType;
             if (vehicle == null)
             {
                 Console.WriteLine("Create new vehicle in the system");
-                Display.ChooseCarTypePrompt();
                 try
                 {
-                    vehicle = r_vehicleFactory.CreateVehicleByType(int.Parse(Console.ReadLine()), licensePLate);
+                    vehicleType = getVehicleTypeFromUser();
+                    vehicle = r_vehicleFactory.CreateVehicleByType(vehicleType, licensePLate);
                     r_garage.AddNewVehicle(vehicle);
                     Console.WriteLine("The vehicle added successfully");
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine($"Insert invlalid parameters {e.Message}");
+                    Console.WriteLine($"Insert invalid parameters {e.Message}");
                 }
             }
             else
@@ -40,8 +41,27 @@ namespace B23_Ex03_Ronen_319047718_Ido_315942193
             }
         }
 
+        private eVehicleType getVehicleTypeFromUser()
+        {
+            eVehicleType vehicleType;
+            Display.ChooseCarTypePrompt();
+
+            if(eVehicleType.TryParse(Console.ReadLine(), out vehicleType))
+            {
+                if(!Enum.IsDefined(typeof(eVehicleType), vehicleType))
+                {
+                    throw new ArgumentException("Vehicle type not listed on the menu");
+                }
+            }
+            else
+            {
+                throw new FormatException(formatErrorMessage);
+            }
+            return vehicleType;
+        }
+
         //Show all licence plate in the garage
-        public void ShowGrageCar()
+        public void ShowGarageCar()
         {
             List<Vehicle> vehicles;
             Display.FilteringStatus();

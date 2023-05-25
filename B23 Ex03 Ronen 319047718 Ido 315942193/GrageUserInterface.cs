@@ -54,7 +54,7 @@ namespace B23_Ex03_Ronen_319047718_Ido_315942193
                     r_garageHandleManager.AddingNewVehicle();
                     break;
                 case eUserAction.ShowGarageCar:
-                    r_garageHandleManager.ShowGrageCar();
+                    r_garageHandleManager.ShowGarageCar();
                     break;
                 case eUserAction.ChangeCarStatus:
                     r_garageHandleManager.ChangeCarStatus();

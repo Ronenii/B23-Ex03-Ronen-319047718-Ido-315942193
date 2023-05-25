@@ -56,38 +56,25 @@ namespace Ex03.GarageLogic
             r_FuelType = i_FuelType;
         }
 
-        // Adds given fuel amount to the vehicle, throws exceptions if too much fuel,
-        // if given amount out of range or if fuel type is invalid.
+
+
         public void Fuel(float i_FuelLitersToAdd, eFuelType i_FuelType)
         {
             if (!isFuelTypeValid(i_FuelType))
             {
-                throw new ArgumentException("Fuel type invalid");
+                // TODO: adjust exception output
+                throw new ArgumentException();
             }
-            else if(!(isFuelLitersToAddValid(i_FuelLitersToAdd) && isFuelLitersToAddNotTooMuch(i_FuelLitersToAdd)))
+
+            if (m_FuelLitersLeft + i_FuelLitersToAdd > r_MaxFuelLiters)
             {
-                throw new ValueOutOfRangeException(0, r_MaxFuelLiters - m_FuelLitersLeft);
+                throw new ValueOutOfRangeException(0, MaxFuelLiters);
             }
             else
             {
                 m_FuelLitersLeft += i_FuelLitersToAdd;
                 EnergyLeft = m_FuelLitersLeft / MaxFuelLiters;
             }
-        }
-
-        public bool isTankFull()
-        {
-            return m_FuelLitersLeft >= MaxFuelLiters;
-        }
-
-        private bool isFuelLitersToAddValid(float i_FuelLitersToAdd)
-        {
-            return i_FuelLitersToAdd >= 0 && i_FuelLitersToAdd <= r_MaxFuelLiters;
-        }
-
-        private bool isFuelLitersToAddNotTooMuch(float i_FuelLitersToAdd)
-        {
-            return m_FuelLitersLeft + i_FuelLitersToAdd <= r_MaxFuelLiters;
         }
 
         private bool isFuelTypeValid(eFuelType i_FuelType)
@@ -118,6 +105,11 @@ namespace Ex03.GarageLogic
             }
 
             return fuelType;
+        }
+
+        public bool isTankFull()
+        {
+            return m_FuelLitersLeft >= MaxFuelLiters;
         }
     }
 }

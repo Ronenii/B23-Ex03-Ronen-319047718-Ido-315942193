@@ -9,26 +9,28 @@ namespace Ex03.GarageLogic
     public class VehicleFactory
     {
         private string m_LicensePlate;
-        public Vehicle CreateVehicleByType(int i_VehicleType, string i_LicensePLate)
+
+        // Creates a vehicle 
+        public Vehicle CreateVehicleByType(eVehicleType i_VehicleType, string i_LicensePLate)
         {
             Vehicle vehicle;
             m_LicensePlate = i_LicensePLate;
             switch (i_VehicleType)
             {
-                case 1:
-                    vehicle = CreateDieselMotorcycle();
+                case eVehicleType.DieselMotorcycle:
+                    vehicle = createDieselMotorcycle();
                     break;
-                case 2:
-                    vehicle = CreateElectricMotorcycle();
+                case eVehicleType.ElectricMotorcycle:
+                    vehicle = createElectricMotorcycle();
                     break;
-                case 3:
-                    vehicle = CreateDieselCar();
+                case eVehicleType.DieselCar:
+                    vehicle = createDieselCar();
                     break;
-                case 4:
-                    vehicle = CreateElectricCar();
+                case eVehicleType.ElectricCar:
+                    vehicle = createElectricCar();
                     break;
-                case 5:
-                    vehicle = CreateTruck();
+                case eVehicleType.Truck:
+                    vehicle = createTruck();
                     break;
                 default:
                     throw new ArgumentException("Invalid choice. Please try again.");
@@ -36,35 +38,36 @@ namespace Ex03.GarageLogic
             return vehicle;
         }
 
-        private Vehicle CreateTruck()
+        private Vehicle createTruck()
         {
             return getVehicleFromUserByType(eVehicleType.Truck);
         }
 
-        private Vehicle CreateElectricMotorcycle()
+        private Vehicle createElectricMotorcycle()
         {
             return getVehicleFromUserByType(eVehicleType.ElectricMotorcycle);
         }
 
-        private Vehicle CreateDieselMotorcycle()
+        private Vehicle createDieselMotorcycle()
         {
             return getVehicleFromUserByType(eVehicleType.DieselMotorcycle);
         }
 
-        private Vehicle CreateElectricCar()
+        private Vehicle createElectricCar()
         {
             return getVehicleFromUserByType(eVehicleType.ElectricCar);
         }
 
-        private Vehicle CreateDieselCar()
+        private Vehicle createDieselCar()
         {
             return getVehicleFromUserByType(eVehicleType.DieselCar);
         }
 
+        // Receives vehicle type from user and builds a vehicle based on said type and user input
         private Vehicle getVehicleFromUserByType(eVehicleType i_Type)
         {
             Vehicle vehicle;
-            string model = getModelFromUser();
+            string model = getVehicleModelFromUser();
             List<Wheel> wheels = getWheelsFromUserByType(i_Type);
             Customer owner = getOwnerFromUser();
             eVehicleStatus vehicleStatus = eVehicleStatus.InRepair;
@@ -74,7 +77,7 @@ namespace Ex03.GarageLogic
                 if (isTruckType(i_Type))
                 {
                     bool transportingHazardousMaterial = getTransportingHazardousMaterial();
-                    float cargoSize = getCargoFromUser();
+                    float cargoSize = getCargoSizeFromUser();
                     vehicle = new Truck(model, m_LicensePlate, wheels, owner, eVehicleStatus.InRepair, powerLeft, transportingHazardousMaterial, cargoSize);
                 }
                 else if (isCarType(i_Type))
@@ -134,10 +137,12 @@ namespace Ex03.GarageLogic
         {
             return i_Type == eVehicleType.ElectricCar || i_Type == eVehicleType.DieselCar;
         }
+
         private static bool isMotorcycleType(eVehicleType i_Type)
         {
             return i_Type == eVehicleType.ElectricMotorcycle || i_Type == eVehicleType.DieselMotorcycle;
         }
+
         private static bool isTruckType(eVehicleType i_Type)
         {
             return i_Type == eVehicleType.Truck;
@@ -150,22 +155,22 @@ namespace Ex03.GarageLogic
 
         private static int getEngineSizeFromUser()
         {
-            Console.Write("Please insert the Engine size: ");
+            Console.Write("Engine size: ");
             int engineSize = int.Parse(Console.ReadLine());
             return engineSize;
         }
 
-        private static float getCargoFromUser()
+        private static float getCargoSizeFromUser()
         {
-            Console.Write("Please insert cargo size: ");
+            Console.Write("Cargo size: ");
             float cargoSize = float.Parse(Console.ReadLine());
             return cargoSize;
         }
 
-        private static float getPowerLeftFromUser(eVehicleType i_Type)
+        private static float getPowerLeftFromUser(eVehicleType i_VehicleType)
         {
-            float maxLittersToFill;
-            if (isDieselVehicle(i_Type))
+            float maxLitersToFill;
+            if (isDieselVehicle(i_VehicleType))
             {
                 Console.Write("Please insert the fuel left: ");
             }
@@ -176,24 +181,23 @@ namespace Ex03.GarageLogic
             bool isValid = float.TryParse(Console.ReadLine(), out float powerLeft);
             if (isValid)
             {
-                if (isCarType(i_Type))
+                if (isCarType(i_VehicleType))
                 {
-                    maxLittersToFill = CarProperties.MaxPSI;
+                    maxLitersToFill = CarProperties.MaxPSI;
                 }
-                else if (isTruckType(i_Type))
+                else if (isTruckType(i_VehicleType))
                 {
-                    maxLittersToFill = TruckProperties.MaxPSI;
+                    maxLitersToFill = TruckProperties.MaxPSI;
                 }
                 else
                 {
-                    maxLittersToFill = MotorcycleProperties.MaxPSI;
+                    maxLitersToFill = MotorcycleProperties.MaxPSI;
                 }
 
-                if (powerLeft < 0 || powerLeft > maxLittersToFill)
+                if (powerLeft < 0 || powerLeft > maxLitersToFill)
                 {
                     throw new ArgumentException("Got invalid fuel left");
                 }
-
             }
             return powerLeft;
         }
@@ -203,9 +207,10 @@ namespace Ex03.GarageLogic
             return i_Type == eVehicleType.DieselCar || i_Type == eVehicleType.DieselMotorcycle || i_Type == eVehicleType.Truck;
         }
 
-        private static string getModelFromUser()
+        
+        private static string getVehicleModelFromUser()
         {
-            Console.Write("Please insert the model: ");
+            Console.Write("Vehicle Model: ");
             string model = Console.ReadLine();
             return model;
         }

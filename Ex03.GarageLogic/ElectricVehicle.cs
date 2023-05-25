@@ -35,56 +35,28 @@ namespace Ex03.GarageLogic
         {
             get
             {
-                return m_ChargeHoursLeft;
+                return ChargeHoursLeft;
             }
 
             set
             {
-                m_ChargeHoursLeft = value;
+                ChargeHoursLeft = value;
             }
         }
 
-        // Adds given charge minutes to the vehicle, throws exceptions if too much minutes
-        // or if given amount out of range
-        public void ChargeBattery(int i_MinutesToCharge)
+        public void ChargeBattery(float i_HoursToCharge)
         {
-            float hoursToCharge = i_MinutesToCharge / 60f;
-            if (!(isHoursToChargeNotTooMuch(hoursToCharge) && isHoursToChargeValid(hoursToCharge)))
+            if (i_HoursToCharge + m_ChargeHoursLeft > MaxChargeHours)
             {
-                throw new ValueOutOfRangeException(0, floatHoursToMinutes(MaxChargeHours - m_ChargeHoursLeft) - 1);
+                throw new ValueOutOfRangeException(0, MaxChargeHours);
             }
             else
             {
-                m_ChargeHoursLeft += hoursToCharge;
+                m_ChargeHoursLeft += i_HoursToCharge;
                 EnergyLeft = m_ChargeHoursLeft / MaxChargeHours;
             }
         }
 
-        public bool isBatteryFull()
-        {
-            return m_ChargeHoursLeft >= r_MaxChargeHours;
-        }
-
-        // Converts hours represented as float to minutes in int
-        private int floatHoursToMinutes(float i_FloatHours)
-        {
-            int hours = Convert.ToInt32(i_FloatHours);
-            int minutes = Convert.ToInt32((i_FloatHours - hours) * 60);
-
-            return hours * 60 + minutes;
-        }
-
-        private bool isHoursToChargeValid(float i_HoursToCharge)
-        {
-            return i_HoursToCharge >= 0 && i_HoursToCharge <= r_MaxChargeHours;
-        }
-
-        private bool isHoursToChargeNotTooMuch(float i_HoursToCharge)
-        {
-            return m_ChargeHoursLeft + i_HoursToCharge <= r_MaxChargeHours;
-        }
-
-        // Converts the charge time to string and prsents it in said format H:MM
         public string ChargeTimeToString()
         {
             int hours = Convert.ToInt32(m_ChargeHoursLeft);
@@ -92,6 +64,11 @@ namespace Ex03.GarageLogic
 
             string time = string.Format("{0}:{1:D2}", hours, minutes);
             return time;
+        }
+
+        public bool isBatteryFull()
+        {
+            return m_ChargeHoursLeft >= MaxChargeHours;
         }
     }
 }
