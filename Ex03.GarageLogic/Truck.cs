@@ -5,12 +5,17 @@ using System.Text;
 
 namespace Ex03.GarageLogic
 {
+    public enum eTransportingHazardousMaterial
+    {
+        Yes = 1,
+        No = 2
+    }
     public class Truck : DieselVehicle
     {
         private const eFuelType k_FuelType = eFuelType.Soler;
         private const float k_MaxFuelLiters = 135f;
 
-        private TruckProperties r_TruckProperties;
+        private readonly TruckProperties r_TruckProperties;
 
         public Truck(
             string i_Model,

@@ -16,10 +16,10 @@ namespace Ex03.GarageLogic
             switch (i_VehicleType)
             {
                 case 1:
-                    vehicle = CreateDieselBike();
+                    vehicle = CreateDieselMotorcycle();
                     break;
                 case 2:
-                    vehicle = CreateElectricBike();
+                    vehicle = CreateElectricMotorcycle();
                     break;
                 case 3:
                     vehicle = CreateDieselCar();
@@ -41,14 +41,14 @@ namespace Ex03.GarageLogic
             return getVehicleFromUserByType(eVehicleType.Truck);
         }
 
-        private Vehicle CreateElectricBike()
+        private Vehicle CreateElectricMotorcycle()
         {
-            return getVehicleFromUserByType(eVehicleType.ElectricBike);
+            return getVehicleFromUserByType(eVehicleType.ElectricMotorcycle);
         }
 
-        private Vehicle CreateDieselBike()
+        private Vehicle CreateDieselMotorcycle()
         {
-            return getVehicleFromUserByType(eVehicleType.DieselBike);
+            return getVehicleFromUserByType(eVehicleType.DieselMotorcycle);
         }
 
         private Vehicle CreateElectricCar()
@@ -85,7 +85,7 @@ namespace Ex03.GarageLogic
                 }
                 else
                 {
-                    eMotorcycleLicense motorcycleLicense = getBikeLicense();
+                    eMotorcycleLicense motorcycleLicense = getMotorcycleLicense();
                     int engineSize = getEngineSizeFromUser();
                     vehicle = new DieselMotorcycle(model, m_LicensePlate, wheels, owner, eVehicleStatus.InRepair, powerLeft, motorcycleLicense, engineSize);
                 }
@@ -101,7 +101,7 @@ namespace Ex03.GarageLogic
                 }
                 else
                 {
-                    eMotorcycleLicense motorcycleLicense = getBikeLicense();
+                    eMotorcycleLicense motorcycleLicense = getMotorcycleLicense();
                     int engineSize = getEngineSizeFromUser();
                     vehicle = new ElectricMotorcycle(model, m_LicensePlate, wheels, owner, eVehicleStatus.InRepair, powerLeft, motorcycleLicense, engineSize);
                 }
@@ -141,9 +141,9 @@ namespace Ex03.GarageLogic
         {
             return i_Type == eVehicleType.ElectricCar || i_Type == eVehicleType.DieselCar;
         }
-        private static bool isBikeType(eVehicleType i_Type)
+        private static bool isMotorcycleType(eVehicleType i_Type)
         {
-            return i_Type == eVehicleType.ElectricBike || i_Type == eVehicleType.DieselBike;
+            return i_Type == eVehicleType.ElectricMotorcycle || i_Type == eVehicleType.DieselMotorcycle;
         }
         private static bool isTruckType(eVehicleType i_Type)
         {
@@ -152,7 +152,7 @@ namespace Ex03.GarageLogic
 
         private static bool isElectricVehicle(eVehicleType i_Type)
         {
-            return i_Type == eVehicleType.ElectricBike || i_Type == eVehicleType.ElectricCar;
+            return i_Type == eVehicleType.ElectricMotorcycle || i_Type == eVehicleType.ElectricCar;
         }
 
         private static int getEngineSizeFromUser()
@@ -173,12 +173,16 @@ namespace Ex03.GarageLogic
         {
             Console.Write("Please insert the fuel left: ");
             float powerLeft = float.Parse(Console.ReadLine());
+            if (powerLeft < 0 || powerLeft > 100)
+            {
+                throw new ArgumentException("Got invalid fuel left");
+            }
             return powerLeft;
         }
 
         private static bool isDieselVehicle(eVehicleType i_Type)
         {
-            return i_Type == eVehicleType.DieselCar || i_Type == eVehicleType.DieselBike || i_Type == eVehicleType.Truck;
+            return i_Type == eVehicleType.DieselCar || i_Type == eVehicleType.DieselMotorcycle || i_Type == eVehicleType.Truck;
         }
 
         private static string getModelFromUser()
@@ -188,15 +192,15 @@ namespace Ex03.GarageLogic
             return model;
         }
 
-        private eMotorcycleLicense getBikeLicense()
+        private eMotorcycleLicense getMotorcycleLicense()
         {
-            Display.BikeLicense();
+            Display.MotorcycleLicense();
 
-            if (Enum.TryParse(Console.ReadLine(), out eMotorcycleLicense o_bikeLicense))
+            if (Enum.TryParse(Console.ReadLine(), out eMotorcycleLicense o_MotorcycleLicense))
             {
-                if (!Enum.IsDefined(typeof(eNumOfCarDoors), o_bikeLicense))
+                if (!Enum.IsDefined(typeof(eNumOfCarDoors), o_MotorcycleLicense))
                 {
-                    throw new ArgumentException("Bike license not listed on the menu");
+                    throw new ArgumentException("Motorcycle license not listed on the menu");
                 }
             }
             else
@@ -204,19 +208,29 @@ namespace Ex03.GarageLogic
                 throw new FormatException(Display.InvalidEnumParameter());
             }
 
-            return o_bikeLicense;
+            return o_MotorcycleLicense;
         }
 
         private bool getTransportingHazardousMaterial()
         {
             bool hazardousMaterial;
             Display.TransportingHazardousMaterial();
-            string transportingHazardousMaterialStr = Console.ReadLine();
-            if (transportingHazardousMaterialStr == "1")
+            if (Enum.TryParse(Console.ReadLine(), out eTransportingHazardousMaterial o_TransportingHazardousMaterial))
+            {
+                if (!Enum.IsDefined(typeof(eTransportingHazardousMaterial), o_TransportingHazardousMaterial))
+                {
+                    throw new ArgumentException("Transporting Hazardous Material not listed on the menu");
+                }
+            }
+            else
+            {
+                throw new FormatException(Display.InvalidEnumParameter());
+            }
+            if (o_TransportingHazardousMaterial == eTransportingHazardousMaterial.Yes)
             {
                 hazardousMaterial = true;
             }
-            else if (transportingHazardousMaterialStr == "2")
+            else if (o_TransportingHazardousMaterial == eTransportingHazardousMaterial.No)
             {
                 hazardousMaterial = false;
             }
@@ -262,7 +276,7 @@ namespace Ex03.GarageLogic
             {
                 userWheels = createNewWheel(CarProperties.NumOfWheels, CarProperties.MaxPSI);
             }
-            else if (isBikeType(i_VehicleType))
+            else if (isMotorcycleType(i_VehicleType))
             {
                 userWheels = createNewWheel(MotorcycleProperties.NumOfWheels, MotorcycleProperties.MaxPSI);
             }
@@ -309,7 +323,7 @@ namespace Ex03.GarageLogic
             float userCurrentPSI = float.Parse(Console.ReadLine());
             if (!isValidCurrentPSI(userCurrentPSI, i_MaxPsi))
             {
-                throw new ArgumentException("The enterence current PSI bigger then the Max allowed PSI");
+                throw new ArgumentException("Current PSI cannot be more than MaxPSI");
             }
             return new Wheel(i_MaxPsi, userManufaturer, userCurrentPSI);
         }

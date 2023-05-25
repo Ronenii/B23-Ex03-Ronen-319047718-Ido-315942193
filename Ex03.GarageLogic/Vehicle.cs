@@ -47,8 +47,8 @@ namespace Ex03.GarageLogic
     {
         DieselCar,
         ElectricCar,
-        DieselBike,
-        ElectricBike,
+        DieselMotorcycle,
+        ElectricMotorcycle,
         Truck
     }
 

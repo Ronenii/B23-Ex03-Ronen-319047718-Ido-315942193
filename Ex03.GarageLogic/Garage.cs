@@ -7,7 +7,7 @@ namespace Ex03.GarageLogic
 {
     public class Garage
     {
-        private List<Vehicle> m_AllVehicles = new List<Vehicle>();
+        private readonly List<Vehicle> m_AllVehicles = new List<Vehicle>();
 
         public void AddNewVehicle(Vehicle vehicle)
         {
