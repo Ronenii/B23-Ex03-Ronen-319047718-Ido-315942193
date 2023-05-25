@@ -29,9 +29,9 @@ namespace B23_Ex03_Ronen_319047718_Ido_315942193
         {
             Console.WriteLine("Please enter one of the folowing options");
             Console.WriteLine("1. Insert a new vehicle");
-            Console.WriteLine("2. Show all vehicles in the garage");
+            Console.WriteLine("2. Show vehicles in the garage");
             Console.WriteLine("3. Change vehicle status");
-            Console.WriteLine("4. Inflate vehicle Wheel");
+            Console.WriteLine("4. Inflate vehicle wheel");
             Console.WriteLine("5. Refuel a vehicle");
             Console.WriteLine("6. Charge a vehicle");
             Console.WriteLine("7. Present a vehicle");

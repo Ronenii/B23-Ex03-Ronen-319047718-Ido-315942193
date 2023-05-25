@@ -122,14 +122,14 @@ namespace B23_Ex03_Ronen_319047718_Ido_315942193
             List<Vehicle> vehicles;
             Display.FilteringStatus();
             string filteringUser = Console.ReadLine();
-            vehicles = getFilterGragageVehicle(filteringUser);
+            vehicles = getFilterGarageVehicle(filteringUser);
             for (int i = 1; i <= vehicles.Count; i++)
             {
                 Console.WriteLine($"{i}. {vehicles[i - 1].LicensePlate}");
             }
         }
 
-        private List<Vehicle> getFilterGragageVehicle(string i_FilteringUser)
+        private List<Vehicle> getFilterGarageVehicle(string i_FilteringUser)
         {
             List<Vehicle> vehicles;
             if (i_FilteringUser == "1")
