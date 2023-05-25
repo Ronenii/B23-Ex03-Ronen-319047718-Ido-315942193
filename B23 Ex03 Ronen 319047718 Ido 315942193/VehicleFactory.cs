@@ -216,7 +216,7 @@ namespace Ex03.GarageLogic
 
             if (Enum.TryParse(Console.ReadLine(), out eMotorcycleLicense motorcycleLicense))
             {
-                if (!Enum.IsDefined(typeof(eNumOfCarDoors), motorcycleLicense))
+                if (!Enum.IsDefined(typeof(eMotorcycleLicense), motorcycleLicense))
                 {
                     throw new ArgumentException("Motorcycle license not listed on the menu");
                 }
