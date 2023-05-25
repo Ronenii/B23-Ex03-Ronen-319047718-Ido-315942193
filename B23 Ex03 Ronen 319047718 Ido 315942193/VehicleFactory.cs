@@ -35,6 +35,7 @@ namespace Ex03.GarageLogic
                 default:
                     throw new ArgumentException("Invalid choice. Please try again.");
             }
+
             return vehicle;
         }
 
@@ -113,6 +114,7 @@ namespace Ex03.GarageLogic
             {
                 throw new ArgumentException("Invalid car type");
             }
+
             return vehicle;
         }
 
@@ -179,6 +181,7 @@ namespace Ex03.GarageLogic
             {
                 powerLeft = getChargeHoursLeft(i_VehicleType);
             }
+
             return powerLeft;
         }
 
@@ -300,6 +303,7 @@ namespace Ex03.GarageLogic
             {
                 throw new ArgumentOutOfRangeException("Invliad transporting hazardous material option");
             }
+
             return hazardousMaterial;
         }
 
@@ -346,6 +350,7 @@ namespace Ex03.GarageLogic
             {
                 userWheels = createNewWheel(TruckProperties.NumOfWheels, TruckProperties.MaxPSI);
             }
+
             return userWheels;
         }
 
@@ -374,6 +379,7 @@ namespace Ex03.GarageLogic
             {
                 throw new ArgumentOutOfRangeException("Invalid wheels mode selection");
             }
+
             return wheels;
         }
 
@@ -387,6 +393,7 @@ namespace Ex03.GarageLogic
             {
                 throw new ArgumentException("Current PSI cannot be more than MaxPSI");
             }
+
             return new Wheel(i_MaxPsi, userManufaturer, userCurrentPSI);
         }
 

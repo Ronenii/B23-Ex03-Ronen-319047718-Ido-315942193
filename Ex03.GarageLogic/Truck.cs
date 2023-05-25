@@ -32,7 +32,7 @@ namespace Ex03.GarageLogic
                 i_Owner,
                 i_VehicleStatus,
                 i_FuelLitersLeft,
-                k_MaxFuelLiters, 
+                k_MaxFuelLiters,
                 k_FuelType)
         {
             r_truckProperties = new TruckProperties(i_IsTransportingHazardousMaterial, i_CargoSize);

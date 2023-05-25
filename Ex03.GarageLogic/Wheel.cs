@@ -49,13 +49,10 @@ namespace Ex03.GarageLogic
 
         public void Inflate(float i_PSItoAdd)
         {
-            if(i_PSItoAdd < 0 || i_PSItoAdd > r_MaxPSI)
-            {
-                throw new ValueOutOfRangeException(0, MaxPSI);
-            }
             if (i_PSItoAdd + m_CurrentPSI > r_MaxPSI)
             {
-                throw new ValueOutOfRangeException(0, r_MaxPSI - CurrentPSI);
+                // TODO: Adjust the exception after writing the exception class
+                throw new ValueOutOfRangeException(0, MaxPSI);
             }
             else
             {

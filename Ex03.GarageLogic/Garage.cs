@@ -11,7 +11,7 @@ namespace Ex03.GarageLogic
 
         public void AddNewVehicle(Vehicle vehicle)
         {
-                m_AllVehicles.Add(vehicle);
+            m_AllVehicles.Add(vehicle);
         }
 
         public Vehicle GetVehicleByLicense(string i_LicencePlate)
@@ -26,9 +26,10 @@ namespace Ex03.GarageLogic
             {
                 throw new ArgumentNullException("Could not find the given license plate in the system");
             }
+
             vehicle.Status = i_Status;
         }
-        
+
         public List<Vehicle> GetAllVehicles()
         {
             return m_AllVehicles;
