@@ -9,23 +9,23 @@ namespace B23_Ex03_Ronen_319047718_Ido_315942193
     public class GarageManager
     {
         private const string formatErrorMessage = "Input must be in numbers";
-        private Garage garage = new Garage();
-        private VehicleFactory vehicleFactory = new VehicleFactory();
+        private readonly Garage r_garage = new Garage();
+        private readonly VehicleFactory r_vehicleFactory = new VehicleFactory();
 
         // Adding new vehicle by user input
         public void AddingNewVehicle()
         {
             Console.WriteLine("Please insert the license plate");
             string licensePLate = Console.ReadLine();
-            Vehicle vehicle = garage.GetVehicleByLicense(licensePLate);
+            Vehicle vehicle = r_garage.GetVehicleByLicense(licensePLate);
             if (vehicle == null)
             {
                 Console.WriteLine("Create new vehicle in the system");
                 Display.ChooseCarTypePrompt();
                 try
                 {
-                    vehicle = vehicleFactory.CreateVehicleByType(int.Parse(Console.ReadLine()), licensePLate);
-                    garage.AddNewVehicle(vehicle);
+                    vehicle = r_vehicleFactory.CreateVehicleByType(int.Parse(Console.ReadLine()), licensePLate);
+                    r_garage.AddNewVehicle(vehicle);
                     Console.WriteLine("The vehicle added successfully");
                 }
                 catch (Exception e)
@@ -71,7 +71,7 @@ namespace B23_Ex03_Ronen_319047718_Ido_315942193
             }
             else if (i_FilteringUser == "4")
             {
-                vehicles = garage.GetAllVehicles();
+                vehicles = r_garage.GetAllVehicles();
             }
             else
             {
@@ -83,7 +83,7 @@ namespace B23_Ex03_Ronen_319047718_Ido_315942193
 
         private List<Vehicle> getFilterVehiclesByStatus(eVehicleStatus i_VehicleStatus)
         {
-            return garage.GetAllVehicles().Where(vehicle => vehicle.Status == i_VehicleStatus).ToList();
+            return r_garage.GetAllVehicles().Where(vehicle => vehicle.Status == i_VehicleStatus).ToList();
         }
 
         //Update the status of the vehicle by user input
@@ -93,16 +93,15 @@ namespace B23_Ex03_Ronen_319047718_Ido_315942193
             Console.Write("Please insert the Licence plate for the car: ");
             string licensePlate = Console.ReadLine();
             vehicleStatus = getVehicleStatusFromUser();
-            garage.UpdateVehicleStatus(licensePlate, vehicleStatus);
+            r_garage.UpdateVehicleStatus(licensePlate, vehicleStatus);
             Console.WriteLine($"The vehicle with the license plate: {licensePlate} updated successfully to \"{vehicleStatus}\" ");
         }
 
         private eVehicleStatus getVehicleStatusFromUser()
         {
-            eVehicleStatus vehicleStatus;
             Display.StatusChoosePrompt();
             string vehicleStatusStr = Console.ReadLine();
-            if (eVehicleStatus.TryParse(vehicleStatusStr, out vehicleStatus))
+            if (Enum.TryParse(vehicleStatusStr, out eVehicleStatus vehicleStatus))
             {
                 if (!Enum.IsDefined(typeof(eVehicleStatus), vehicleStatus))
                 {
@@ -121,7 +120,7 @@ namespace B23_Ex03_Ronen_319047718_Ido_315942193
         {
             Console.Write("Please insert the Licence plate for the car: ");
             string licensePlate = Console.ReadLine();
-            Vehicle vehicle = garage.GetVehicleByLicense(licensePlate);
+            Vehicle vehicle = r_garage.GetVehicleByLicense(licensePlate);
             if (vehicle != null)
             {
                 vehicle.InflateAllWheelsToMax();
@@ -160,11 +159,10 @@ namespace B23_Ex03_Ronen_319047718_Ido_315942193
         // Prompts user to input liters to fuel and validates the input format wise
         private float getLitersToAddFromUser()
         {
-            float litersToAdd;
             Console.Write("Liters to add: ");
             string litersToAddStr = Console.ReadLine();
 
-            if (!float.TryParse(litersToAddStr, out litersToAdd))
+            if (!float.TryParse(litersToAddStr, out float litersToAdd))
             {
                 throw new FormatException(formatErrorMessage);
             }
@@ -175,10 +173,9 @@ namespace B23_Ex03_Ronen_319047718_Ido_315942193
         // Prompts the user to input fuel type and validates the input
         private eFuelType getFuelTypeFromUser()
         {
-            eFuelType fuelType;
             Display.ChooseFuelPrompt();
             string fuelTypeStr = Console.ReadLine();
-            if (eFuelType.TryParse(fuelTypeStr, out fuelType))
+            if (Enum.TryParse(fuelTypeStr, out eFuelType fuelType))
             {
                 if (!Enum.IsDefined(typeof(eFuelType), fuelType))
                 {
@@ -200,7 +197,7 @@ namespace B23_Ex03_Ronen_319047718_Ido_315942193
         {
             Console.Write("Vehicle license plate: ");
             string licensePlate = Console.ReadLine();
-            Vehicle vehicleToFind = garage.GetVehicleByLicense(licensePlate);
+            Vehicle vehicleToFind = r_garage.GetVehicleByLicense(licensePlate);
 
             if (vehicleToFind == null)
             {
@@ -235,11 +232,10 @@ namespace B23_Ex03_Ronen_319047718_Ido_315942193
         // Prompts user to input number of minutes to charge and validates the input format wise
         private int getMinutesToChargeFromUser()
         {
-            int minutesToCharge;
             Console.Write("Minutes to charge: ");
             string minutesToChargeStr = Console.ReadLine();
 
-            if (!int.TryParse(minutesToChargeStr, out minutesToCharge))
+            if (!int.TryParse(minutesToChargeStr, out int minutesToCharge))
             {
                 throw new FormatException(formatErrorMessage);
             }

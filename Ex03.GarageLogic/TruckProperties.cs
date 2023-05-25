@@ -53,7 +53,7 @@ namespace Ex03.GarageLogic
 
         public string IsTransportingHazardousMaterialToString()
         {
-            string yesOrNo = string.Empty;
+            string yesOrNo;
             if (IsTransportingHazardousMaterial)
             {
                 yesOrNo = "Yes";
